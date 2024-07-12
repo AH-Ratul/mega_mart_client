@@ -12,8 +12,8 @@ export const allIcons = {
   home: <Home />,
   dashboard: <Dashboard />,
   cart: <ShoppingCart />,
-  account: <Person />,
+  account: <Person fontSize="small" />,
   search: <Search />,
-  list: <List />,
+  list: <List fontSize="large" />,
   wish: <Favorite />
 };
