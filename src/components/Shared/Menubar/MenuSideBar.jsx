@@ -15,7 +15,7 @@ const MenuSideBar = ({ isOpen, close }) => {
       <div className="flex justify-between items-center">
         <img src={logo} alt="logo" className="w-44 md:w-64" />
         <span onClick={close}>
-          {cross}
+          {cross('large')}
         </span>
       </div>
       <div className="px-7 mt-4 flex flex-col gap-2 text-lg md:text-xl">
