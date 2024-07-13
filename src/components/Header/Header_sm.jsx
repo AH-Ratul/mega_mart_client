@@ -10,7 +10,7 @@ const HeaderSm = () => {
   const { home, cart, search, list, menu } = allIcons;
   const [toggleStates, toggle] = useToggle({
     menu: false,
-    cart: false
+    cart: false,
   }); // custom hook to handle toggle
 
   return (
@@ -47,24 +47,30 @@ const HeaderSm = () => {
         {/* cart */}
         <div>
           <button
-            onClick={()=> toggle('cart')}
+            onClick={() => toggle("cart")}
             className="text-gray1 flex flex-col items-center"
           >
-            {cart}
+            {cart("medium")}
             <span className="text-xs">Cart</span>
           </button>
-          <CartSideBar isOpen={toggleStates.cart} close={()=> toggle('cart')} />
+          <CartSideBar
+            isOpen={toggleStates.cart}
+            close={() => toggle("cart")}
+          />
         </div>
         {/* menu */}
         <div>
           <button
-            onClick={()=> toggle('menu')}
+            onClick={() => toggle("menu")}
             className="text-gray1 flex flex-col items-center"
           >
             {menu}
             <span className="text-xs">Menu</span>
           </button>
-          <MenuSideBar isOpen={toggleStates.menu} close={()=> toggle('menu')} />
+          <MenuSideBar
+            isOpen={toggleStates.menu}
+            close={() => toggle("menu")}
+          />
         </div>
       </section>
     </main>
