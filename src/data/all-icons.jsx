@@ -1,8 +1,11 @@
 import {
+  Close,
   Dashboard,
+  ExpandMore,
   Favorite,
   Home,
   List,
+  Menu,
   Person,
   Search,
   ShoppingCart,
@@ -11,9 +14,12 @@ import {
 export const allIcons = {
   home: <Home />,
   dashboard: <Dashboard />,
-  cart: <ShoppingCart />,
+  cart: <ShoppingCart fontSize="medium"/>,
   account: <Person fontSize="small" />,
   search: <Search />,
-  list: <List fontSize="large" />,
-  wish: <Favorite />
+  list: <List fontSize="medium" />,
+  wish: <Favorite />,
+  menu: <Menu />,
+  expend: <ExpandMore fontSize="small"/>,
+  cross: <Close fontSize="large"/>,
 };
