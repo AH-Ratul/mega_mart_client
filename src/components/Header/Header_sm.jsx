@@ -2,59 +2,71 @@ import React from "react";
 import logo from "../../assets/logo11.svg";
 import { allIcons } from "../../data/all-icons";
 import { Link } from "react-router-dom";
+import MenuSideBar from "../Shared/Menubar/MenuSideBar";
+import useToggle from "../../hooks/useToggle";
+import CartSideBar from "../Shared/Cartbar/CartSideBar";
 
 const HeaderSm = () => {
-  const { home, dashboard, cart, account, search, wish, list } = allIcons;
-  return (
-    <main className="lg:hidden h-[100dvh]">
-      {/* bottom header */}
-      {/*<section className="bg-gray-100 py-2 fixed bottom-0 w-[100dvw] z-20 flex justify-between items-center px-8">
-        <span className="text-secondary">{home}</span>
-        <span className="text-gray1">{dashboard}</span>
-        <span className="text-gray1">{cart}</span>
-        <span className="text-gray1">{account}</span>
-      </section>*/}
+  const { home, cart, search, list, menu } = allIcons;
+  const [toggleStates, toggle] = useToggle({
+    menu: false,
+    cart: false
+  }); // custom hook to handle toggle
 
-      {/* header */}
-      <div className="bg-gray-100 text-xs flex justify-end items-center">
-        <Link className="bg-secondary py-1 px-3 text-white/90">
-          {account} My Account
-        </Link>
-        <Link className="text-gray1 px-2 border-r border-gray1">{wish}</Link>
-      </div>
-      {/** */}
+  return (
+    <main className="lg:hidden">
+      {/* top header */}
       <div className="flex flex-col justify-center items-center ">
-        <div className="w-[45%]">
+        <div className="w-[45%] md:w-[30%]">
           <a href="/">
-            <img src={logo} alt="logo" className="" />
+            <img src={logo} alt="logo" />
           </a>
         </div>
-        <div className="flex w-full px-3">
+        <div className="flex w-full px-3 md:px-9">
           <input
             type="text"
-            className="border border-secondary p-1 ps-3 w-full outline-none"
+            className="border border-primary p-1 ps-3 w-full outline-none focus:border-secondary focus:border-2"
             placeholder="Search"
           />
-          <button className="bg-secondary py-1 px-4 text-white/90">
+          <button className="bg-primary py-1 px-3 text-white/90">
             {search}
           </button>
         </div>
-        {/** */}
-        <div className="flex justify-between px-4 items-center gap-20 mt-3 bg-gray-700 w-full">
-          <Link className="text-white/90 flex items-center">
-            <span className="">{list}</span>CATEGORY
-          </Link>
-          <Link className="flex items-center py-1 text-sm">
-            <span className="bg-gray-50 bg-opacity-35 p-2 text-white/70 mr-3">
-              {cart}
-            </span>
-            <div className="flex flex-col text-white/90">
-              <span className="text-secondary">MY CART</span>
-              <span>2 Items - $40.0</span>
-            </div>
-          </Link>
-        </div>
       </div>
+
+      {/* bottom header */}
+      <section className="bg-gray-200 py-2 fixed bottom-0 w-[100dvw] z-20 flex justify-between items-center px-8 md:px-12">
+        <a href="/" className="text-primary flex flex-col items-center">
+          {home}
+          <span className="text-xs">Home</span>
+        </a>
+        <span className="text-gray1 flex flex-col items-center">
+          {list}
+          <span className="text-xs">Category</span>
+        </span>
+        {/* cart */}
+        <div>
+          <button
+            onClick={()=> toggle('cart')}
+            className="text-gray1 flex flex-col items-center"
+          >
+            {cart}
+            <span className="text-xs">Cart</span>
+          </button>
+          <CartSideBar isOpen={toggleStates.cart} close={()=> toggle('cart')} />
+        </div>
+        {/* menu */}
+        <div>
+          <button
+            onClick={()=> toggle('menu')}
+            className="text-gray1 flex flex-col items-center"
+          >
+            {menu}
+            <span className="text-xs">Menu</span>
+          </button>
+          <MenuSideBar isOpen={toggleStates.menu} close={()=> toggle('menu')} />
+        </div>
+      </section>
     </main>
   );
 };
