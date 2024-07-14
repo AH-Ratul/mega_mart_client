@@ -18,7 +18,7 @@ export const allIcons = {
   cart: (size = "default") => <ShoppingCart fontSize={size} />,
   account: <Person fontSize="small" />,
   search: <Search />,
-  list: <List fontSize="medium" />,
+  list: (size = 'default') => <List fontSize={size} />,
   wish: <Favorite />,
   menu: <Menu />,
   expend: <ExpandMore fontSize="small" />,
