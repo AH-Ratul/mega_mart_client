@@ -5,10 +5,12 @@ import { Link } from "react-router-dom";
 import MenuSideBar from "../Shared/Menubar/MenuSideBar";
 import useToggle from "../../hooks/useToggle";
 import CartSideBar from "../Shared/Cartbar/CartSideBar";
+import CategorySideBar from "../Shared/Category/CategorySideBar";
 
 const HeaderSm = () => {
   const { home, cart, search, list, menu } = allIcons;
   const [toggleStates, toggle] = useToggle({
+    category: false,
     menu: false,
     cart: false,
   }); // custom hook to handle toggle
@@ -22,7 +24,7 @@ const HeaderSm = () => {
             <img src={logo} alt="logo" />
           </a>
         </div>
-        <div className="flex w-full px-3 md:px-9">
+        <div className="flex w-screen px-3 md:px-9">
           <input
             type="text"
             className="border border-primary p-1 ps-3 w-full outline-none focus:border-secondary focus:border-2"
@@ -40,10 +42,20 @@ const HeaderSm = () => {
           {home}
           <span className="text-xs">Home</span>
         </a>
-        <span className="text-gray1 flex flex-col items-center">
-          {list}
-          <span className="text-xs">Category</span>
-        </span>
+        {/* category */}
+        <div>
+          <button
+            onClick={() => toggle("category")}
+            className="text-gray1 flex flex-col items-center"
+          >
+            {list("medium")}
+            <span className="text-xs">Categories</span>
+          </button>
+          <CategorySideBar
+            isOpen={toggleStates.category}
+            close={() => toggle("category")}
+          />
+        </div>
         {/* cart */}
         <div>
           <button
