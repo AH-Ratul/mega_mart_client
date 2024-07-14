@@ -6,6 +6,7 @@ const Main = () => {
         <main className='relative bg-babypowder'>
             {/* Header section */}
             <HeaderSm />
+            
         </main>
     );
 };
