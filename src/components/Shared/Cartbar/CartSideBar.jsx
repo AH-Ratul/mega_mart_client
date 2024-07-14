@@ -17,7 +17,7 @@ const CartSideBar = ({ isOpen, close }) => {
         </span>
       </div>
       <div className="mt-5 text-black flex items-center gap-7">
-        <img src={p1} alt="" className="w-16" />
+        <img src={p1} alt="" className="w-12 md:w-20" />
         <p>Dell Laptop i5 8th gen.. </p>
         <p className="text-lg">$3000</p>
         <span className="text-sm bg-gray1 text-white px-1">
