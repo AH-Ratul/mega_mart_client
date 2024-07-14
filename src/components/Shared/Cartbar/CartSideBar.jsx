@@ -39,10 +39,10 @@ const CartSideBar = ({ isOpen, close }) => {
         </div>
       </div>
       <div className="flex justify-center items-center gap-20 mt-7">
-        <button className="bg-d1 text-white/90 px-3 py-2">
+        <button className="bg-d1 text-white/90 px-3 py-2 hover:text-secondary">
           {cart("small")} View Cart
         </button>
-        <button className="bg-d1 text-white/90 px-3 py-2">
+        <button className="bg-d1 text-white/90 px-3 py-2 hover:text-secondary">
           {checkout("small")} Checkout
         </button>
       </div>
