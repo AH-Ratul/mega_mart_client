@@ -8,13 +8,13 @@ const MenuSideBar = ({ isOpen, close }) => {
 
   return (
     <div
-      className={`fixed h-[100dvh]  left-0 right-8 text-gray1 bg-white z-20 top-0 p-2 overflow-hidden inset-y-0 transform ${
+      className={`fixed h-[100dvh]  left-0 right-8 text-gray1 bg-white z-20 top-0 px-3 overflow-hidden inset-y-0 transform ${
         isOpen ? "translate-x-0 shadow-2xl" : "-translate-x-full"
       } transition-transform duration-500 ease-in-out`}
     >
       <div className="flex justify-between items-center">
-        <img src={logo} alt="logo" className="w-44 md:w-64" />
-        <span onClick={close}>
+        <img src={logo} alt="logo" className="w-64 md:w-80" />
+        <span onClick={close} className="hover:text-primary text-black">
           {cross('large')}
         </span>
       </div>
