@@ -1,5 +1,16 @@
-import { MdClose, MdDashboard, MdExpandMore, MdFavorite, MdHome, MdList, MdMenu, MdPerson, MdSearch, MdShoppingCart, MdShoppingCartCheckout } from "react-icons/md";
-
+import {
+  MdClose,
+  MdDashboard,
+  MdExpandMore,
+  MdFavorite,
+  MdHome,
+  MdList,
+  MdMenu,
+  MdPerson,
+  MdSearch,
+  MdShoppingCart,
+  MdShoppingCartCheckout,
+} from "react-icons/md";
 
 export const allIcons = {
   home: <MdHome />,
