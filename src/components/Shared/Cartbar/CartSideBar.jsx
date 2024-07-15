@@ -12,17 +12,18 @@ const CartSideBar = ({ isOpen, close }) => {
     >
       <div className="flex justify-between items-center border-b-2 pb-4 border-primary">
         <h1 className="text-2xl font-bold text-orange-500">My Cart</h1>
-        <span onClick={close} className="hover:text-primary text-black">
-          {cross("large")}
+        <span
+          onClick={close}
+          className="hover:text-primary text-black text-3xl"
+        >
+          {cross}
         </span>
       </div>
       <div className="mt-5 text-black flex items-center gap-7">
         <img src={p1} alt="" className="w-12 md:w-20" />
         <p>Dell Laptop i5 8th gen.. </p>
         <p className="text-lg">$3000</p>
-        <span className="text-sm bg-gray1 text-white px-1">
-          {cross("default")}
-        </span>
+        <span className="text-base bg-gray1 text-white  px-1">{cross}</span>
       </div>
       <div className="border-t-2 border-b-2 border-black/40 pb-2 mt-12 text-black">
         <div className="flex justify-between items-center px-3 mt-2">
@@ -39,11 +40,11 @@ const CartSideBar = ({ isOpen, close }) => {
         </div>
       </div>
       <div className="flex justify-center items-center gap-20 mt-7">
-        <button className="bg-d1 text-white/90 px-3 py-2 hover:text-secondary">
-          {cart("small")} View Cart
+        <button className="bg-d1 text-white/90 px-3 py-2 hover:text-secondary flex items-center">
+          {cart} View Cart
         </button>
-        <button className="bg-d1 text-white/90 px-3 py-2 hover:text-secondary">
-          {checkout("small")} Checkout
+        <button className="bg-d1 text-white/90 px-3 py-2 hover:text-secondary flex items-center">
+          {checkout} Checkout
         </button>
       </div>
     </div>

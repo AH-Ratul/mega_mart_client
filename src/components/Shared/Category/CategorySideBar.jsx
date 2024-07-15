@@ -15,8 +15,8 @@ const CategorySideBar = ({ isOpen, close }) => {
         <h1 className="text-3xl mt-4 ml-4 text-black flex items-center font-bold">
           Categories
         </h1>
-        <span onClick={close} className="hover:text-primary text-black">
-          {cross("large")}
+        <span onClick={close} className="hover:text-primary text-black text-3xl">
+          {cross}
         </span>
       </div>
       {/* category lists */}
