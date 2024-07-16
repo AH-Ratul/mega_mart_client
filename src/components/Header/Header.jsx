@@ -7,10 +7,10 @@ const Header = () => {
   const { account, wish, search, cart2 } = allIcons;
 
   const headlines = [
-    "50% off on all products!",
-    "Free shipping on orders over $50!",
-    "New collection just arrived!",
-    "Limited time offer: Buy 1 Get 1 Free!",
+    "50% off on all products! .....",
+    "Free shipping on orders over $50! .....",
+    "New collection just arrived! .....",
+    "Limited time offer: Buy 1 Get 1 Free! .....",
   ];
   return (
     <header className="hidden lg:block ">
@@ -26,10 +26,10 @@ const Header = () => {
           <span className="flex items-center text-xs px-3 pr-5 py-2  gap-1 cursor-pointer">
             {wish} WISH LIST (2)
           </span>
-          <span className="flex items-center text-xs text-white/90 px-3 py-2 gap-1 bg-gray2 relative cursor-pointer">
+          <span className="flex items-center text-xs text-white/90 px-3 py-2 gap-1 bg-gray2 cursor-pointer">
             <span className="text-lg">{cart2}</span> MY CART
-            <span className="bg-red-400 absolute -left-2 flex justify-center text-white rounded-full px-1 text-xs">
-              0
+            <span className="bg-red-400 pb-[1px] text-white rounded-full px-1 text-xs">
+              2
             </span>
           </span>
         </div>
@@ -49,13 +49,9 @@ const Header = () => {
             {search}
           </button>
         </div>
-        <div className="flex items-center bg-gray1">
-          
-        </div>
+        <div className="flex items-center bg-gray1"></div>
       </div>
-      <div className="flex items-center bg-primary opacity-95 py-2">
-        
-      </div>
+      <div className="flex items-center bg-primary opacity-95 py-2"></div>
     </header>
   );
 };
