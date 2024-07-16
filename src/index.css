@@ -10,4 +10,18 @@
   .shadow-a2 {
     box-shadow: 0px 2px 9px -5px rgba(0, 0, 0, 0.9);
   }
+
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 4px;
+    height: 12px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: #adadad88;
+    border-radius: 3px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
 }
