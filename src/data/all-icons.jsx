@@ -1,3 +1,4 @@
+import { FaCartPlus } from "react-icons/fa6";
 import {
   MdClose,
   MdDashboard,
@@ -16,6 +17,7 @@ export const allIcons = {
   home: <MdHome />,
   dashboard: <MdDashboard />,
   cart: <MdShoppingCart />,
+  cart2: <FaCartPlus />,
   account: <MdPerson />,
   search: <MdSearch />,
   list: <MdList />,
