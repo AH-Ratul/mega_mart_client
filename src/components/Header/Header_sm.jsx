@@ -1,7 +1,6 @@
 import React from "react";
-import logo from "../../../public/logo.svg";
+import logo from "../../../public/logo12.svg";
 import { allIcons } from "../../data/all-icons";
-import { Link } from "react-router-dom";
 import MenuSideBar from "../Shared/Menubar/MenuSideBar";
 import useToggle from "../../hooks/useToggle";
 import CartSideBar from "../Shared/Cartbar/CartSideBar";
@@ -38,7 +37,10 @@ const HeaderSm = () => {
 
       {/* bottom header */}
       <section className="bg-gray-200 py-2 fixed bottom-0 w-[100dvw] z-20 flex justify-between items-center px-8 md:px-12">
-        <a href="/" className="text-primary text-2xl flex flex-col items-center">
+        <a
+          href="/"
+          className="text-primary text-2xl flex flex-col items-center"
+        >
           {home}
           <span className="text-xs">Home</span>
         </a>
