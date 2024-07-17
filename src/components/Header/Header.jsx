@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import logo from "../../../public/logo12.svg";
 import { allIcons } from "../../data/all-icons";
 import Headlines from "../Headlines/Headlines";
+import DropOnHover from "../Shared/DropDown/DropOnHover";
+import DropDown from "../Shared/DropDown/DropDown";
 
 const Header = () => {
   const { account, wish, search, cart2 } = allIcons;
@@ -19,19 +21,24 @@ const Header = () => {
         <div>
           <Headlines headlines={headlines} />
         </div>
+        {/* account */}
         <div className="flex items-center text-white/70 ">
-          <span className="flex items-center text-xs px-3 py-2 border-r border-l border-gray1 gap-1 cursor-pointer">
+          <div className="flex items-center text-xs px-3 py-2 border-r border-l border-gray1 gap-1 cursor-pointer relative group">
             {account}MY ACCOUNT
-          </span>
-          <span className="flex items-center text-xs px-3 pr-5 py-2  gap-1 cursor-pointer">
+            <DropOnHover />
+          </div>
+          {/* wish list */}
+          <div className="flex items-center text-xs px-3 pr-5 py-2  gap-1 cursor-pointer">
             {wish} WISH LIST (2)
-          </span>
-          <span className="flex items-center text-xs text-white/90 px-3 py-2 gap-1 bg-gray2 cursor-pointer">
+          </div>
+          {/* my cart */}
+          <div className="flex items-center text-xs text-white/90 px-3 py-2 gap-1 bg-gray2 cursor-pointer relative">
             <span className="text-lg">{cart2}</span> MY CART
             <span className="bg-red-400 pb-[1px] text-white rounded-full px-1 text-xs">
               2
             </span>
-          </span>
+            <DropDown />
+          </div>
         </div>
       </div>
       {/* lower div */}
