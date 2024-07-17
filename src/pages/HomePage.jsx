@@ -13,7 +13,7 @@ const HomePage = () => {
           <Category />
         </div>
         {/* slider */}
-        <div className="w-[410px] md:w-[750px] lg:w-[980px]">
+        <div className="w-[410px] md:w-[770px] lg:w-[980px]">
           <Slider />
         </div>
       </div>
@@ -21,7 +21,7 @@ const HomePage = () => {
         <Spotlights />
       </div>
       <div>
-        <img src={cart1} alt="cart1" className="w-full" />
+        
       </div>
     </main>
   );
