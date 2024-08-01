@@ -1,12 +1,16 @@
-import React, { useState } from "react";
+import React from "react";
 import logo from "../../../public/logo12.svg";
 import { allIcons } from "../../data/all-icons";
 import Headlines from "../Headlines/Headlines";
 import DropOnHover from "../Shared/DropDown/DropOnHover";
 import DropDown from "../Shared/DropDown/DropDown";
+import useToggle from "../../hooks/useToggle";
 
 const Header = () => {
   const { account, wish, search, cart2 } = allIcons;
+  const [toggleStates, toggle] = useToggle({
+    drop: false,
+  });
 
   const headlines = [
     "50% off on all products! .....",
@@ -23,8 +27,11 @@ const Header = () => {
         </div>
         {/* account */}
         <div className="flex items-center text-white/70 ">
-          <div className="flex items-center text-xs px-3 py-2 border-r border-l border-gray1 gap-1 cursor-pointer relative group">
-            {account}MY ACCOUNT
+          {/* my account */}
+          <div className="group relative">
+            <span className="flex items-center text-xs px-3 py-2 border-r border-l border-gray1 gap-1 cursor-pointer">
+              {account}MY ACCOUNT
+            </span>
             <DropOnHover />
           </div>
           {/* wish list */}
@@ -32,12 +39,17 @@ const Header = () => {
             {wish} WISH LIST (2)
           </div>
           {/* my cart */}
-          <div className="flex items-center text-xs text-white/90 px-3 py-2 gap-1 bg-gray2 cursor-pointer relative">
-            <span className="text-lg">{cart2}</span> MY CART
-            <span className="bg-red-400 pb-[1px] text-white rounded-full px-1 text-xs">
-              2
-            </span>
-            <DropDown />
+          <div className="relative">
+            <button
+              onClick={() => toggle("drop")}
+              className="flex items-center text-xs text-white/90 px-3 py-2 gap-1 bg-gray2"
+            >
+              <span className="text-lg">{cart2}</span> MY CART
+              <span className="bg-red-400 pb-[1.5px] text-white rounded-full px-[6px] text-xs">
+                2
+              </span>
+            </button>
+            <DropDown isOpen={toggleStates.drop} close={() => toggle("drop")} />
           </div>
         </div>
       </div>
@@ -52,7 +64,10 @@ const Header = () => {
             className="border-2 border-primary text-gray1 rounded-tl rounded-bl p-1 ps-3 w-full outline-none"
             placeholder="Search"
           />
-          <button className="bg-primary py-1 px-3 text-white/90 text-xl rounded-tr rounded-br">
+          <button
+            onClick={() => console.log("click search")}
+            className="bg-primary py-1 px-3 text-white/90 text-xl rounded-tr rounded-br"
+          >
             {search}
           </button>
         </div>
