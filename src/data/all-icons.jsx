@@ -1,5 +1,6 @@
+import { BsCart } from "react-icons/bs";
 import { FaUser } from "react-icons/fa";
-import { FaCartPlus, FaRightToBracket } from "react-icons/fa6";
+import { FaCartPlus, FaLock, FaRightToBracket } from "react-icons/fa6";
 import {
   MdClose,
   MdDashboard,
@@ -18,6 +19,7 @@ export const allIcons = {
   dashboard: <MdDashboard />,
   cart: <MdShoppingCart />,
   cart2: <FaCartPlus />,
+  cart3: <BsCart />,
   account: <FaUser />,
   search: <MdSearch />,
   list: <MdList />,
@@ -27,4 +29,5 @@ export const allIcons = {
   cross: <MdClose />,
   checkout: <MdShoppingCartCheckout />,
   login: <FaRightToBracket />,
+  lock: <FaLock />,
 };
