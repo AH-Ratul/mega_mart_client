@@ -1,21 +1,23 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { allIcons } from "../../../data/all-icons";
 
 const DropOnHover = () => {
+  const { account, login } = allIcons;
   return (
-    <div className="absolute border mt-[90px] w-full shadow-sm text-center py-1 left-0 bg-white text-d2 transition-opacity duration-500 ease-out opacity-0 group-hover:opacity-100 group-hover:visible invisible">
-      <div className="flex flex-col">
+    <div className="invisible absolute group-hover:visible border w-full shadow-a3 text-xs left-0 bg-white text-d2 transition-transform duration-300 ease-out transform -translate-y-2 group-hover:translate-y-0">
+      <div className=" flex flex-col font-medium">
         <Link
-          href=""
-          className="font-medium hover:text-secondary hover:bg-gray-100 px-5 py-1"
+          to="/signup"
+          className="hover:text-secondary hover:bg-gray-100 px-6 py-1 flex justify-start items-center gap-1"
         >
-          Register
+          {account} Register
         </Link>
         <Link
-          href=""
-          className="font-medium hover:text-secondary hover:bg-gray-100 px-5 py-1"
+          to="/login"
+          className="hover:text-secondary hover:bg-gray-100 px-6 py-1 flex justify-start items-center gap-1"
         >
-          Login
+          {login} Login
         </Link>
       </div>
     </div>
