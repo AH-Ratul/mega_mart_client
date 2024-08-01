@@ -1,7 +1,5 @@
 import React from "react";
-import p1 from "../../assets/bnn.svg";
-import p2 from "../../assets/banner.svg";
-import p3 from "../../assets/banner5.svg";
+import banner from "../../assets/banner6.svg";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
@@ -19,25 +17,25 @@ const Slider = () => {
         autoplay={{ delay: 5000, disableOnInteraction: false }}
         modules={[Pagination, Autoplay]}
       >
-        <SwiperSlide className="px-3 md:px-9 ">
+        <SwiperSlide className="px-3 md:px-9 lg:pl-0 lg:pr-0">
           <img
-            src={p1}
+            src={banner}
             alt="banner"
-            className="w-full h-[170px]  md:h-[390px] object-cover rounded-md lg:rounded-none"
+            className="w-full h-[170px]  md:h-[390px] object-cover rounded-md "
           />
         </SwiperSlide>
-        <SwiperSlide className="px-3 md:px-9 ">
+        <SwiperSlide className="px-3 md:px-9 lg:pl-0 lg:pr-0">
           <img
-            src={p1}
+            src={banner}
             alt="banner"
-            className="w-full h-[170px] md:h-[390px] object-cover rounded-md lg:rounded-none"
+            className="w-full h-[170px] md:h-[390px] object-cover rounded-md "
           />
         </SwiperSlide>
-        <SwiperSlide className="px-3 md:px-9">
+        <SwiperSlide className="px-3 md:px-9 lg:pl-0 lg:pr-0">
           <img
-            src={p1}
+            src={banner}
             alt="banner"
-            className="w-full h-[170px] md:h-[390px] object-cover rounded-md lg:rounded-none"
+            className="w-full h-[170px] md:h-[390px] object-cover rounded-md "
           />
         </SwiperSlide>
       </Swiper>
