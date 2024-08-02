@@ -5,7 +5,7 @@ import Header from "../components/Header/Header";
 
 const Main = () => {
   return (
-    <main className="relative bg-babypowder">
+    <main className="relative bg-babypowder font-Poppins">
       {/* Header section */}
       <Header />
       <HeaderSm />
