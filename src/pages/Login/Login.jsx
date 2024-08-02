@@ -1,8 +1,11 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
+import { allIcons } from "../../data/all-icons";
 
 const Login = () => {
+  const { google, phone } = allIcons;
+
   const {
     register,
     handleSubmit,
@@ -58,13 +61,29 @@ const Login = () => {
             </p>
           )}
           <div className="flex justify-end">
-            <Link className="text-sm mt-1 w-fit text-d2 hover:text-red-500">Forget Password?</Link>
+            <Link className="text-sm mt-1 w-fit text-d2 hover:text-red-500">
+              Forgot Password?
+            </Link>
           </div>
-          <button className="mt-3 bg-secondary hover:opacity-90 py-3 rounded-md text-white font-bold text-base">
-            Login
+          <button className="mt-3 bg-secondary hover:opacity-90 py-3 rounded-md text-white text-base font-medium tracking-wider">
+            LOGIN
           </button>
-          
-          <p className=" text-center my-8 font-semibold">New Member? <Link className=" text-primary">Register</Link> Here</p>
+          {/* social login */}
+          <div className="flex justify-center items-center gap-5 mt-5">
+            <button className="flex justify-center items-center  rounded-md gap-2 py-1 text-xl w-44 border border-secondary ">
+              <span>{google}</span>
+              <span className="text-primary text-base">Google</span>
+            </button>
+            <Link className="flex justify-center items-center rounded-md gap-2 py-1 text-xl w-44 border border-secondary ">
+              <span>{phone}</span>
+              <span className="text-primary text-base">Phone</span>
+            </Link>
+          </div>
+          {/* signup link */}
+          <p className="text-sm text-center my-8">
+            New Member?{" "}
+            <Link to='/register' className="font-semibold text-primary tracking-wider">Register</Link> Here
+          </p>
         </form>
       </div>
     </div>
