@@ -34,11 +34,11 @@ const Header = () => {
             </Link>
           </div>
           {/* wish list */}
-          <Link className="flex items-center mx-3 gap-1 hover:text-white/90">
+          <Link className="flex items-center mx-3 gap-1 hover:text-white/90 tracking-wide">
             {wish} WISH LIST (2)
           </Link>
           {/* login */}
-          <Link to='/login' className="flex items-center ml-3 gap-1 hover:text-white/90">
+          <Link to='/login' className="flex items-center ml-3 gap-1 hover:text-white/90 tracking-wider">
             {lock} LOGIN
           </Link>
         </div>
