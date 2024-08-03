@@ -20,8 +20,8 @@ const Login = () => {
     reset();
   };
   return (
-    <div className="flex justify-center items-center mt-6">
-      <div className="w-[500px] px-16 py-4 rounded-lg shadow-a2">
+    <div className="flex justify-center items-center md:mt-6">
+      <div className="w-full px-5 md:px-20  lg:w-[500px] lg:px-16 py-4 rounded-lg lg:shadow-a2">
         <h1 className="font-bold text-2xl text-center text-primary mt-9">
           Login Here
         </h1>
@@ -68,23 +68,29 @@ const Login = () => {
           <button className="mt-3 bg-secondary hover:opacity-90 py-3 rounded-md text-white text-base font-medium tracking-wider">
             LOGIN
           </button>
-          {/* social login */}
-          <div className="flex justify-center items-center gap-5 mt-5">
-            <button className="flex justify-center items-center  rounded-md gap-2 py-1 text-xl w-44 border border-secondary ">
-              <span>{google}</span>
-              <span className="text-primary text-base">Google</span>
-            </button>
-            <Link className="flex justify-center items-center rounded-md gap-2 py-1 text-xl w-44 border border-secondary ">
-              <span>{phone}</span>
-              <span className="text-primary text-base">Phone</span>
-            </Link>
-          </div>
-          {/* signup link */}
-          <p className="text-sm text-center my-8">
-            New Member?{" "}
-            <Link to='/register' className="font-semibold text-primary tracking-wider">Register</Link> Here
-          </p>
         </form>
+        {/* social login */}
+        <div className="flex justify-center items-center gap-5 mt-5">
+          <button className="flex justify-center items-center  rounded-md gap-2 py-1 text-xl w-full border border-secondary ">
+            <span>{google}</span>
+            <span className="text-primary text-base">Google</span>
+          </button>
+          <Link className="flex justify-center items-center rounded-md gap-2 py-1 text-xl w-full border border-secondary ">
+            <span>{phone}</span>
+            <span className="text-primary text-base">Phone</span>
+          </Link>
+        </div>
+        {/* register link */}
+        <p className="text-sm text-center my-8">
+          New Member?{" "}
+          <Link
+            to="/register"
+            className="font-semibold text-primary tracking-wider"
+          >
+            Register
+          </Link>{" "}
+          Here
+        </p>
       </div>
     </div>
   );
