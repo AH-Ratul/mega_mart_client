@@ -1,5 +1,6 @@
 import React from "react";
 import { useForm } from "react-hook-form";
+import { useCreateUserMutation } from "../../redux/api/users_api";
 
 const Register = () => {
   const {
@@ -9,14 +10,21 @@ const Register = () => {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => {
-    console.log(data);
+  const [postData, { isSuccess, isLoading, isError, error }] =
+    useCreateUserMutation();
 
-    //clear fields
-    reset();
+  const onSubmit = async (data) => {
+    try {
+      await postData(data).unwrap();
+
+      //clear fields
+      reset();
+    } catch (error) {
+      console.log("Err ->", error.data);
+    }
   };
   return (
-    <div className="flex justify-center items-center mt-6">
+    <div className="flex justify-center items-center mt-6 mb-9">
       <div className="w-full px-5 md:px-20 lg:w-[500px] lg:px-16 py-4 rounded-lg lg:shadow-a2">
         <h1 className="font-bold text-2xl text-center text-primary mt-9">
           Register Here
@@ -81,9 +89,9 @@ const Register = () => {
           )}
           <input
             type="password"
-            id="confirmpassword"
+            id="passwordConfirm"
             placeholder="Confirm Your Password"
-            {...register("confirmpassword", {
+            {...register("passwordConfirm", {
               required: "You have to confirm your password",
               minLength: {
                 value: 6,
@@ -101,6 +109,10 @@ const Register = () => {
             SIGN UP
           </button>
         </form>
+        <div className="text-center text-sm text-red-500">
+          {isSuccess && <p>User Created</p>}
+          {isError && <p>{error.data.message}</p>}
+        </div>
       </div>
     </div>
   );
