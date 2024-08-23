@@ -6,12 +6,22 @@ import DropDown from "../Shared/DropDown/DropDown";
 import useToggle from "../../hooks/useToggle";
 import { Link } from "react-router-dom";
 import bonus from "../../assets/bonus.png";
+import useAuth from "../../hooks/useAuth";
+import { useDispatch } from "react-redux";
+import { logOut } from "../../redux/slices/authSlice";
 
 const Header = () => {
-  const { account, wish, search, cart3, lock } = allIcons;
+  const { account, wish, search, cart3, lock, logout } = allIcons;
   const [toggleStates, toggle] = useToggle({
     drop: false,
   });
+  const dispatch = useDispatch();
+
+  const { user } = useAuth();
+
+  const handleLogout = () => {
+    dispatch(logOut());
+  };
 
   const headlines = [
     "50% off on all products! .....",
@@ -38,9 +48,21 @@ const Header = () => {
             {wish} WISH LIST (2)
           </Link>
           {/* login */}
-          <Link to='/login' className="flex items-center ml-3 gap-1 hover:text-white/90 tracking-wider">
-            {lock} LOGIN
-          </Link>
+          {user ? (
+            <button
+              onClick={handleLogout}
+              className="flex items-center ml-3 gap-1 hover:text-white/90 tracking-wider"
+            >
+              {logout} LOGOUT
+            </button>
+          ) : (
+            <Link
+              to="/login"
+              className="flex items-center ml-3 gap-1 hover:text-white/90 tracking-wider"
+            >
+              {lock} LOGIN
+            </Link>
+          )}
         </div>
       </div>
       {/* lower div */}
