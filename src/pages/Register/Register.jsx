@@ -1,6 +1,7 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useCreateUserMutation } from "../../redux/api/users_api";
+import CustomToast from "../../hooks/CustomToast";
 
 const Register = () => {
   const {
@@ -15,12 +16,14 @@ const Register = () => {
 
   const onSubmit = async (data) => {
     try {
-      await postData(data).unwrap();
+      const post = await postData(data).unwrap();
 
+      CustomToast({ type: "success", message: post.message });
       //clear fields
       reset();
     } catch (error) {
       console.log("Err ->", error.data);
+      CustomToast({ type: "error", message: error.data.message });
     }
   };
   return (
@@ -106,13 +109,10 @@ const Register = () => {
             </p>
           )}
           <button className="mt-5 mb-8 bg-secondary hover:opacity-90 py-3 rounded-md text-white text-base font-medium tracking-wider">
-            SIGN UP
+            {isLoading ? "SIGNING UP..." : "SIGN UP"}
           </button>
         </form>
-        <div className="text-center text-sm text-red-500">
-          {isSuccess && <p>User Created</p>}
-          {isError && <p>{error.data.message}</p>}
-        </div>
+        <div className="text-center text-sm text-red-500"></div>
       </div>
     </div>
   );
