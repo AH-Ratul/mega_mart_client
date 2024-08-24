@@ -40,7 +40,7 @@ const Header = () => {
           {/* my account */}
           <div className="group relative">
             <Link className="flex items-center mx-3 gap-1 hover:text-white/90">
-              {account}MY ACCOUNT
+              {account}MY ACCOUNT {user.name}
             </Link>
           </div>
           {/* wish list */}
