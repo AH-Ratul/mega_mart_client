@@ -4,7 +4,7 @@ export const userApi = createApi({
   reducerPath: "userApi",
   baseQuery: fetchBaseQuery({
     baseUrl: `${import.meta.env.VITE_baseurl}api/v1`,
-    credentials: 'include',
+    
   }),
   tagTypes: ["auth"],
   endpoints: (builder) => ({
@@ -20,12 +20,6 @@ export const userApi = createApi({
         url: "/users/login",
         method: "POST",
         body: userCredentials,
-      }),
-    }),
-    getUser: builder.query({
-      query: () => ({
-        url: "/users/get",
-        method: "GET",
       }),
     }),
   }),
