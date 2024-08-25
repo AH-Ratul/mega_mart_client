@@ -6,7 +6,7 @@ import sp3 from "../../assets/deal.png";
 const Spotlights = () => {
   return (
     <div className="">
-      <ul className="flex flex-col gap-5 md:grid md:grid-cols-3 md:gap-2 md:px-9 lg:gap-20 md:mb-4">
+      <ul className="flex flex-col gap-5 md:grid md:grid-cols-3 md:gap-2 md:px-9 lg:px-0 lg:gap-[103px] md:mb-4">
         <li className="border-4">
           <img src={sp1} alt="free-shipping" />
         </li>
