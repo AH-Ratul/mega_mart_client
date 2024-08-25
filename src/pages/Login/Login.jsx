@@ -61,8 +61,8 @@ const Login = () => {
   return (
     <div className="flex justify-center items-center md:mt-6">
       <div className="w-full px-4 md:px-20  lg:w-[400px] lg:px-8 py-4 rounded-lg lg:border lg:border-b1">
-        <h1 className="font-medium text-2xl text-center text-primary  mt-9 lg:mt-3">
-          Login Here
+        <h1 className="font-medium text-2xl text-center text-primary mt-9 lg:mt-3">
+          Login
         </h1>
         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col ">
           <input
