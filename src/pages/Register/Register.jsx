@@ -96,10 +96,7 @@ const Register = () => {
             placeholder="Confirm Your Password"
             {...register("passwordConfirm", {
               required: "You have to confirm your password",
-              minLength: {
-                value: 6,
-                message: "Password must be at least 6 characters",
-              },
+              message: "Password must be at least 6 characters",
             })}
             className=" border border-primary outline-none rounded-md ps-3 py-2 mt-5"
           />
