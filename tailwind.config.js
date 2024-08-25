@@ -12,7 +12,7 @@ export default {
       colors: {
         primary: "#ff8c42",
         secondary: "#F9A03F",
-        babypowder: "#FFFFFA",
+        b1: "#ddd",
         gray1: "#7D7C7C",
         gray2: "#67696c",
         d1: "#232f3e",
