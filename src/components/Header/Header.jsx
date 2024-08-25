@@ -4,7 +4,7 @@ import { allIcons } from "../../data/all-icons";
 import Headlines from "../Headlines/Headlines";
 import DropDown from "../Shared/DropDown/DropDown";
 import useToggle from "../../hooks/useToggle";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import bonus from "../../assets/bonus.png";
 import useAuth from "../../hooks/useAuth";
 import { useDispatch } from "react-redux";
@@ -16,11 +16,12 @@ const Header = () => {
     drop: false,
   });
   const dispatch = useDispatch();
-
+  const navigate = useNavigate();
   const { user } = useAuth();
 
   const handleLogout = () => {
     dispatch(logOut());
+    navigate("/");
   };
 
   const headlines = [
@@ -39,8 +40,11 @@ const Header = () => {
         <div className="flex items-center text-white/70 text-xs">
           {/* my account */}
           <div className="group relative">
-            <Link className="flex items-center mx-3 gap-1 hover:text-white/90">
-              {account}MY ACCOUNT {user.name}
+            <Link
+              to="/myaccount"
+              className="flex items-center mx-3 gap-1 hover:text-white/90"
+            >
+              {account}MY ACCOUNT
             </Link>
           </div>
           {/* wish list */}
@@ -66,7 +70,7 @@ const Header = () => {
         </div>
       </div>
       {/* lower div */}
-      <div className="py-3 px-10 flex justify-between items-center">
+      <div className="py-1 px-10 flex justify-between items-center">
         <a href="/">
           <img src={logo} alt="logo" className="w-56" />
         </a>
