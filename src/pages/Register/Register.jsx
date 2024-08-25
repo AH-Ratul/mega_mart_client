@@ -2,6 +2,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { useCreateUserMutation } from "../../redux/api/users_api";
 import CustomToast from "../../hooks/CustomToast";
+import { Link } from "react-router-dom";
 
 const Register = () => {
   const {
@@ -28,9 +29,9 @@ const Register = () => {
   };
   return (
     <div className="flex justify-center items-center mt-6 mb-9">
-      <div className="w-full px-5 md:px-20 lg:w-[500px] lg:px-16 py-4 rounded-lg lg:shadow-a2">
-        <h1 className="font-bold text-2xl text-center text-primary mt-9">
-          Register Here
+      <div className="w-full px-5 md:px-20 lg:w-[430px] lg:px-8 py-4 rounded-lg lg:border lg:border-b1">
+        <h1 className="font-medium text-2xl text-center text-primary mt-9 lg:mt-3">
+          Create Account
         </h1>
         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col">
           <input
@@ -38,7 +39,7 @@ const Register = () => {
             id="name"
             placeholder="Your Name"
             {...register("name")}
-            className=" border border-primary outline-none rounded-md ps-3 py-2 mt-5"
+            className=" border border-b1 text-sm outline-none rounded-md ps-3 py-2 mt-5"
           />
           <input
             type="email"
@@ -51,7 +52,7 @@ const Register = () => {
                 message: "Enter a valid email address",
               },
             })}
-            className=" border border-primary outline-none rounded-md ps-3 py-2 mt-5"
+            className=" border border-b1 text-sm outline-none rounded-md ps-3 py-2 mt-5"
           />
           {errors.email && (
             <p className="text-red-600 text-xs mt-1">{errors.email.message}</p>
@@ -67,7 +68,7 @@ const Register = () => {
                 message: "Enter a valid phone number",
               },
             })}
-            className=" border border-primary outline-none rounded-md ps-3 py-2 mt-5"
+            className=" border border-b1 text-sm outline-none rounded-md ps-3 py-2 mt-5"
           />
           {errors.phone && (
             <p className="text-red-600 text-xs mt-1">{errors.phone.message}</p>
@@ -83,7 +84,7 @@ const Register = () => {
                 message: "Password must be at least 6 characters",
               },
             })}
-            className=" border border-primary outline-none rounded-md ps-3 py-2 mt-5"
+            className=" border border-b1 text-sm outline-none rounded-md ps-3 py-2 mt-5"
           />
           {errors.password && (
             <p className="text-red-600 text-xs mt-1">
@@ -98,18 +99,40 @@ const Register = () => {
               required: "You have to confirm your password",
               message: "Password must be at least 6 characters",
             })}
-            className=" border border-primary outline-none rounded-md ps-3 py-2 mt-5"
+            className=" border border-b1 text-sm outline-none rounded-md ps-3 py-2 mt-5"
           />
           {errors.confirmpassword && (
             <p className="text-red-600 text-xs mt-1">
               {errors.confirmpassword.message}
             </p>
           )}
-          <button className="mt-5 mb-8 bg-secondary hover:opacity-90 py-3 rounded-md text-white text-base font-medium tracking-wider">
-            {isLoading ? "SIGNING UP..." : "SIGN UP"}
+          <button className="mt-5 bg-primary hover:bg-opacity-90 py-[6px] rounded-md text-white text-base font-medium tracking-wide text-center">
+            {isLoading ? "Creating.." : "Create"}
           </button>
         </form>
-        <div className="text-center text-sm text-red-500"></div>
+        <div>
+          <p className="text-xs mt-6 font-medium tracking-wide">
+            By Creating account, you agree to our{" "}
+            <Link className="text-sky-800 hover:text-primary underline">
+              Conditions of Use
+            </Link>{" "}
+            and{" "}
+            <Link className="text-sky-800 hover:text-primary underline">
+              Privacy Notice
+            </Link>
+            .
+          </p>
+        </div>
+        {/* LOGIN LINK */}
+        <p className="text-xs text-center mt-8 mb-4">
+          Already Have an Account?{" "}
+          <Link
+            to="/login"
+            className="font-semibold text-primary tracking-wider"
+          >
+            Login
+          </Link>
+        </p>
       </div>
     </div>
   );
