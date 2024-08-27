@@ -4,6 +4,7 @@ import HomePage from "../pages/HomePage";
 import Login from "../pages/Login/Login";
 import Register from "../pages/Register/Register";
 import MyAccount from "../components/Profile/MyAccount";
+import PrivateRoute from "./PrivateRoute/PrivateRoute";
 
 export const router = createBrowserRouter([
   {
@@ -24,7 +25,11 @@ export const router = createBrowserRouter([
       },
       {
         path: "myaccount",
-        element: <MyAccount />,
+        element: (
+          <PrivateRoute>
+            <MyAccount />
+          </PrivateRoute>
+        ),
       },
     ],
   },
