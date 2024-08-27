@@ -24,7 +24,7 @@ export const router = createBrowserRouter([
         element: <Register />,
       },
       {
-        path: "myaccount",
+        path: "account",
         element: (
           <PrivateRoute>
             <MyAccount />
