@@ -9,9 +9,11 @@ import bonus from "../../assets/bonus.png";
 import useAuth from "../../hooks/useAuth";
 import { useDispatch } from "react-redux";
 import { logOut } from "../../redux/slices/authSlice";
+import DropOnHover from "../Shared/DropDown/DropOnHover";
 
 const Header = () => {
-  const { account, wish, search, cart3, lock, logout } = allIcons;
+  const { account, wish, search, cart3, lock, logout, facebook, insta, email } =
+    allIcons;
   const [toggleStates, toggle] = useToggle({
     drop: false,
   });
@@ -31,80 +33,83 @@ const Header = () => {
     "Limited time offer: Buy 1 Get 1 Free! .....",
   ];
   return (
-    <header className="hidden lg:block bg-d1">
-      {/* upper div */}
-      <div className="flex justify-between items-center px-10 py-1 2xl:py-2 border-b border-b-white/10">
-        <div>
-          <Headlines headlines={headlines} />
-        </div>
-        <div className="flex items-center text-white/70 text-xs">
-          {/* my account */}
-          <div className="group relative">
-            <Link
-              to="/myaccount"
-              className="flex items-center mx-3 gap-1 hover:text-white/90"
-            >
-              {account}MY ACCOUNT
-            </Link>
+    <header className="hidden lg:flex flex-col justify-center items-center bg-d1 border-b">
+      <div>
+        {/* upper div */}
+        <div className="flex justify-between items-center  pt-2 text-white/80">
+          <div className="flex items-center gap-3 text-sm">
+            <a href="">{facebook}</a>
+            <a href="">{insta}</a>
+            <a href="">{email}</a>
           </div>
-          {/* wish list */}
-          <Link className="flex items-center mx-3 gap-1 hover:text-white/90 tracking-wide">
-            {wish} WISH LIST (2)
-          </Link>
-          {/* login */}
-          {user ? (
-            <button
-              onClick={handleLogout}
-              className="flex items-center ml-3 gap-1 hover:text-white/90 tracking-wider"
-            >
-              {logout} LOGOUT
-            </button>
-          ) : (
-            <Link
-              to="/login"
-              className="flex items-center ml-3 gap-1 hover:text-white/90 tracking-wider"
-            >
-              {lock} LOGIN
-            </Link>
-          )}
-        </div>
-      </div>
-      {/* lower div */}
-      <div className="py-1 px-10 flex justify-between items-center">
-        <a href="/">
-          <img src={logo} alt="logo" className="w-56" />
-        </a>
-        {/* Search */}
-        <div className="flex w-[600px]">
-          <input
-            type="text"
-            className=" text-gray1 rounded-tl rounded-bl py-2 ps-3 w-full outline-none"
-            placeholder="Search"
-          />
-          <button
-            onClick={() => console.log("click search")}
-            className="bg-primary py-1 px-3 text-white/90 text-xl rounded-tr rounded-br"
-          >
-            {search}
-          </button>
-        </div>
-        {/* banner & cart */}
-        <div className="flex items-center gap-5">
-          {/* bonus banner */}
-          <div className="w-60">
-            <img src={bonus} alt="bonus" />
+          <div className="flex items-center gap-5 text-xs">
+            <a href="" className="">
+              About Us
+            </a>
+            <a href="" className="">
+              Media
+            </a>
+            <a href="" className=" ">
+              FAQ
+            </a>
           </div>
-          {/* My Cart */}
-          <div className="relative">
+        </div>
+        {/* lower div */}
+        <div className="py-5 w-full flex justify-between items-center gap-[167px] ">
+          <a href="/">
+            <img src={logo} alt="logo" className="w-52" />
+          </a>
+          {/* Search */}
+          <div className="flex w-[700px] rounded-md">
+            <input
+              type="text"
+              className=" text-gray1  border border-b1 border-r-0 rounded-tl-md rounded-bl-md py-[6px] ps-3 w-full outline-none text-sm"
+              placeholder="Search"
+            />
             <button
-              onClick={() => toggle("drop")}
-              className="flex items-center text-xs text-white/90 gap-2"
+              onClick={() => console.log("click search")}
+              className="bg-primary py-1 px-4 text-white/90 text-xl rounded-tr-md rounded-br-md"
             >
-              <span className="text-2xl  border border-primary text-primary rounded-full p-[6px]">
-                {cart3}
-              </span>
+              {search}
             </button>
-            <DropDown isOpen={toggleStates.drop} close={() => toggle("drop")} />
+          </div>
+          {/* account & cart */}
+          <div className="flex items-center gap-5 ">
+            {/* login */}
+            <div className="relative group">
+              <Link
+                to=""
+                className="flex items-center text-primary text-2xl h-9"
+              >
+                {account}
+              </Link>
+              <DropOnHover />
+            </div>
+
+            {/* My Cart */}
+            <div className="relative ">
+              <button
+                onClick={() => toggle("drop")}
+                className="flex items-center text-xs text-white/90"
+              >
+                <span className="text-[1.688rem] text-primary rounded-full">
+                  {cart3}
+                </span>
+              </button>
+              <DropDown
+                isOpen={toggleStates.drop}
+                close={() => toggle("drop")}
+              />
+            </div>
+            {/* my account 
+            <div className="group relative">
+              <Link
+                to="/myaccount"
+                className="flex items-center text-2xl   text-primary rounded-full p-[6px]"
+              >
+                {account}
+              </Link>
+            </div>*/}
           </div>
         </div>
       </div>
