@@ -1,6 +1,6 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { allIcons } from "../../data/all-icons";
 import { useLoginMutation } from "../../redux/api/users_api";
 import { useDispatch } from "react-redux";
@@ -12,6 +12,9 @@ import Loader from "../../components/Shared/Loader/Loader";
 const Login = () => {
   const { google, phone } = allIcons;
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const to = location?.state?.from?.pathname || "/";
 
   const {
     register,
@@ -45,7 +48,7 @@ const Login = () => {
       // clear fields
       reset();
 
-      navigate("/");
+      navigate(to);
       dispatch(setLoading(false));
     } catch (error) {
       {
