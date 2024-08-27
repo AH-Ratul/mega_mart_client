@@ -12,7 +12,7 @@ const HomePage = () => {
           <Category />
         </div>
         {/* slider */}
-        <div className="w-[410px] md:w-[770px] lg:w-[999px]">
+        <div className="w-[410px] md:w-[770px] lg:w-[992px]">
           <Slider />
         </div>
       </section>
