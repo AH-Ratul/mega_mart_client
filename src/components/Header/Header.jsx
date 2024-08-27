@@ -4,27 +4,14 @@ import { allIcons } from "../../data/all-icons";
 import Headlines from "../Headlines/Headlines";
 import DropDown from "../Shared/DropDown/DropDown";
 import useToggle from "../../hooks/useToggle";
-import { Link, useNavigate } from "react-router-dom";
-import bonus from "../../assets/bonus.png";
-import useAuth from "../../hooks/useAuth";
-import { useDispatch } from "react-redux";
-import { logOut } from "../../redux/slices/authSlice";
+import { Link } from "react-router-dom";
 import DropOnHover from "../Shared/DropDown/DropOnHover";
 
 const Header = () => {
-  const { account, wish, search, cart3, lock, logout, facebook, insta, email } =
-    allIcons;
+  const { account, search, cart3, facebook, insta, email } = allIcons;
   const [toggleStates, toggle] = useToggle({
     drop: false,
   });
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const { user } = useAuth();
-
-  const handleLogout = () => {
-    dispatch(logOut());
-    navigate("/");
-  };
 
   const headlines = [
     "50% off on all products! .....",
@@ -101,15 +88,6 @@ const Header = () => {
                 close={() => toggle("drop")}
               />
             </div>
-            {/* my account 
-            <div className="group relative">
-              <Link
-                to="/myaccount"
-                className="flex items-center text-2xl   text-primary rounded-full p-[6px]"
-              >
-                {account}
-              </Link>
-            </div>*/}
           </div>
         </div>
       </div>
