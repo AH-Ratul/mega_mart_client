@@ -1,6 +1,12 @@
 import { BsCart } from "react-icons/bs";
 import { FaUser } from "react-icons/fa";
-import { FaCartPlus, FaLock, FaRightToBracket } from "react-icons/fa6";
+import {
+  FaCartPlus,
+  FaFacebookF,
+  FaInstagram,
+  FaLock,
+  FaRightToBracket,
+} from "react-icons/fa6";
 import { FcGoogle } from "react-icons/fc";
 import { FiLogOut } from "react-icons/fi";
 import { IoPhonePortraitOutline } from "react-icons/io5";
@@ -12,6 +18,7 @@ import {
   MdHome,
   MdList,
   MdMenu,
+  MdOutlineMailOutline,
   MdSearch,
   MdShoppingCart,
   MdShoppingCartCheckout,
@@ -36,4 +43,7 @@ export const allIcons = {
   lock: <FaLock />,
   google: <FcGoogle />,
   phone: <IoPhonePortraitOutline />,
+  facebook: <FaFacebookF />,
+  insta: <FaInstagram />,
+  email: <MdOutlineMailOutline />,
 };
