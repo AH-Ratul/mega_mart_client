@@ -66,7 +66,7 @@ const Header = () => {
             <div className="relative group">
               <Link
                 to=""
-                className="flex items-center text-primary text-2xl h-9"
+                className="flex items-center text-primary text-2xl h-10"
               >
                 {account}
               </Link>
