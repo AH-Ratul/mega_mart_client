@@ -14,7 +14,9 @@ const DropOnHover = () => {
     navigate("/");
   };
   return (
-    <div className="invisible absolute group-hover:visible  w-72 h-52 text-sm -left-60 rounded shadow-2xl z-20 bg-white text-d1 transition-transform duration-300 ease-out transform -translate-y-2 group-hover:translate-y-0 ">
+    <div className="invisible absolute group-hover:visible  w-72 h-52 text-sm -left-60 rounded shadow-2xl z-20 bg-white text-d1 transition-transform duration-300 ease-out transform translate-y-2 group-hover:translate-y-0">
+      <div className="absolute -top-[22px] right-5 transform -translate-y-2 -translate-x-1/2 border-8 border-transparent border-b-white py-2"></div>
+
       {user ? (
         <div className="text-center mt-3">
           <h1 className="">
@@ -23,10 +25,10 @@ const DropOnHover = () => {
           <p className="mt-2 text-gray1 text-xs">Welcome to MegaMart</p>
         </div>
       ) : (
-        <div className=" flex flex-col justify-center items-center  px-3">
+        <div className="mt-3 flex flex-col justify-center items-center  px-3">
           <Link
             to="/login"
-            className="bg-primary text- hover:underline mt-4 w-[80%] text-center py-1 rounded-md"
+            className="bg-primary text-white hover:underline mt-4 w-[80%] text-center py-1 rounded-md"
           >
             Login
           </Link>
