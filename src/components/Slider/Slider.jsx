@@ -14,7 +14,7 @@ const Slider = () => {
         spaceBetween={30}
         slidesPerView={1}
         pagination={{ clickable: true }}
-        autoplay={{ delay: 5000, disableOnInteraction: false }}
+        autoplay={{ delay: 10000, disableOnInteraction: false }}
         modules={[Pagination, Autoplay]}
       >
         <SwiperSlide className="px-3 md:px-9 lg:pl-0 lg:pr-0">
