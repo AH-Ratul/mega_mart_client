@@ -1,10 +1,10 @@
 import React from "react";
 import { ImSpinner8 } from "react-icons/im";
 
-const Loader = () => {
+const Loader = ({ color, size }) => {
   return (
-    <div>
-      <ImSpinner8 className="text-secondary text-6xl animate-spin-slow" />
+    <div className="flex justify-center items-center">
+      <ImSpinner8 className={`text-${color} text-${size} animate-spin-slow`} />
     </div>
   );
 };
