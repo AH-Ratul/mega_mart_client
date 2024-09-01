@@ -9,7 +9,7 @@ const Category = () => {
       <h1 className="flex items-center ps-4 text-center text-xl bg-primary text-white font-bold py-2 rounded-t-lg">
         <span className="text-3xl pr-4">{list}</span> CATEGORIES
       </h1>
-      <div className=" flex flex-col lg:text-base h-[345px] border border-t-0 text-gray1 rounded-b-md overflow-auto custom-scrollbar">
+      <div className=" flex flex-col lg:text-sm h-[345px] border border-t-0 border-b1 text-gray1 rounded-b-md overflow-auto custom-scrollbar">
         <Link className="hover:text-primary hover:bg-gray-100 px-7 py-2 transition duration-300 ease-in-out">
           Mobile & Accessories
         </Link>
