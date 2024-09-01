@@ -23,7 +23,7 @@ const ForgetPassword = () => {
 
       CustomToast({ type: "success", message: result.message });
       reset();
-      navigate("/resetpassword");
+      navigate("/verifyCode");
     } catch (error) {
       error && CustomToast({ type: "error", message: error.data.message });
     }
@@ -34,7 +34,7 @@ const ForgetPassword = () => {
       <div className="text-center">
         <h1 className="text-3xl text-primary">Forget Your Password?</h1>
         <p className="text-xs mt-3 text-gray1">
-          Enter email so that we can send you a reset token.
+          Enter email so that we can send you a reset code.
         </p>
         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col mt-9">
           <label htmlFor="email" className="text-start text-d2">
@@ -63,7 +63,7 @@ const ForgetPassword = () => {
           <button className="mt-4 bg-primary hover:bg-opacity-95 rounded-md py-2 text-white">
             {isLoading ? <Loader color="white" size="2xl" /> : "Send Email"}
           </button>
-          <Link to="/login" className="mt-5 text-xs text-d2">
+          <Link to="/login" className="mt-5 text-xs text-d2 hover:underline">
             Back to Login
           </Link>
         </form>
