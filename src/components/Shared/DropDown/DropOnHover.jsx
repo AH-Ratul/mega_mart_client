@@ -51,8 +51,12 @@ const DropOnHover = () => {
           <li className="mb-2 hover:text-primary hover:underline">
             <Link>Wishlist</Link>
           </li>
-          <li className=" hover:text-primary hover:underline">
-            {user && <button onClick={handleLogout}>Logout</button>}
+          <li className=" hover:text-primary ">
+            {user && (
+              <button onClick={handleLogout} className="hover:underline">
+                Logout
+              </button>
+            )}
           </li>
         </ul>
       </div>
