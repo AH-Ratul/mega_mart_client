@@ -7,6 +7,7 @@ import MyAccount from "../components/Profile/MyAccount";
 import PrivateRoute from "./PrivateRoute/PrivateRoute";
 import ForgetPassword from "../pages/ForgetPassword/ForgetPassword";
 import ResetPassword from "../pages/ResetPassword/ResetPassword";
+import VerifyCode from "../pages/VerifyCode/VerifyCode";
 
 export const router = createBrowserRouter([
   {
@@ -38,7 +39,11 @@ export const router = createBrowserRouter([
         element: <ForgetPassword />,
       },
       {
-        path: "resetpassword",
+        path: "verifyCode",
+        element: <VerifyCode />,
+      },
+      {
+        path: "resetPassword",
         element: <ResetPassword />,
       },
     ],
