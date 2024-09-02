@@ -40,18 +40,18 @@ const DropOnHover = () => {
           </span>
         </div>
       )}
-      <div className="mt-3 border-t mx-7">
+      <div className="mt-3 border-t mx-3">
         <ul className="mt-3 ml-8 ">
-          <li className="mb-2 hover:text-primary hover:underline ">
+          <li className="mb-2 hover:text-primary hover:underline w-fit">
             <Link to="/account">Your Account</Link>
           </li>
-          <li className="mb-2 hover:text-primary hover:underline">
+          <li className="mb-2 hover:text-primary hover:underline w-fit">
             <Link>Your Orders</Link>
           </li>
-          <li className="mb-2 hover:text-primary hover:underline">
+          <li className="mb-2 hover:text-primary hover:underline w-fit">
             <Link>Wishlist</Link>
           </li>
-          <li className=" hover:text-primary ">
+          <li className=" hover:text-primary w-fit">
             {user && (
               <button onClick={handleLogout} className="hover:underline">
                 Logout
