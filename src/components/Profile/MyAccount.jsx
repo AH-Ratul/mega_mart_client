@@ -1,8 +1,8 @@
 import React from "react";
-import useAuth from "../../hooks/useAuth";
+import { useSelector } from "react-redux";
 
 const MyAccount = () => {
-  const { user } = useAuth();
+  const user = useSelector((state) => state.auth.user);
   return (
     <main className="flex justify-center items-center mt-9">
       <section>
