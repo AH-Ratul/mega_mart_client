@@ -1,18 +1,28 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
-import useAuth from "../../../hooks/useAuth";
-import { useDispatch } from "react-redux";
-import { logOut } from "../../../redux/slices/authSlice";
+import { useLogOutMutation } from "../../../redux/api/users_api";
+import { useDispatch, useSelector } from "react-redux";
+import Modal from "../Modal/Modal";
+import Loader from "../Loader/Loader";
+import { logout } from "../../../redux/slices/authSlice";
 
 const DropOnHover = () => {
-  const { user } = useAuth();
-  const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const handleLogout = () => {
-    dispatch(logOut());
+  const dispatch = useDispatch();
+  const { user, loading } = useSelector((state) => state.auth);
+  const [logOut, { isLoading }] = useLogOutMutation();
+
+  const handleLogout = async () => {
+    await logOut();
+    dispatch(logout());
     navigate("/");
   };
+
+  if (isLoading || loading) {
+    return <Modal modal={<Loader color="white" size="2xl" />} />;
+  }
+
   return (
     <div className="invisible absolute group-hover:visible  w-72 h-52 text-sm -left-60 rounded shadow-2xl z-20 bg-white text-d1 transition-transform duration-300 ease-out transform translate-y-2 group-hover:translate-y-0">
       <div className="absolute -top-[22px] right-5 transform -translate-y-2 -translate-x-1/2 border-8 border-transparent border-b-white py-2"></div>
