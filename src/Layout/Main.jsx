@@ -13,7 +13,7 @@ const Main = () => {
 
       {/** */}
       <Outlet />
-      <Toaster position="top-right"/>
+      <Toaster position="top-right" />
     </main>
   );
 };
