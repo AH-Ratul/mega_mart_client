@@ -1,17 +1,15 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { allIcons } from "../../data/all-icons";
-import { useLoginMutation } from "../../redux/api/users_api";
-import { useDispatch } from "react-redux";
-import { login, setLoading } from "../../redux/slices/authSlice";
+import { useGetMeQuery, useLoginMutation } from "../../redux/api/users_api";
+import { useDispatch, useSelector } from "react-redux";
+import { setUser } from "../../redux/slices/authSlice";
 import CustomToast from "../../hooks/CustomToast";
-import Modal from "../../components/Shared/Modal/Modal";
 import Loader from "../../components/Shared/Loader/Loader";
 
 const Login = () => {
   const { google, phone } = allIcons;
-  const navigate = useNavigate();
   const location = useLocation();
 
   const to = location?.state?.from?.pathname || "/";
@@ -23,44 +21,28 @@ const Login = () => {
     formState: { errors },
   } = useForm();
 
-  const [loginUser, { isSuccess, isLoading, isError, error }] =
-    useLoginMutation();
-
+  const [loginUser, { isLoading }] = useLoginMutation();
+  const { loading } = useSelector((state) => state.auth);
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   // HANDLE LOGIN FUNCTIONALTIY
   const onSubmit = async (data) => {
-    dispatch(setLoading(true));
     try {
       const result = await loginUser(data).unwrap();
-
-      const user = {
-        name: result.data.user.name,
-        email: result.data.user.email,
-        phone: result.data.user.phone,
-      };
-      //console.log(user);
-      dispatch(login({ user: user, token: result.token }));
-
-      // SEND SUCCESS MESSAGE
+      console.log(result);
       CustomToast({ type: "success", message: result.message });
 
-      // clear fields
+      dispatch(setUser(result.data.user));
+
       reset();
-
       navigate(to);
-      dispatch(setLoading(false));
     } catch (error) {
-      {
-        error && CustomToast({ type: "error", message: error.data.message });
-      }
-      dispatch(setLoading(false));
-    }
-
-    if (isLoading) {
-      return <Modal modal={<Loader />} />;
+      console.log(error);
+      CustomToast({ type: "error", message: error.data.message });
     }
   };
+
   return (
     <div className="flex justify-center items-center md:mt-6">
       <div className="w-full px-4 md:px-20  lg:w-[400px] lg:px-8 py-4 rounded-lg lg:border lg:border-b1">
@@ -113,7 +95,11 @@ const Login = () => {
             </Link>
           </div>
           <button className="mt-3 bg-primary hover:bg-opacity-90 py-[7px] rounded-md text-white text-base font-medium tracking-wide text-center">
-            {isLoading ? "Logging in..." : "Login"}
+            {isLoading || loading ? (
+              <Loader color="white" size="2xl" />
+            ) : (
+              "Login"
+            )}
           </button>
         </form>
         <div>
