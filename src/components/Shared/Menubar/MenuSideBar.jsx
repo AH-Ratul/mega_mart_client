@@ -2,23 +2,29 @@ import React from "react";
 import logo from "../../../../public/logo12.svg";
 import { allIcons } from "../../../data/all-icons";
 import { Link, useNavigate } from "react-router-dom";
-import useAuth from "../../../hooks/useAuth";
-import { useDispatch } from "react-redux";
-import { logOut } from "../../../redux/slices/authSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../../../redux/slices/authSlice";
+import { useLogOutMutation } from "../../../redux/api/users_api";
+import Modal from "../Modal/Modal";
+import Loader from "../Loader/Loader";
 
 const MenuSideBar = ({ isOpen, close }) => {
   const { cross } = allIcons;
 
-  const { user } = useAuth();
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [logOut, { isLoading }] = useLogOutMutation();
+  const { user, loading } = useSelector((state) => state.auth);
 
-  //console.log(user);
-
-  const handleLogOut = () => {
-    dispatch(logOut());
+  const handleLogout = async () => {
+    await logOut();
+    dispatch(logout());
     navigate("/");
   };
+
+  if (isLoading || loading) {
+    return <Modal modal={<Loader color="white" size="2xl" />} />;
+  }
 
   return (
     <div>
@@ -44,7 +50,7 @@ const MenuSideBar = ({ isOpen, close }) => {
           <Link className="hover:text-primary">WishList</Link>
           {user ? (
             <button
-              onClick={handleLogOut}
+              onClick={handleLogout}
               className="hover:text-primary text-start"
             >
               Logout
