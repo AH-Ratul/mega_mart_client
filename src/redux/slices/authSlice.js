@@ -1,28 +1,42 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { userApi } from "../api/users_api";
 
 const initialState = {
-  user: '',
-  isLoading: false,
+  user: "",
+  isAuthenticated: false,
+  loading: true,
 };
 
 const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    login: (state, actions) => {
-      state.user = actions.payload.user;
-      localStorage.setItem("user", JSON.stringify(actions.payload));
+    setUser: (state, action) => {
+      state.user = action.payload;
+      state.isAuthenticated = true;
+      state.loading = false;
     },
-    logOut: (state) => {
-      state.user = '';
-      localStorage.removeItem("user");
+    logout: (state) => {
+      state.user = "";
+      state.isAuthenticated = false;
+      state.loading = false;
     },
-    setLoading: (state, actions) => {
-      state.isLoading = actions.payload;
-    },
+  },
+  extraReducers: (builder) => {
+    builder
+      .addMatcher(userApi.endpoints.getMe.matchFulfilled, (state, action) => {
+        state.user = action.payload;
+        state.isAuthenticated = true;
+        state.loading = false;
+      })
+      .addMatcher(userApi.endpoints.getMe.matchRejected, (state) => {
+        state.user = "";
+        state.isAuthenticated = false;
+        state.loading = false;
+      });
   },
 });
 
-export const { login, setLoading, loginSuccess, logOut } = authSlice.actions;
+export const { setUser, logout } = authSlice.actions;
 
 export default authSlice.reducer;
