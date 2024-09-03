@@ -1,10 +1,9 @@
 import React from "react";
-import useAuth from "../../hooks/useAuth";
 import { Navigate, useLocation } from "react-router-dom";
-import CustomToast from "../../hooks/CustomToast";
+import { useSelector } from "react-redux";
 
 const PrivateRoute = ({ children }) => {
-  const { user } = useAuth();
+  const { user } = useSelector((state) => state.auth);
   const location = useLocation();
 
   if (user) {
@@ -12,7 +11,6 @@ const PrivateRoute = ({ children }) => {
   }
 
   if (!user) {
-    //CustomToast({ type: "error", message: "You Have to Login first" });
     return <Navigate to="/login" state={{ from: location }} replace />;
   }
 };
