@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { useCreateUserMutation } from "../../redux/api/users_api";
 import CustomToast from "../../hooks/CustomToast";
 import { Link } from "react-router-dom";
+import Loader from "../../components/Shared/Loader/Loader";
 
 const Register = () => {
   const {
@@ -107,7 +108,7 @@ const Register = () => {
             </p>
           )}
           <button className="mt-5 bg-primary hover:bg-opacity-90 py-[6px] rounded-md text-white text-base font-medium tracking-wide text-center">
-            {isLoading ? "Creating.." : "Create"}
+            {isLoading ? <Loader color="white" size="24px" /> : "Create"}
           </button>
         </form>
         <div>
