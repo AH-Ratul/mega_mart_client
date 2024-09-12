@@ -18,7 +18,7 @@ const AuthProvider = ({ children }) => {
   }, [userData, dispatch]);
 
   if (isLoading || loading) {
-    return <Modal modal={<Loader color="white" size="2xl" />} />;
+    return <Modal modal={<Loader color="white" size="70px" />} />;
   }
 
   return <>{children}</>;
