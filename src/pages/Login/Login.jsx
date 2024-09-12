@@ -1,8 +1,8 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { allIcons } from "../../data/all-icons";
-import { useGetMeQuery, useLoginMutation } from "../../redux/api/users_api";
+import { useLoginMutation } from "../../redux/api/users_api";
 import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "../../redux/slices/authSlice";
 import CustomToast from "../../hooks/CustomToast";
@@ -96,7 +96,7 @@ const Login = () => {
           </div>
           <button className="mt-3 bg-primary hover:bg-opacity-90 py-[7px] rounded-md text-white text-base font-medium tracking-wide text-center">
             {isLoading || loading ? (
-              <Loader color="white" size="2xl" />
+              <Loader color="white" size="24px" />
             ) : (
               "Login"
             )}
