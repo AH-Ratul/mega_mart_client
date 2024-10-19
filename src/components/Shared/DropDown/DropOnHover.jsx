@@ -24,7 +24,7 @@ const DropOnHover = () => {
   }
 
   return (
-    <div className="invisible absolute group-hover:visible  w-72 h-52 text-sm -left-60 rounded shadow-2xl z-20 bg-white text-d1 transition-transform duration-300 ease-out transform translate-y-2 group-hover:translate-y-0">
+    <div className="invisible absolute group-hover:visible  w-60 h-52 text-sm -left-48 rounded shadow-sm border z-20 bg-white text-d1 transition-transform duration-300 ease-out transform translate-y-2 group-hover:translate-y-0">
       <div className="absolute -top-[22px] right-5 transform -translate-y-2 -translate-x-1/2 border-8 border-transparent border-b-white py-2"></div>
 
       {user ? (
@@ -50,8 +50,8 @@ const DropOnHover = () => {
           </span>
         </div>
       )}
-      <div className="mt-3 border-t mx-3">
-        <ul className="mt-3 ml-8 ">
+      <div className="mt-3 border-t mx-8">
+        <ul className="mt-3  ">
           <li className="mb-2 hover:text-primary hover:underline w-fit">
             <Link to="/account">Your Account</Link>
           </li>
