@@ -1,7 +1,6 @@
 import React from "react";
 import Slider from "../components/Slider/Slider";
 import Category from "../components/Shared/Category/Category";
-import Spotlights from "../components/spotlights/Spotlights";
 
 const HomePage = () => {
   return (
@@ -17,10 +16,6 @@ const HomePage = () => {
         </div>
       </section>
 
-      <section className="mt-9 ">
-        <Spotlights />
-      </section>
-      
       <div></div>
     </main>
   );
