@@ -24,8 +24,8 @@ const DropOnHover = () => {
   }
 
   return (
-    <div className="invisible absolute group-hover:visible  w-60 h-52 text-sm -left-48 rounded shadow-sm border z-20 bg-white text-d1 transition-transform duration-300 ease-out transform translate-y-2 group-hover:translate-y-0">
-      <div className="absolute -top-[22px] right-5 transform -translate-y-2 -translate-x-1/2 border-8 border-transparent border-b-white py-2"></div>
+    <div className="invisible absolute group-hover:visible  w-60 h-52 text-sm -left-36 rounded shadow-sm border z-20 bg-white text-d1 transition-transform duration-300 ease-out transform translate-y-2 group-hover:translate-y-0">
+      <div className="absolute top-[3px]  right-5 transform -translate-y-2 -translate-x-1/2 w-3 h-3 rotate-45 bg-white"></div>
 
       {user ? (
         <div className="text-center mt-3">
