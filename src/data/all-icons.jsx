@@ -9,7 +9,7 @@ import {
 } from "react-icons/fa6";
 import { FcGoogle } from "react-icons/fc";
 import { FiLogOut } from "react-icons/fi";
-import { IoPhonePortraitOutline } from "react-icons/io5";
+import { IoPhonePortraitOutline, IoSearch } from "react-icons/io5";
 import {
   MdClose,
   MdDashboard,
@@ -19,7 +19,6 @@ import {
   MdList,
   MdMenu,
   MdOutlineMailOutline,
-  MdSearch,
   MdShoppingCart,
   MdShoppingCartCheckout,
 } from "react-icons/md";
@@ -31,7 +30,7 @@ export const allIcons = {
   cart2: <FaCartPlus />,
   cart3: <BsCart />,
   account: <FaUser />,
-  search: <MdSearch />,
+  search: <IoSearch />,
   list: <MdList />,
   wish: <MdFavorite />,
   menu: <MdMenu />,
