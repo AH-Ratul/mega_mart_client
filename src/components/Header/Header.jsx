@@ -20,55 +20,47 @@ const Header = () => {
     "Limited time offer: Buy 1 Get 1 Free! .....",
   ];
   return (
-    <header className="hidden lg:flex flex-col justify-center items-center bg-d1 border-b">
+    <header className="hidden lg:flex flex-col justify-center items-center bg-cardinal ">
       <div>
         {/* upper div */}
-        <div className="flex justify-between items-center  pt-2 text-white/80">
-          <div className="flex items-center gap-3 text-sm">
-            <a href="">{facebook}</a>
-            <a href="">{insta}</a>
-            <a href="">{email}</a>
-          </div>
-          <div className="flex items-center gap-5 text-xs">
-            <a href="" className="">
-              About Us
-            </a>
-            <a href="" className="">
-              Media
-            </a>
-            <a href="" className=" ">
-              FAQ
-            </a>
-          </div>
-        </div>
+
         {/* lower div */}
-        <div className="py-5 w-full flex justify-between items-center gap-[167px] ">
+        <div className="py-2 w-full flex justify-between items-center gap-[160px] ">
           <a href="/">
-            <img src={logo} alt="logo" className="w-52" />
+            <img src={logo} alt="logo" className="w-40" />
           </a>
+          <div>
+            <p className="text-white p-2 hover:bg-black/10 hover:rounded-full cursor-pointer">
+              Category
+            </p>
+          </div>
           {/* Search */}
-          <div className="flex w-[700px] rounded-md">
+          <div className="flex w-[400px] rounded-md relative items-center">
             <input
               type="text"
-              className=" text-gray1  border border-b1 border-r-0 rounded-tl-md rounded-bl-md py-[6px] ps-3 w-full outline-none text-sm"
+              className=" text-gray1 rounded-2xl  py-2 ps-3 w-full outline-none text-sm"
               placeholder="Search"
             />
             <button
               onClick={() => console.log("click search")}
-              className="bg-primary py-1 px-4 text-white/90 text-xl rounded-tr-md rounded-br-md"
+              className="bg-black/95 hover:bg-black/70 p-[6.5px] me-[2px] text-white/90 text-xl rounded-full absolute right-0"
             >
               {search}
             </button>
           </div>
           {/* account & cart */}
-          <div className="flex items-center gap-5 ">
+          <div className="flex items-center gap-2 ">
             {/* login */}
             <div className="relative group">
               <Link
                 to=""
-                className="flex items-center text-primary text-2xl h-10"
+                className="flex items-center gap-1 text-white text-2xl h-10 hover:bg-black/10 hover:rounded-full p-3"
               >
                 {account}
+                <p className="text-xs">
+                  Orders & <br />
+                  Account
+                </p>
               </Link>
               <DropOnHover />
             </div>
@@ -77,9 +69,9 @@ const Header = () => {
             <div className="relative ">
               <button
                 onClick={() => toggle("drop")}
-                className="flex items-center text-xs text-white/90"
+                className="flex items-center text-xs text-white/90 hover:bg-black/10 hover:rounded-full p-2"
               >
-                <span className="text-[1.688rem] text-primary rounded-full">
+                <span className="text-[1.688rem] text-white rounded-full">
                   {cart3}
                 </span>
               </button>
