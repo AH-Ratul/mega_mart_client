@@ -20,7 +20,7 @@ const Header = () => {
     "Limited time offer: Buy 1 Get 1 Free! .....",
   ];
   return (
-    <header className="hidden lg:flex flex-col justify-center items-center bg-cardinal ">
+    <header className="hidden lg:flex flex-col justify-center items-center bg-cardinal">
       <div>
         {/* upper div */}
 
@@ -38,7 +38,7 @@ const Header = () => {
           <div className="flex w-[400px] rounded-md relative items-center">
             <input
               type="text"
-              className=" text-gray1 rounded-2xl  py-2 ps-3 w-full outline-none text-sm"
+              className=" text-gray1 rounded-2xl  py-[9px] ps-3 w-full outline-none text-sm"
               placeholder="Search"
             />
             <button
