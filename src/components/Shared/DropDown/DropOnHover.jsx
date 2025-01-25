@@ -24,18 +24,18 @@ const DropOnHover = () => {
   }
 
   return (
-    <div className="invisible absolute group-hover:visible  w-60 h-52 text-sm -left-36 rounded shadow-sm border z-20 bg-white text-d1 transition-transform duration-300 ease-out transform translate-y-2 group-hover:translate-y-0">
-      <div className="absolute top-[3px]  right-5 transform -translate-y-2 -translate-x-1/2 w-3 h-3 rotate-45 bg-white"></div>
+    <div className="invisible absolute group-hover:visible  w-52 h-48 text-sm -left-28 rounded shadow-sm border z-20 bg-white text-d1 transition-transform duration-300 ease-out transform translate-y-2 group-hover:translate-y-0">
+      <div className="absolute top-[3px] right-5 transform -translate-y-2 -translate-x-1/2 w-3 h-3 rotate-45 bg-white"></div>
 
       {user ? (
-        <div className="text-center mt-3">
+        <div className="text-center mt-1">
           <h1 className="">
             Hello! <span className="text-pretty text-primary">{user.name}</span>
           </h1>
           <p className="mt-2 text-gray1 text-xs">Welcome to MegaMart</p>
         </div>
       ) : (
-        <div className="mt-3 flex flex-col justify-center items-center  px-3">
+        <div className="mt-1 flex flex-col justify-center items-center  px-1">
           <Link
             to="/login"
             className="bg-primary text-white hover:underline mt-4 w-[80%] text-center py-1 rounded-md"
@@ -44,14 +44,14 @@ const DropOnHover = () => {
           </Link>
           <span className="text-xs mt-2">
             New Here?{" "}
-            <Link to="/register" className="text-secondary hover:underline">
+            <Link to="/register" className="text-primary hover:underline">
               Create
             </Link>
           </span>
         </div>
       )}
-      <div className="mt-3 border-t mx-8">
-        <ul className="mt-3  ">
+      <div className="mt-2 border-t ">
+        <ul className="mt-3 ml-8 ">
           <li className="mb-2 hover:text-primary hover:underline w-fit">
             <Link to="/account">Your Account</Link>
           </li>
@@ -61,13 +61,13 @@ const DropOnHover = () => {
           <li className="mb-2 hover:text-primary hover:underline w-fit">
             <Link>Wishlist</Link>
           </li>
-          <li className=" hover:text-primary w-fit">
-            {user && (
+          {user && (
+            <li className=" hover:text-primary w-fit">
               <button onClick={handleLogout} className="hover:underline">
                 Logout
               </button>
-            )}
-          </li>
+            </li>
+          )}
         </ul>
       </div>
     </div>
