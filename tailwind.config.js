@@ -17,6 +17,7 @@ export default {
         gray2: "#67696c",
         d1: "#232f3e",
         d2: "#4f5053",
+        cardinal: "#C52233",
       },
     },
   },
