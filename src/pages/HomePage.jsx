@@ -1,18 +1,11 @@
 import React from "react";
-import Slider from "../components/Slider/Slider";
-import Category from "../components/Shared/Category/Category";
 
 const HomePage = () => {
   return (
-    <main className="mt-4 flex flex-col justify-center items-center">
-      <section className="lg:flex lg:items-center lg:gap-5">
-        {/* category */}
-        <div className="hidden lg:block">
-          <Category />
-        </div>
-        {/* slider */}
-        <div className="w-[410px] md:w-[770px] lg:w-[992px]">
-          <Slider />
+    <main className="relative flex flex-col justify-center items-center">
+      <section className="lg:flex lg:items-center">
+        <div className="bg-[#DF1238] w-screen h-96 flex justify-center pt-14">
+          dsddsdsd
         </div>
       </section>
 
