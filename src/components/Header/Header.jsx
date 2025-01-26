@@ -47,7 +47,7 @@ const Header = () => {
             />
             <button
               onClick={() => console.log("click search")}
-              className="bg-black/95 hover:bg-black/70 p-[6.5px] me-[2px] text-white/90 text-xl rounded-full absolute right-0"
+              className="bg-black/95 hover:bg-black/70 px-2 py-[6.5px] me-[2px] text-white/90 text-xl rounded-full absolute right-0"
             >
               {search}
             </button>
