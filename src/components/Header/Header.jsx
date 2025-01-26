@@ -6,9 +6,10 @@ import DropDown from "../Shared/DropDown/DropDown";
 import useToggle from "../../hooks/useToggle";
 import { Link } from "react-router-dom";
 import DropOnHover from "../Shared/DropDown/DropOnHover";
+import CategoryOnHover from "../Shared/DropDown/CategoryOnHover";
 
 const Header = () => {
-  const { account, search, cart3, facebook, insta, email } = allIcons;
+  const { account, search, cart3 } = allIcons;
   const [toggleStates, toggle] = useToggle({
     drop: false,
   });
@@ -20,21 +21,24 @@ const Header = () => {
     "Limited time offer: Buy 1 Get 1 Free! .....",
   ];
   return (
-    <header className="hidden lg:flex flex-col justify-center items-center bg-cardinal">
+    <header className="hidden fixed w-full z-10 top-0 lg:flex flex-col justify-center items-center bg-[#c82233e6]  border-b-cardinal border-b">
       <div>
-        {/* upper div */}
-
         {/* lower div */}
-        <div className="py-2 w-full flex justify-between items-center gap-[160px] ">
+        <div className=" w-full flex justify-between items-center gap-[160px] ">
+          {/* LOGO */}
           <a href="/">
             <img src={logo} alt="logo" className="w-40" />
           </a>
-          <div>
+
+          {/* CATEGORY */}
+          <div className="relative group py-2">
             <p className="text-white p-2 hover:bg-black/10 hover:rounded-full cursor-pointer">
               Category
             </p>
+            <CategoryOnHover />
           </div>
-          {/* Search */}
+
+          {/* SEARCH */}
           <div className="flex w-[400px] rounded-md relative items-center">
             <input
               type="text"
@@ -48,10 +52,11 @@ const Header = () => {
               {search}
             </button>
           </div>
-          {/* account & cart */}
+
+          {/* ACCOUNT & CART */}
           <div className="flex items-center gap-2 ">
             {/* login */}
-            <div className="relative group">
+            <div className="relative group py-2">
               <Link
                 to=""
                 className="flex items-center gap-1 text-white text-2xl h-10 hover:bg-black/10 hover:rounded-full p-3"
@@ -65,7 +70,7 @@ const Header = () => {
               <DropOnHover />
             </div>
 
-            {/* My Cart */}
+            {/* CART */}
             <div className="relative ">
               <button
                 onClick={() => toggle("drop")}
