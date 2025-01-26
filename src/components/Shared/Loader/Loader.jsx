@@ -1,11 +1,11 @@
 import React from "react";
-import { ImSpinner8 } from "react-icons/im";
+import { PiSpinnerBold } from "react-icons/pi";
 
 const Loader = ({ color, size }) => {
   return (
     <div className="flex justify-center items-center">
-      <ImSpinner8
-        className={`text-${color} animate-spin-slow`}
+      <PiSpinnerBold
+        className={`text-${color} animate-spin`}
         style={{ fontSize: size }}
       />
     </div>
