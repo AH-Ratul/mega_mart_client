@@ -21,23 +21,10 @@ const Slider = () => {
           <img
             src={banner}
             alt="banner"
-            className="w-full h-[170px]  md:h-[390px] object-cover rounded-md "
+            className="w-[500px] h-[170px]  md:h-[390px] object-cover rounded-md "
           />
         </SwiperSlide>
-        <SwiperSlide className="px-3 md:px-9 lg:pl-0 lg:pr-0">
-          <img
-            src={banner}
-            alt="banner"
-            className="w-full h-[170px] md:h-[390px] object-cover rounded-md "
-          />
-        </SwiperSlide>
-        <SwiperSlide className="px-3 md:px-9 lg:pl-0 lg:pr-0">
-          <img
-            src={banner}
-            alt="banner"
-            className="w-full h-[170px] md:h-[390px] object-cover rounded-md "
-          />
-        </SwiperSlide>
+        
       </Swiper>
     </div>
   );
