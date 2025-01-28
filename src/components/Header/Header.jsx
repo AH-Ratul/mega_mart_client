@@ -1,7 +1,6 @@
 import React from "react";
 import logo from "../../../public/logo123.svg";
 import { allIcons } from "../../data/all-icons";
-import Headlines from "../Headlines/Headlines";
 import DropDown from "../Shared/DropDown/DropDown";
 import useToggle from "../../hooks/useToggle";
 import { Link } from "react-router-dom";
@@ -14,17 +13,11 @@ const Header = () => {
     drop: false,
   });
 
-  const headlines = [
-    "50% off on all products! .....",
-    "Free shipping on orders over $50! .....",
-    "New collection just arrived! .....",
-    "Limited time offer: Buy 1 Get 1 Free! .....",
-  ];
   return (
-    <header className="hidden fixed w-full z-10 top-0 lg:flex flex-col justify-center items-center bg-[#c82233e6]  border-b-cardinal border-b">
+    <header className="hidden fixed w-screen z-10 top-0 lg:flex justify-center items-center bg-[#c82233e6]  border-b-cardinal border-b">
       <div>
         {/* lower div */}
-        <div className=" w-full flex justify-between items-center gap-[160px] ">
+        <div className=" w-full flex justify-between items-center px-2 lg:gap-16 xl:gap-[160px] 2xl:gap-[180px]">
           {/* LOGO */}
           <a href="/">
             <img src={logo} alt="logo" className="w-40" />
@@ -39,7 +32,7 @@ const Header = () => {
           </div>
 
           {/* SEARCH */}
-          <div className="flex w-[400px] rounded-md relative items-center">
+          <div className="flex w-[360px] rounded-md relative items-center">
             <input
               type="text"
               className=" text-gray1 rounded-2xl  py-[9px] ps-3 w-full outline-none text-sm"
