@@ -1,5 +1,5 @@
 import React from "react";
-import logo from "../../../public/logo12.svg";
+import logo from "../../../public/logo123.svg";
 import { allIcons } from "../../data/all-icons";
 import MenuSideBar from "../Shared/Menubar/MenuSideBar";
 import useToggle from "../../hooks/useToggle";
@@ -17,19 +17,19 @@ const HeaderSm = () => {
   return (
     <main className="lg:hidden">
       {/* top header */}
-      <div className="flex flex-col justify-center items-center ">
-        <div className="w-[35%] md:w-[20%] py-2">
+      <div className="flex justify-center items-center gap-3 px-3 py-2 bg-[#c82233e6] fixed z-10 w-screen">
+        <div className="w-[55%]">
           <a href="/">
             <img src={logo} alt="logo" />
           </a>
         </div>
-        <div className="flex w-screen px-3 md:px-9">
+        <div className="flex items-center w-screen relative">
           <input
             type="text"
-            className="border-2 border-primary text-gray1 rounded-tl rounded-bl p-1 ps-3 w-full outline-none"
+            className=" text-gray1 rounded-2xl p-2 ps-3 text-sm w-full outline-none"
             placeholder="Search"
           />
-          <button className="bg-primary py-1 px-3 text-white/90 text-xl rounded-tr rounded-br">
+          <button className="bg-black/95 hover:bg-black/70 py-[6.5px] px-2 text-white/90 text-xl rounded-full absolute right-0 mr-[1px]">
             {search}
           </button>
         </div>
