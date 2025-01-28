@@ -20,21 +20,30 @@ const Products = () => {
     <div>
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-2 mb-20 mt-9">
         {products.map((product) => (
-          <div className="flex flex-col my-1 border p-1 rounded-md w-fit sm:w-60 hover:shadow-lg relative">
+          <div className="flex flex-col my-1 border p-1 rounded-md w-fit sm:w-60 shadow-sm hover:shadow-lg relative">
             <img
               src={product.productImages}
               alt="img"
-              className="h-64 mb-2 rounded-md cursor-pointer border-b"
+              className="h-64 mb-1 rounded-md cursor-pointer"
             />
-            <div className="absolut bottom-0 p-2 w-full">
+            <div className=" p-2 w-full">
               <Link className="text-sm hover:text-primary hover:transition hover:duration-300 hover:ease-in-out">
                 {product.productName.length > 25
                   ? `${product.productName.slice(0, 25)}...`
                   : product.productName}
               </Link>
-              <div className="flex justify-between items-center mt-3 ">
-                <p className="font-bold">&#2547; {product.price}</p>
-                <button className="border border-d2 rounded-full p-1 text-xl">
+              <div className="flex justify-between items-center mt-1 ">
+                <div className="flex items-center gap-1">
+                  <p className="font-bold text-sm">&#2547; {product.price}</p>
+                  {product.quantity < 5 && product.quantity > 0 ? (
+                    <p className="text-xs text-primary">
+                      Only {product.quantity} left
+                    </p>
+                  ) : (
+                    ""
+                  )}
+                </div>
+                <button className="border border-d2 hover:border-primary hover:text-primary rounded-full py-1 px-2 text-xl">
                   {cart2}
                 </button>
               </div>
