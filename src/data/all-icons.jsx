@@ -11,6 +11,7 @@ import { FcGoogle } from "react-icons/fc";
 import { FiLogOut } from "react-icons/fi";
 import { IoPhonePortraitOutline, IoSearch } from "react-icons/io5";
 import {
+  MdAddShoppingCart,
   MdClose,
   MdDashboard,
   MdExpandMore,
@@ -27,7 +28,7 @@ export const allIcons = {
   home: <MdHome />,
   dashboard: <MdDashboard />,
   cart: <MdShoppingCart />,
-  cart2: <FaCartPlus />,
+  cart2: <MdAddShoppingCart />,
   cart3: <BsCart />,
   account: <FaUser />,
   search: <IoSearch />,
