@@ -14,7 +14,7 @@ const Header = () => {
   });
 
   return (
-    <header className="hidden fixed w-screen z-10 top-0 lg:flex justify-center items-center bg-[#c82233e6]  border-b-cardinal border-b">
+    <header className="hidden fixed w-screen z-10 top-0 lg:flex justify-center items-center bg-[#c82233e6]  border-b-cardinal border-b backdrop-blur-sm">
       <div>
         {/* lower div */}
         <div className=" w-full flex justify-between items-center px-2 lg:gap-16 xl:gap-[160px] 2xl:gap-[180px]">
