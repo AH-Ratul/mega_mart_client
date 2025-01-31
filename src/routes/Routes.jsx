@@ -8,6 +8,7 @@ import PrivateRoute from "./PrivateRoute/PrivateRoute";
 import ForgetPassword from "../pages/ForgetPassword/ForgetPassword";
 import ResetPassword from "../pages/ResetPassword/ResetPassword";
 import VerifyCode from "../pages/VerifyCode/VerifyCode";
+import ProductDetails from "../pages/ProductDetails/ProductDetails";
 
 export const router = createBrowserRouter([
   {
@@ -45,6 +46,10 @@ export const router = createBrowserRouter([
       {
         path: "resetPassword",
         element: <ResetPassword />,
+      },
+      {
+        path: "details/:id/:name",
+        element: <ProductDetails />,
       },
     ],
   },
