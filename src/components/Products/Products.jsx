@@ -20,14 +20,22 @@ const Products = () => {
     <div>
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-2 mb-20 mt-9">
         {products.map((product) => (
-          <div className="flex flex-col my-1 border p-1 rounded-md w-fit sm:w-60 shadow-sm hover:shadow-lg relative">
+          <div
+            key={product._id}
+            className="flex flex-col my-1 border p-1 rounded-md w-fit sm:w-60 shadow-sm hover:shadow-lg relative"
+          >
             <img
               src={product.productImages}
               alt="img"
               className="h-64 mb-1 rounded-md cursor-pointer"
             />
             <div className=" p-2 w-full">
-              <Link className="text-sm hover:text-primary hover:transition hover:duration-300 hover:ease-in-out">
+              <Link
+                to={`/details/${product._id}/${encodeURIComponent(
+                  product.productName
+                )}`}
+                className="text-sm hover:text-primary hover:transition hover:duration-300 hover:ease-in-out"
+              >
                 {product.productName.length > 25
                   ? `${product.productName.slice(0, 25)}...`
                   : product.productName}
