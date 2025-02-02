@@ -17,7 +17,7 @@ const Header = () => {
     <header className="hidden fixed w-screen z-10 top-0 lg:flex justify-center items-center bg-[#c82233e6]  border-b-cardinal border-b backdrop-blur-sm">
       <div>
         {/* lower div */}
-        <div className=" w-full flex justify-between items-center px-2 lg:gap-16 xl:gap-[160px] 2xl:gap-[180px]">
+        <div className=" w-full flex justify-between items-center lg:gap-16 xl:gap-[170px] 2xl:gap-[180px]">
           {/* LOGO */}
           <a href="/">
             <img src={logo} alt="logo" className="w-40" />
@@ -35,7 +35,7 @@ const Header = () => {
           <div className="flex w-[360px] rounded-md relative items-center">
             <input
               type="text"
-              className=" text-gray1 rounded-2xl  py-[9px] ps-3 w-full outline-none text-sm"
+              className="text-gray1 rounded-2xl  py-[9px] ps-3 w-full outline-none text-sm"
               placeholder="Search"
             />
             <button
