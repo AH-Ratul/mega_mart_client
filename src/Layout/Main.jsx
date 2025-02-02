@@ -6,7 +6,7 @@ import { Toaster } from "react-hot-toast";
 
 const Main = () => {
   return (
-    <main className="relative font-Poppins">
+    <main className="relative font-Roboto">
       {/* Header section */}
       <Header />
       <HeaderSm />
