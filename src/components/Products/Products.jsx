@@ -10,10 +10,13 @@ const Products = () => {
   const { data: productsData, isLoading, error } = useGetProductsQuery();
   const { loading } = useSelector((state) => state.products);
   const products = productsData?.data || [];
-  console.log(products);
 
   if (isLoading && loading) {
     return <Loader size="30px" />;
+  }
+
+  if (error) {
+    return <p>Error occured to fetch data</p>;
   }
 
   return (
@@ -24,11 +27,17 @@ const Products = () => {
             key={product._id}
             className="flex flex-col my-1 border p-1 rounded-md w-fit sm:w-60 shadow-sm hover:shadow-lg relative"
           >
-            <img
-              src={product.productImages}
-              alt="img"
-              className="h-64 mb-1 rounded-md cursor-pointer"
-            />
+            <Link
+              to={`/details/${product._id}/${encodeURIComponent(
+                product.productName
+              )}`}
+            >
+              <img
+                src={product.productImages}
+                alt="img"
+                className="h-52 mb-1 rounded-md cursor-pointer"
+              />
+            </Link>
             <div className=" p-2 w-full">
               <Link
                 to={`/details/${product._id}/${encodeURIComponent(
@@ -40,17 +49,15 @@ const Products = () => {
                   ? `${product.productName.slice(0, 25)}...`
                   : product.productName}
               </Link>
+              {product.quantity < 5 && product.quantity > 0 ? (
+                <p className="text-xs text-primary">
+                  Only {product.quantity} left
+                </p>
+              ) : (
+                ""
+              )}
               <div className="flex justify-between items-center mt-1 ">
-                <div className="flex items-center gap-1">
-                  <p className="font-bold text-sm">&#2547; {product.price}</p>
-                  {product.quantity < 5 && product.quantity > 0 ? (
-                    <p className="text-xs text-primary">
-                      Only {product.quantity} left
-                    </p>
-                  ) : (
-                    ""
-                  )}
-                </div>
+                <p className="font-bold text-sm">&#2547; {product.price}</p>
                 <button className="border border-d2 hover:border-primary hover:text-primary rounded-full py-1 px-2 text-xl">
                   {cart2}
                 </button>
