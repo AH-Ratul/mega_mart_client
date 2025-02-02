@@ -4,7 +4,7 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        Poppins: ["Poppins", "sans-serif"],
+        Roboto: ["Roboto", "serif"],
       },
       animation: {
         "spin-slow": "spin 1.5s linear infinite", // Slow spin
