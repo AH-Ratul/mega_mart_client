@@ -20,7 +20,7 @@ const Header = () => {
         <div className=" w-full flex justify-between items-center lg:gap-16 xl:gap-[170px] 2xl:gap-[180px]">
           {/* LOGO */}
           <a href="/">
-            <img src={logo} alt="logo" className="w-40" />
+            <img src={logo} alt="logo" className="w-44" />
           </a>
 
           {/* CATEGORY */}
