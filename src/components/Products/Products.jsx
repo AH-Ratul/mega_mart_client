@@ -64,12 +64,12 @@ const Products = () => {
                       <p className="font-bold text-sm">
                         &#2547; {product.discountPrice}
                       </p>
-                      <span className="text-xs text-gray1 line-through">
+                      <span className="text-xs text-gray1 line-through hidden lg:block">
                         &#2547; {product.price}
                       </span>
                     </>
                   ) : (
-                    <span>&#2547; {product.price}</span>
+                    <span className="font-bold text-sm">&#2547; {product.price}</span>
                   )}
                   <span className="text-xs text-gray1">0 sold</span>
                 </div>
