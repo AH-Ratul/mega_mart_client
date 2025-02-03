@@ -44,24 +44,24 @@ const ProductDetails = () => {
           {/* Product Details */}
           <div className="flex flex-col justify-between px-6 lg:w-1/2">
             <div>
-              <h1 className="mb-1 text-xl">{productName}</h1>
+              <h1 className="mb-1 text-2xl">{productName}</h1>
               <span className="bg-slate-200 px-1 py-[1px] text-sm font-medium tracking-wide rounded-md">
                 Brand: Walton
               </span>
-              <div className="flex justify-between items-center text-sm text-gray-500 mt-2 mb-4">
+              <div className="flex justify-start items-center gap-4 text-sm text-gray-500 mt-2 mb-4">
                 <span>0 sold</span>
-                <span className="flex items-center gap-1">4.3 ⭐⭐⭐⭐⭐</span>
+                <span className="flex items-center">⭐⭐⭐⭐⭐ 4.3 Ratings</span>
               </div>
-              <p className="font-bold text-xl mb-4 flex items-center gap-2">
+              <p className="font-semibold text-xl mb-4 flex items-center gap-2">
                 {discountPrice ? (
                   <>
                     <span>&#2547; {discountPrice}</span>
-                    <span className="text-xs text-gray1 line-through">
+                    <span className="text-base text-gray1 line-through">
                       &#2547; {price}
                     </span>
                   </>
                 ) : (
-                  <span>&#2547; {price}</span>
+                  <span className="">&#2547; {price}</span>
                 )}
               </p>
               <p className="text-sm text-justify">{description}</p>
@@ -88,7 +88,7 @@ const ProductDetails = () => {
       </div>
 
       {/* Familiar Items */}
-      <div className="flex flex-col justify-center items-center">
+      <div className="flex flex-col justify-center items-center mx-2">
         <h1 className="font-bold text-lg">Explore Your interests</h1>
         <Products />
       </div>
