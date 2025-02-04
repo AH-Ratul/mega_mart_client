@@ -15,9 +15,9 @@ const HeaderSm = () => {
   }); // custom hook to handle toggle
 
   return (
-    <main className="lg:hidden">
+    <header className="lg:hidden">
       {/* top header */}
-      <div className="flex justify-center items-center gap-3 px-3 py-2 bg-[#c82233e6] fixed z-10 w-screen">
+      <div className="flex justify-center items-center gap-3 px-3 py-2 bg-[#c82233e6] fixed z-10 top-0 w-screen">
         <div className="w-[55%]">
           <a href="/">
             <img src={logo} alt="logo" />
@@ -87,7 +87,7 @@ const HeaderSm = () => {
           />
         </div>
       </section>
-    </main>
+    </header>
   );
 };
 
