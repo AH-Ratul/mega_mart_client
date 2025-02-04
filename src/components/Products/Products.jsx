@@ -25,7 +25,7 @@ const Products = () => {
         {products.map((product) => (
           <div
             key={product._id}
-            className="flex flex-col my-1  w-fit h-[360px] sm:w-60 shadow-sm hover:shadow-lg relative"
+            className="flex flex-col w-fit h-[360px] lg:p-2 sm:w-60 lg:shadow-sm lg:hover:shadow-xl relative"
           >
             {/* PRODUCT IMAGE */}
             <div className="h-56 flex items-center justify-center overflow-hidden">
@@ -33,7 +33,7 @@ const Products = () => {
                 to={`/details/${product._id}/${encodeURIComponent(
                   product.productName
                 )}`}
-                className="block w-full h-full"
+                className="block"
               >
                 <img
                   src={product.productImages}
@@ -44,7 +44,7 @@ const Products = () => {
             </div>
 
             {/* DETAILS */}
-            <div className="p-2 w-full">
+            <div className="w-full">
               <Link
                 to={`/details/${product._id}/${encodeURIComponent(
                   product.productName
@@ -52,7 +52,7 @@ const Products = () => {
                 className="text-sm hover:text-primary transition duration-300"
               >
                 {product.productName.length > 25
-                  ? `${product.productName.slice(0, 25)}...`
+                  ? `${product.productName.slice(0, 23)}...`
                   : product.productName}
               </Link>
 
@@ -69,11 +69,13 @@ const Products = () => {
                       </span>
                     </>
                   ) : (
-                    <span className="font-bold text-sm">&#2547; {product.price}</span>
+                    <span className="font-bold text-sm">
+                      &#2547; {product.price}
+                    </span>
                   )}
                   <span className="text-xs text-gray1">0 sold</span>
                 </div>
-                <button className="border border-d2 hover:border-primary hover:text-primary rounded-full py-1 px-2 text-xl transition duration-300">
+                <button className="border border-d2 hover:border-primary hover:text-primary rounded-full py-1 px-2 text-lg transition duration-300">
                   {cart2}
                 </button>
               </div>
