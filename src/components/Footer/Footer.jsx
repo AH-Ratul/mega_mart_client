@@ -1,12 +1,22 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { allIcons } from "../../data/all-icons";
+import visa from "../../../public/visa.png";
+import ms from "../../../public/ms.png";
+import pay from "../../../public/pay.png";
+import bkash from "../../../public/BKash.svg";
+import rocket from "../../../public/rocket.png";
+import nagad from "../../../public/nagad.svg";
 
 const Footer = () => {
+  const { facebook, insta, X, youtube } = allIcons;
+
   return (
-    <div className="bg-eerieblack flex flex-col justify-center items-center text-white mt-14 pt-5 pb-3 w-full">
-      <div className="flex gap-32">
+    <div className="hidden bg-eerieblack lg:flex flex-col justify-center items-center text-white mt-20 pt-7 pb-3 w-full">
+      <div className="flex gap-20 xl:gap-32">
+        {/* INFO */}
         <div>
-          <h1 className="mb-4">Company Info</h1>
+          <h1 className="mb-4 font-bold">Company Info</h1>
           <ul className="flex flex-col gap-1 text-sm text-white/70">
             <li className="hover:text-white">
               <Link>About MegaMart</Link>
@@ -22,8 +32,10 @@ const Footer = () => {
             </li>
           </ul>
         </div>
+
+        {/* Services */}
         <div>
-          <h1 className="mb-4">Customer Service</h1>
+          <h1 className="mb-4 font-bold">Customer Service</h1>
           <ul className="flex flex-col text-sm text-white/70 gap-1">
             <li className="hover:text-white">
               <Link>Return & Refund</Link>
@@ -39,8 +51,10 @@ const Footer = () => {
             </li>
           </ul>
         </div>
+
+        {/* HELP section */}
         <div>
-          <h1 className="mb-4">Help</h1>
+          <h1 className="mb-4 font-bold">Help</h1>
           <ul className="flex flex-col text-sm text-white/70 gap-1">
             <li className="hover:text-white">
               <Link>Support center & FAQ</Link>
@@ -56,16 +70,57 @@ const Footer = () => {
             </li>
           </ul>
         </div>
+
+        {/* Social Media Links */}
         <div>
-          <h1>Find us</h1>
-          <div className="flex items-center gap-5">
-            <Link>in</Link>
-            <Link>f</Link>
-            <Link>x</Link>
-            <Link>y</Link>
+          <h1 className="mb-3 font-bold">Connect with us</h1>
+          <div className="flex items-center gap-2 text-2xl">
+            <Link className="hover:bg-white/10 rounded-full p-2">{insta}</Link>
+            <Link className="hover:bg-white/10 rounded-full p-2">
+              {facebook}
+            </Link>
+            <Link className="hover:bg-white/10 rounded-full p-2">{X}</Link>
+            <Link className="hover:bg-white/10 rounded-full p-2">
+              {youtube}
+            </Link>
+          </div>
+
+          {/* Payment Methods */}
+          <div>
+            <p className="font-bold text-base mt-4">We accept</p>
+            <div className=" mt-2 flex items-center gap-2">
+              <Link>
+                <img src={visa} alt="visa" className="w-10" />
+              </Link>
+              <Link>
+                <img src={ms} alt="ms" className="w-10" />
+              </Link>
+              <Link>
+                <img src={pay} alt="pay" className="w-10" />
+              </Link>
+              <Link>
+                <img
+                  src={bkash}
+                  alt="bkash"
+                  className="w-10 bg-white rounded"
+                />
+              </Link>
+              <Link>
+                <img src={rocket} alt="rocket" className="w-10 rounded" />
+              </Link>
+              <Link>
+                <img
+                  src={nagad}
+                  alt="nagad"
+                  className="w-10 bg-white py-1.5 px-1 rounded"
+                />
+              </Link>
+            </div>
           </div>
         </div>
       </div>
+
+      {/* Copyright */}
       <div className="border-t border-t-white/20 w-full flex items-center justify-center mt-12">
         <p className="text-sm my-5 text-white/70">
           Copyright &copy; MegaMart 2025 | All Right Reserved
