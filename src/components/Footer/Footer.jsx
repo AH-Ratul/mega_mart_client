@@ -89,32 +89,21 @@ const Footer = () => {
           <div>
             <p className="font-bold text-base mt-4">We accept</p>
             <div className=" mt-2 flex items-center gap-2">
-              <Link>
-                <img src={visa} alt="visa" className="w-10" />
-              </Link>
-              <Link>
-                <img src={ms} alt="ms" className="w-10" />
-              </Link>
-              <Link>
-                <img src={pay} alt="pay" className="w-10" />
-              </Link>
-              <Link>
-                <img
-                  src={bkash}
-                  alt="bkash"
-                  className="w-10 bg-white rounded"
-                />
-              </Link>
-              <Link>
-                <img src={rocket} alt="rocket" className="w-10 rounded" />
-              </Link>
-              <Link>
-                <img
-                  src={nagad}
-                  alt="nagad"
-                  className="w-10 bg-white py-1.5 px-1 rounded"
-                />
-              </Link>
+              <img src={visa} alt="visa" className="w-10" />
+
+              <img src={ms} alt="ms" className="w-10" />
+
+              <img src={pay} alt="pay" className="w-10" />
+
+              <img src={bkash} alt="bkash" className="w-10 bg-white rounded" />
+
+              <img src={rocket} alt="rocket" className="w-10 rounded" />
+
+              <img
+                src={nagad}
+                alt="nagad"
+                className="w-10 bg-white py-1.5 px-1 rounded"
+              />
             </div>
           </div>
         </div>
