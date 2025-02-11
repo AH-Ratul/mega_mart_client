@@ -18,6 +18,7 @@ export default {
         d1: "#232f3e",
         d2: "#4f5053",
         cardinal: "#C52233",
+        eerieblack: "#1e1e1e",
       },
     },
   },
