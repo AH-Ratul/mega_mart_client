@@ -25,7 +25,7 @@ const Products = () => {
         {products.map((product) => (
           <div
             key={product._id}
-            className="flex flex-col w-fit h-[360px] lg:p-2 sm:w-60 lg:shadow-sm lg:hover:shadow-xl relative"
+            className="flex flex-col w-fit h-[360px] lg:p-2 sm:w-60 lg:shadow-sm lg:hover:shadow-md relative"
           >
             {/* PRODUCT IMAGE */}
             <div className="h-56 flex items-center justify-center overflow-hidden">
