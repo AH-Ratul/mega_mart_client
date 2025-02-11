@@ -70,7 +70,7 @@ const ProductDetails = () => {
                   <span className="">&#2547; {price}</span>
                 )}
               </p>
-              <p className="text-sm text-justify">{description}</p>
+              <p className="text-sm text-pretty">{description}</p>
             </div>
 
             {/* Quantity Selector */}
