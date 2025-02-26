@@ -69,7 +69,7 @@ const Products = () => {
                       </span>
                     </>
                   ) : (
-                    <span className="font-bold text-sm">
+                    <span className="font-bold text-">
                       &#2547; {product.price}
                     </span>
                   )}
