@@ -9,6 +9,7 @@ import ForgetPassword from "../pages/ForgetPassword/ForgetPassword";
 import ResetPassword from "../pages/ResetPassword/ResetPassword";
 import VerifyCode from "../pages/VerifyCode/VerifyCode";
 import ProductDetails from "../pages/ProductDetails/ProductDetails";
+import CartPage from "../pages/Cart/CartPage";
 
 export const router = createBrowserRouter([
   {
@@ -50,6 +51,10 @@ export const router = createBrowserRouter([
       {
         path: "details/:id/:name",
         element: <ProductDetails />,
+      },
+      {
+        path: "shopping_cart",
+        element: <CartPage />,
       },
     ],
   },
