@@ -65,18 +65,14 @@ const Header = () => {
 
             {/* CART */}
             <div className="relative ">
-              <button
-                onClick={() => toggle("drop")}
+              <Link
+                to="/shopping_cart"
                 className="flex items-center text-xs text-white/90 hover:bg-black/10 hover:rounded-full p-2"
               >
                 <span className="text-[1.688rem] text-white rounded-full">
                   {cart3}
                 </span>
-              </button>
-              <DropDown
-                isOpen={toggleStates.drop}
-                close={() => toggle("drop")}
-              />
+              </Link>
             </div>
           </div>
         </div>
