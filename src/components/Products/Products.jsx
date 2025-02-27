@@ -1,15 +1,25 @@
 import React from "react";
 import { useGetProductsQuery } from "../../redux/api/products_api";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { allIcons } from "../../data/all-icons";
 import { Link } from "react-router-dom";
 import Loader from "../Shared/Loader/Loader";
+import { addToCart } from "../../redux/slices/cartSlice";
+import CustomToast from "../../hooks/CustomToast";
 
 const Products = () => {
   const { cart2 } = allIcons;
   const { data: productsData, isLoading, error } = useGetProductsQuery();
   const { loading } = useSelector((state) => state.products);
   const products = productsData?.data || [];
+
+  const dispatch = useDispatch();
+
+  const handleAddToCart = (product) => {
+    dispatch(addToCart(product));
+
+    CustomToast({ type: "success", message: "Added to cart" });
+  };
 
   if (isLoading && loading) {
     return <Loader size="30px" />;
@@ -75,7 +85,10 @@ const Products = () => {
                   )}
                   <span className="text-xs text-gray1">0 sold</span>
                 </div>
-                <button className="border border-d2 hover:border-primary hover:text-primary rounded-full py-1 px-2 text-lg transition duration-300">
+                <button
+                  onClick={() => handleAddToCart(product)}
+                  className="border border-d2 hover:border-primary hover:text-primary rounded-full py-1 px-2 text-lg transition duration-300"
+                >
                   {cart2}
                 </button>
               </div>
