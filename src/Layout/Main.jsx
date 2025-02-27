@@ -7,7 +7,7 @@ import Footer from "../components/Footer/Footer";
 
 const Main = () => {
   return (
-    <main className="relative">
+    <main className="relative font-Poppins">
       {/* Header section */}
       <Header />
       <HeaderSm />
