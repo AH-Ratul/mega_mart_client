@@ -16,6 +16,7 @@ import {
   MdAddShoppingCart,
   MdClose,
   MdDashboard,
+  MdDelete,
   MdExpandMore,
   MdFavorite,
   MdHome,
@@ -50,4 +51,5 @@ export const allIcons = {
   email: <MdOutlineMailOutline />,
   X: <FaXTwitter />,
   youtube: <FaYoutube />,
+  deleted: <MdDelete />
 };
