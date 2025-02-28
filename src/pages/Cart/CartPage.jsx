@@ -28,10 +28,18 @@ const CartPage = () => {
   };
 
   return (
-    <div className="mt-20 px-3 hidden lg:flex flex-col items-center w-full">
+    <div className="mt-20 px-3 flex flex-col items-center w-full">
       <div className="w-full max-w-[1270px] ">
-        <span>Home {">"} Cart</span>
-        <div className="flex justify-center gap-20 mt-5">
+        {/* breadcrumb */}
+        <nav aria-label="breadcrumb">
+          <ol className="flex space-x-2 text-gray-600">
+            <li>Home</li>
+            <li>{">"}</li>
+            <li className="font-semibold text-black">Cart</li>
+          </ol>
+        </nav>
+        {/* main cart */}
+        <div className="flex flex-col lg:flex-row justify-center gap-20 mt-5">
           {/* Cart Items */}
           <div className="w-full h-auto flex flex-col justify-center items-center">
             {cartItems.length === 0 ? (
@@ -111,7 +119,7 @@ const CartPage = () => {
           </div>
 
           {/* Order summary */}
-          <div className="w-[600px] h-auto">
+          <div className="lg:w-[600px] h-auto">
             <h1 className="font-bold">Order Summary</h1>
 
             <div className="flex justify-between items-center text-xl font-bold my-2">
