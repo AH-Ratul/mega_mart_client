@@ -1,7 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
-import Loader from "../../components/Shared/Loader/Loader";
-import Modal from "../../components/Shared/Modal/Modal";
 import Products from "../../components/Products/Products";
 import { useDispatch, useSelector } from "react-redux";
 import { allIcons } from "../../data/all-icons";
@@ -12,19 +10,13 @@ import {
 } from "../../redux/slices/cartSlice";
 
 const CartPage = () => {
-  const [loader, setLoader] = useState(false);
   const { deleted } = allIcons;
   const cartItems = useSelector((state) => state.cart.cartItems);
   const dispatch = useDispatch();
 
-  // Scrolls to the top
+  // Scroll to the top
   useEffect(() => {
     window.scrollTo(0, 0);
-    setLoader(true);
-
-    setTimeout(() => {
-      setLoader(false);
-    }, [1000]);
   }, []);
 
   // Total price calculate
@@ -35,13 +27,8 @@ const CartPage = () => {
     }, 0);
   };
 
-  // Loader for 1 second before showing the content.
-  if (loader) {
-    return <Modal modal={<Loader size="40px" />} />;
-  }
-
   return (
-    <div className="mt-20 px-3 flex flex-col items-center w-full">
+    <div className="mt-20 px-3 hidden lg:flex flex-col items-center w-full">
       <div className="w-full max-w-[1270px] ">
         <span>Home {">"} Cart</span>
         <div className="flex justify-center gap-20 mt-5">
