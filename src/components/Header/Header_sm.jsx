@@ -3,8 +3,8 @@ import logo from "../../../public/logo123.svg";
 import { allIcons } from "../../data/all-icons";
 import MenuSideBar from "../Shared/Menubar/MenuSideBar";
 import useToggle from "../../hooks/useToggle";
-import CartSideBar from "../Shared/Cartbar/CartSideBar";
 import CategorySideBar from "../Shared/Category/CategorySideBar";
+import { Link } from "react-router-dom";
 
 const HeaderSm = () => {
   const { home, cart, search, list, menu } = allIcons;
@@ -60,17 +60,13 @@ const HeaderSm = () => {
         </div>
         {/* cart */}
         <div>
-          <button
-            onClick={() => toggle("cart")}
+          <Link
+            to="/shopping_cart"
             className="text-gray1 text-2xl hover:text-secondary flex flex-col items-center"
           >
             {cart}
             <span className="text-xs">Cart</span>
-          </button>
-          <CartSideBar
-            isOpen={toggleStates.cart}
-            close={() => toggle("cart")}
-          />
+          </Link>
         </div>
         {/* menu */}
         <div>
