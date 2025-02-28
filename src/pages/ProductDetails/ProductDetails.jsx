@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useGetProductByIdQuery } from "../../redux/api/products_api";
 import { useDispatch, useSelector } from "react-redux";
 import Loader from "../../components/Shared/Loader/Loader";
 import Products from "../../components/Products/Products";
 import { decrement, increment } from "../../redux/slices/quantitySlice";
-import Modal from "../../components/Shared/Modal/Modal";
 
 const ProductDetails = () => {
   const { id } = useParams();
@@ -17,22 +16,11 @@ const ProductDetails = () => {
 
   const quantity = useSelector((state) => state.quantity.value);
   const dispatch = useDispatch();
-  const [loader, setLoader] = useState(true);
 
   // Scrolls to the top when navigating to a new product detail page.
   useEffect(() => {
-    window.scrollTo(0, 0);
-    setLoader(true);
-
-    setTimeout(() => {
-      setLoader(false);
-    }, [1000]);
+    window.scrollTo({ top: 0, behavior: "smooth" });
   }, [id]);
-
-  // Loader for 1 second before showing the content.
-  if (loader) {
-    return <Modal modal={<Loader size="40px" />} />;
-  }
 
   if (isLoading && loading) {
     return <Loader size="30px" />;
