@@ -32,7 +32,7 @@ const CartPage = () => {
       <div className="w-full max-w-[1270px] ">
         {/* breadcrumb */}
         <nav aria-label="breadcrumb">
-          <ol className="flex space-x-2 text-gray-600">
+          <ol className="flex space-x-2 text-gray-600 text-xs">
             <li>Home</li>
             <li>{">"}</li>
             <li className="font-semibold text-black">Cart</li>
@@ -129,9 +129,15 @@ const CartPage = () => {
                 {calculateTotal().toFixed(2)}
               </p>
             </div>
+            {/* link to checkout */}
             <Link>
-              <button className="bg-primary w-full text-center text-white py-2 text-lg rounded-lg mt-3">
-                Checkout <span>({cartItems.length})</span>
+              <button className="bg-primary w-full text-center text-white py-2 text-lg rounded-lg mt-3 relative overflow-hidden group">
+                <span className="relative inline-block transition-all duration-300 ease-in-out">
+                  Checkout <span>({cartItems.length})</span>
+                </span>
+
+                {/* Blur Effect - Moving from Top to Bottom */}
+                <span className="absolute inset-0 bg-white/20 blur-lg scale-y-0 origin-top group-hover:scale-y-100 transition-transform duration-300 ease-in-out"></span>
               </button>
             </Link>
           </div>
