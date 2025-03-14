@@ -12,22 +12,22 @@ const Footer = () => {
   const { facebook, insta, X, youtube } = allIcons;
 
   return (
-    <div className="hidden bg-eerieblack lg:flex flex-col justify-center items-center text-white mt-20 pt-7 pb-3 w-full">
+    <footer className="hidden bg-eerieblack lg:flex flex-col justify-center items-center text-white mt-20 pt-7 pb-3 w-full">
       <div className="flex gap-20 xl:gap-32">
         {/* INFO */}
         <div>
-          <h1 className="mb-4 font-bold">Company Info</h1>
+          <h1 className="mb-4 font-semibold">Company Info</h1>
           <ul className="flex flex-col gap-1 text-sm text-white/70">
-            <li className="hover:text-white">
+            <li className="hover:text-white w-fit">
               <Link>About MegaMart</Link>
             </li>
-            <li className="hover:text-white">
+            <li className="hover:text-white w-fit">
               <Link>Contact us</Link>
             </li>
-            <li className="hover:text-white">
+            <li className="hover:text-white w-fit">
               <Link>News center</Link>
             </li>
-            <li className="hover:text-white">
+            <li className="hover:text-white w-fit">
               <Link>Careers</Link>
             </li>
           </ul>
@@ -35,18 +35,18 @@ const Footer = () => {
 
         {/* Services */}
         <div>
-          <h1 className="mb-4 font-bold">Customer Service</h1>
+          <h1 className="mb-4 font-semibold">Customer Service</h1>
           <ul className="flex flex-col text-sm text-white/70 gap-1">
-            <li className="hover:text-white">
+            <li className="hover:text-white w-fit">
               <Link>Return & Refund</Link>
             </li>
-            <li className="hover:text-white">
+            <li className="hover:text-white w-fit">
               <Link>Shipping Info</Link>
             </li>
-            <li className="hover:text-white">
+            <li className="hover:text-white w-fit">
               <Link>Policies & Rules</Link>
             </li>
-            <li className="hover:text-white">
+            <li className="hover:text-white w-fit">
               <Link>Report suspicious activity</Link>
             </li>
           </ul>
@@ -54,18 +54,18 @@ const Footer = () => {
 
         {/* HELP section */}
         <div>
-          <h1 className="mb-4 font-bold">Help</h1>
+          <h1 className="mb-4 font-semibold">Help</h1>
           <ul className="flex flex-col text-sm text-white/70 gap-1">
-            <li className="hover:text-white">
+            <li className="hover:text-white w-fit">
               <Link>Support center & FAQ</Link>
             </li>
-            <li className="hover:text-white">
+            <li className="hover:text-white w-fit">
               <Link>Safety Center</Link>
             </li>
-            <li className="hover:text-white">
+            <li className="hover:text-white w-fit">
               <Link>Product support</Link>
             </li>
-            <li className="hover:text-white">
+            <li className="hover:text-white w-fit">
               <Link>Sitemap</Link>
             </li>
           </ul>
@@ -73,7 +73,7 @@ const Footer = () => {
 
         {/* Social Media Links */}
         <div>
-          <h1 className="mb-3 font-bold">Connect with us</h1>
+          <h1 className="mb-3 font-semibold">Connect with us</h1>
           <div className="flex items-center gap-2 text-2xl">
             <Link className="hover:bg-white/10 rounded-full p-2">{insta}</Link>
             <Link className="hover:bg-white/10 rounded-full p-2">
@@ -87,7 +87,7 @@ const Footer = () => {
 
           {/* Payment Methods */}
           <div>
-            <p className="font-bold text-base mt-4">We accept</p>
+            <p className="font-semibold text-base mt-4">We accept</p>
             <div className=" mt-2 flex items-center gap-2">
               <img src={visa} alt="visa" className="w-10" />
 
@@ -115,7 +115,7 @@ const Footer = () => {
           Copyright &copy; MegaMart 2025 | All Right Reserved
         </p>
       </div>
-    </div>
+    </footer>
   );
 };
 
