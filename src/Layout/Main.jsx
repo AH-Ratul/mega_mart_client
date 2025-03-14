@@ -7,7 +7,7 @@ import Footer from "../components/Footer/Footer";
 
 const Main = () => {
   return (
-    <main className="relative font-Poppins">
+    <main className="relative font-OpenSans">
       {/* Header section */}
       <Header />
       <HeaderSm />
