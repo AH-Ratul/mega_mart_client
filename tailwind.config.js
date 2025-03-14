@@ -4,7 +4,8 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        Poppins: ["Poppins", "serif"],
+        Poppins: ["Poppins", "sans-serif"],
+        OpenSans: ["Open Sans", "sans-serif"]
       },
       animation: {
         "spin-slow": "spin 1.5s linear infinite", // Slow spin
