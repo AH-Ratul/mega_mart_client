@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useGetProductByIdQuery } from "../../redux/api/products_api";
 import { useDispatch, useSelector } from "react-redux";
 import Loader from "../../components/Shared/Loader/Loader";
@@ -12,17 +12,29 @@ const ProductDetails = () => {
   const { id } = useParams();
   const { data: productData, isLoading, error } = useGetProductByIdQuery(id);
   const { loading } = useSelector((state) => state.products);
-  console.log(id, productData);
   const { productName, productImages, price, discountPrice, description } =
     productData?.data || [];
 
   const quantity = useSelector((state) => state.quantity.value);
   const dispatch = useDispatch();
 
+  const navigate = useNavigate();
+
   const handleAddToCart = (product) => {
     dispatch(addToCart(product));
 
     CustomToast({ type: "success", message: "Added to cart" });
+  };
+
+  const handleBuy = () => {
+    const item = {
+      productName,
+      productImages,
+      price,
+      discountPrice,
+      quantity,
+    };
+    navigate(`/checkout`, { state: item });
   };
 
   // Scrolls to the top when navigating to a new product detail page.
@@ -119,7 +131,10 @@ const ProductDetails = () => {
               >
                 Add to Cart
               </button>
-              <button className="mt-6 w-1/2 bg-primary text-white py-3 rounded-lg transition-transform duration-300 hover:scale-105">
+              <button
+                onClick={handleBuy}
+                className="mt-6 w-1/2 bg-primary text-white py-3 rounded-lg transition-transform duration-300 hover:scale-105"
+              >
                 Buy Now
               </button>
             </div>
