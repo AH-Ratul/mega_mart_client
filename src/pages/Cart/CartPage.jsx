@@ -120,7 +120,7 @@ const CartPage = () => {
 
           {/* Order summary */}
           <div className="lg:w-[600px] h-auto">
-            <h1 className="font-bold">Order Summary</h1>
+            <h1 className="text-xl">Order Summary</h1>
 
             <div className="flex justify-between items-center text-xl font-bold my-2">
               <p>Total</p>
@@ -130,8 +130,8 @@ const CartPage = () => {
               </p>
             </div>
             {/* link to checkout */}
-            <Link>
-              <button className="bg-primary w-full text-center text-white py-2 text-lg rounded-lg mt-3 relative overflow-hidden group">
+            <Link to="/checkout">
+              <button className="bg-primary w-full text-center text-white py-2 text-lg rounded mt-3 relative overflow-hidden group">
                 <span className="relative inline-block transition-all duration-300 ease-in-out">
                   Checkout <span>({cartItems.length})</span>
                 </span>
