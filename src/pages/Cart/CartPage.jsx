@@ -145,7 +145,7 @@ const CartPage = () => {
 
         {/* all products */}
         <div className="mt-28">
-          <h1 className="font-bold text-lg text-black/70">
+          <h1 className="font-medium">
             Items may you want to add
           </h1>
           <div>
