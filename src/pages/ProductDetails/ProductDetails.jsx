@@ -12,7 +12,7 @@ const ProductDetails = () => {
   const { id } = useParams();
   const { data: productData, isLoading, error } = useGetProductByIdQuery(id);
   const { loading } = useSelector((state) => state.products);
-  const { productName, productImages, price, discountPrice, description } =
+  const { _id, productName, productImages, price, discountPrice, description } =
     productData?.data || [];
 
   const quantity = useSelector((state) => state.quantity.value);
@@ -28,6 +28,7 @@ const ProductDetails = () => {
 
   const handleBuy = () => {
     const item = {
+      _id,
       productName,
       productImages,
       price,
