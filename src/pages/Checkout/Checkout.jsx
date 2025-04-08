@@ -1,5 +1,6 @@
 import React from "react";
 import { useForm } from "react-hook-form";
+import { useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 
 const Checkout = () => {
@@ -9,11 +10,35 @@ const Checkout = () => {
     reset,
     formState: { errors },
   } = useForm();
+
   const location = useLocation();
   const data = location.state;
 
-  // calculation
-  const itemsTotal = (data.discountPrice || data.price) * data.quantity;
+  const cartItems = useSelector((state) => state.cart.cartItems);
+
+  const items = data
+    ? [
+        {
+          productId: data._id,
+          productName: data.productName,
+          productImages: data.productImages,
+          price: data.discountPrice || data.price,
+          quantity: data.quantity,
+        },
+      ]
+    : cartItems.map((item) => ({
+        productId: item._id,
+        productName: item.productName,
+        productImages: item.productImages,
+        price: item.discountPrice || item.price,
+        quantity: item.quantity,
+      }));
+
+  // total calculation
+  const itemsTotal = items.reduce(
+    (acc, item) => acc + item.price * item.quantity,
+    0
+  );
   const shippingCharge = 50;
   const total = itemsTotal + shippingCharge;
 
@@ -22,15 +47,7 @@ const Checkout = () => {
     handleSubmit((formData) => {
       const orderData = {
         ...formData,
-        items: [
-          {
-            productId: data._id,
-            productName: data.productName,
-            productImages: data.productImages,
-            price: data.discountPrice || data.price,
-            quantity: data.quantity,
-          },
-        ],
+        items,
         orderSummary: {
           itemsTotal,
           shippingCharge,
@@ -44,10 +61,10 @@ const Checkout = () => {
   };
 
   return (
-    <div className="pt-20 pb-10 mx-auto w-full flex justify-center items-center bg-gray-100 h-full">
-      <div className="w-full max-w-[1270px] flex gap-4">
-        <div className="w-full">
-          <section className="bg-white ">
+    <div className="pt-20 pb-24 lg:pb-10 mx-auto w-full flex justify-center items-center bg-gray-100 h-full">
+      <div className="w-full max-w-[1270px] flex gap-4  flex-col lg:flex-row ">
+        <div className="w-full flex flex-col-reverse lg:flex-col">
+          <section className="bg-white mx-2 xl:mx-0">
             <p className="bg-gray-50 py-2 ps-3 text-sm font-medium">
               Add Shipping Address
             </p>
@@ -122,35 +139,32 @@ const Checkout = () => {
           </section>
 
           {/* selected items */}
-          <section className="bg-white mt-5 p-3">
-            <div className="flex border-b pb-1">
-              <img
-                src={data.productImages[0]}
-                alt="img"
-                className="w-20 h-20"
-              />
-              <div className="ml-3">
-                <p className="text-wrap">{data.productName}</p>
-                <div className="flex gap-8 mt-6 text-sm">
-                  {data.discountPrice ? (
+          <section className="bg-white lg:mt-5 mb-5 p-3 mx-2 xl:mx-0">
+            {items.map((item) => (
+              <div key={item.productId} className="flex border-b pt-3 pb-3">
+                <img
+                  src={item.productImages[0]}
+                  alt="img"
+                  className="w-20 h-20"
+                />
+                <div className="ml-3">
+                  <p className="text-wrap">{item.productName}</p>
+                  <div className="flex gap-8 mt-6 text-sm">
                     <p>
-                      Price: <span>&#2547;</span> {data.discountPrice}
+                      Price: <span>&#2547;</span> {item.price}
                     </p>
-                  ) : (
-                    <p>
-                      Price: <span>&#2547;</span> {data.price}
-                    </p>
-                  )}
-                  <p>Quantity: {data.quantity}</p>
+
+                    <p>Quantity: {item.quantity}</p>
+                  </div>
                 </div>
               </div>
-            </div>
+            ))}
           </section>
         </div>
 
         {/* Order Summary */}
-        <div className="w-[600px] bg-white p-3 shadow-sm h-fit">
-          <section className="flex items-center">
+        <div className="xl:w-[600px] bg-white p-3 mx-2 xl:mx-0 shadow-sm h-fit">
+          <section className="flex items-center justify-end">
             <input
               type="text"
               className="border text-sm py-2 ps-2 w-80 outline-none focus:border-secondary"
@@ -163,9 +177,7 @@ const Checkout = () => {
           <section className="mt-7">
             <h1>Order Summary</h1>
             <div className="flex justify-between items-center mt-3">
-              <p className="text-black/60 text-sm">
-                Items Total ({data.quantity} Items)
-              </p>
+              <p className="text-black/60 text-sm">Items Total</p>
               <p>
                 <span>&#2547;</span> {itemsTotal}
               </p>
