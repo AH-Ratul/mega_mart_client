@@ -8,11 +8,30 @@ import {
   decreaseQuantity,
   removeFromCart,
 } from "../../redux/slices/cartSlice";
+import {
+  useGetCartQuery,
+  useRemoveitemMutation,
+} from "../../redux/api/cart_api";
+import { useGetMeQuery } from "../../redux/api/users_api";
 
 const CartPage = () => {
   const { deleted } = allIcons;
   const cartItems = useSelector((state) => state.cart.cartItems);
   const dispatch = useDispatch();
+
+  //
+  const { data: userData } = useGetMeQuery();
+  const user = userData.data;
+
+  const { data: cartData, isLoading, refetch } = useGetCartQuery(user._id);
+  console.log(cartData);
+
+  const [removeItem] = useRemoveitemMutation();
+
+  const handleRemove = async (userId, productId) => {
+    await removeItem({ userId, productId });
+    refetch();
+  };
 
   // Scroll to the top
   useEffect(() => {
@@ -21,11 +40,15 @@ const CartPage = () => {
 
   // Total price calculate
   const calculateTotal = () => {
-    return cartItems.reduce((total, item) => {
+    return cartData.reduce((total, item) => {
       const itemPrice = item.discountPrice ? item.discountPrice : item.price;
       return total + itemPrice * item.quantity;
     }, 0);
   };
+
+  if (isLoading) {
+    return <p>loading..</p>;
+  }
 
   return (
     <div className="mt-20 px-3 flex flex-col items-center w-full">
@@ -42,14 +65,14 @@ const CartPage = () => {
         <div className="flex flex-col lg:flex-row justify-center gap-20 mt-5">
           {/* Cart Items */}
           <div className="w-full h-auto flex flex-col justify-center items-center">
-            {cartItems.length === 0 ? (
+            {cartData.length === 0 ? (
               <>
                 <p className="text-lg font-bold">Your Cart is Empty</p>
                 <span className="text-xs">Add your favorite item in it</span>
               </>
             ) : (
               <div className="w-full">
-                {cartItems.map((item) => (
+                {cartData.map((item) => (
                   <div
                     key={item._id}
                     className="flex items-center px-1 py-1  mb-1"
@@ -68,7 +91,7 @@ const CartPage = () => {
                             : item.productName}
                         </p>
                         <button
-                          onClick={() => dispatch(removeFromCart(item._id))}
+                          onClick={() => handleRemove(user._id, item.productId)}
                           className="text-red-500 hover:bg-gray-200 p-2 text-lg rounded-full ml-1"
                         >
                           {deleted}
