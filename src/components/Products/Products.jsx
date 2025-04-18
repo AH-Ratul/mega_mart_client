@@ -6,6 +6,8 @@ import { Link } from "react-router-dom";
 import Loader from "../Shared/Loader/Loader";
 import { addToCart } from "../../redux/slices/cartSlice";
 import CustomToast from "../../hooks/CustomToast";
+import { useAddedToCartMutation } from "../../redux/api/cart_api";
+import { useGetMeQuery } from "../../redux/api/users_api";
 
 const Products = () => {
   const { cart2 } = allIcons;
@@ -13,12 +15,26 @@ const Products = () => {
   const { loading } = useSelector((state) => state.products);
   const products = productsData?.data || [];
 
+  // get user
+  const { data: userData } = useGetMeQuery();
+  const user = userData.data;
+
+  // cart added to database
+  const [addedToCart] = useAddedToCartMutation();
+
   const dispatch = useDispatch();
 
-  const handleAddToCart = (product) => {
-    dispatch(addToCart(product));
-
-    CustomToast({ type: "success", message: "Added to cart" });
+  const handleAddToCart = async (product) => {
+    try {
+      if (user) {
+        await addedToCart({ userId: user._id, ...product }).unwrap();
+      } else {
+        dispatch(addToCart(product));
+      }
+      CustomToast({ type: "success", message: "Added to cart" });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   if (isLoading && loading) {
