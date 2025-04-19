@@ -2,6 +2,8 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
+import { useGetCartQuery } from "../../redux/api/cart_api";
+import { useGetMeQuery } from "../../redux/api/users_api";
 
 const Checkout = () => {
   const {
@@ -16,6 +18,12 @@ const Checkout = () => {
 
   const cartItems = useSelector((state) => state.cart.cartItems);
 
+  // get user
+  const { data: userData } = useGetMeQuery();
+  const user = userData?.data;
+
+  const { data: cartData, isLoading } = useGetCartQuery(user._id);
+
   const items = data
     ? [
         {
@@ -26,8 +34,8 @@ const Checkout = () => {
           quantity: data.quantity,
         },
       ]
-    : cartItems.map((item) => ({
-        productId: item._id,
+    : cartData?.map((item) => ({
+        productId: item.productId,
         productName: item.productName,
         productImages: item.productImages,
         price: item.discountPrice || item.price,
@@ -35,7 +43,7 @@ const Checkout = () => {
       }));
 
   // total calculation
-  const itemsTotal = items.reduce(
+  const itemsTotal = items?.reduce(
     (acc, item) => acc + item.price * item.quantity,
     0
   );
@@ -59,6 +67,14 @@ const Checkout = () => {
       reset();
     })();
   };
+
+  if (isLoading) {
+    return <p>loading...</p>;
+  }
+
+  if (!cartData) {
+    return <p>no data found</p>;
+  }
 
   return (
     <div className="pt-20 pb-24 lg:pb-10 mx-auto w-full flex justify-center items-center bg-gray-100 h-full">
@@ -140,8 +156,8 @@ const Checkout = () => {
 
           {/* selected items */}
           <section className="bg-white lg:mt-5 mb-5 p-3 mx-2 xl:mx-0">
-            {items.map((item) => (
-              <div key={item.productId} className="flex border-b pt-3 pb-3">
+            {cartData?.map((item) => (
+              <div key={item._id} className="flex border-b pt-3 pb-3">
                 <img
                   src={item.productImages[0]}
                   alt="img"
