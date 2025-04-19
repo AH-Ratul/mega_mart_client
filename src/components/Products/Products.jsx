@@ -8,9 +8,11 @@ import { addToCart } from "../../redux/slices/cartSlice";
 import CustomToast from "../../hooks/CustomToast";
 import { useAddedToCartMutation } from "../../redux/api/cart_api";
 import { useGetMeQuery } from "../../redux/api/users_api";
+import { handleCartToAddedGlobal } from "../../utils/cartUtils";
 
 const Products = () => {
   const { cart2 } = allIcons;
+  const dispatch = useDispatch();
   const { data: productsData, isLoading, error } = useGetProductsQuery();
   const { loading } = useSelector((state) => state.products);
   const products = productsData?.data || [];
@@ -22,19 +24,8 @@ const Products = () => {
   // cart added to database
   const [addedToCart] = useAddedToCartMutation();
 
-  const dispatch = useDispatch();
-
-  const handleAddToCart = async (product) => {
-    try {
-      if (user) {
-        await addedToCart({ userId: user._id, ...product }).unwrap();
-      } else {
-        dispatch(addToCart(product));
-      }
-      CustomToast({ type: "success", message: "Added to cart" });
-    } catch (error) {
-      console.log(error);
-    }
+  const handleClick = (product) => {
+    handleCartToAddedGlobal({ product, user, addedToCart, dispatch });
   };
 
   if (isLoading && loading) {
@@ -102,7 +93,7 @@ const Products = () => {
                   <span className="text-xs text-gray1">0 sold</span>
                 </div>
                 <button
-                  onClick={() => handleAddToCart(product)}
+                  onClick={() => handleClick(product)}
                   className="border border-d2 hover:border-primary hover:text-primary rounded-full py-1 px-2 text-lg transition duration-300"
                 >
                   {cart2}
