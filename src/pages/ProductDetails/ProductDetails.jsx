@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useGetProductByIdQuery } from "../../redux/api/products_api";
 import { useDispatch, useSelector } from "react-redux";
 import Loader from "../../components/Shared/Loader/Loader";
