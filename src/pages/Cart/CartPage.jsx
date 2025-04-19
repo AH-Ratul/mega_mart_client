@@ -3,34 +3,45 @@ import { Link } from "react-router-dom";
 import Products from "../../components/Products/Products";
 import { useDispatch, useSelector } from "react-redux";
 import { allIcons } from "../../data/all-icons";
+import { addToCart, removeFromCart } from "../../redux/slices/cartSlice";
 import {
-  addToCart,
-  decreaseQuantity,
-  removeFromCart,
-} from "../../redux/slices/cartSlice";
-import {
+  useAddedToCartMutation,
+  useDecreaseQuantityMutation,
   useGetCartQuery,
   useRemoveitemMutation,
 } from "../../redux/api/cart_api";
 import { useGetMeQuery } from "../../redux/api/users_api";
+import { handleCartToAddedGlobal } from "../../utils/cartUtils";
 
 const CartPage = () => {
   const { deleted } = allIcons;
-  const cartItems = useSelector((state) => state.cart.cartItems);
   const dispatch = useDispatch();
+  const cartItems = useSelector((state) => state.cart.cartItems);
 
-  //
+  // get user
   const { data: userData } = useGetMeQuery();
   const user = userData.data;
 
-  const { data: cartData, isLoading, refetch } = useGetCartQuery(user._id);
-  console.log(cartData);
+  // for increase quantity
+  const [addedToCart] = useAddedToCartMutation();
 
+  const handleClick = (product) => {
+    handleCartToAddedGlobal({ user, product, addedToCart });
+  };
+
+  // get cart data
+  const { data: cartData, isLoading } = useGetCartQuery(user._id);
+
+  // remove cart data & decrease quantity
   const [removeItem] = useRemoveitemMutation();
+  const [decreaseQuantity] = useDecreaseQuantityMutation();
 
   const handleRemove = async (userId, productId) => {
     await removeItem({ userId, productId });
-    refetch();
+  };
+
+  const handleDecreaseQuantity = async (userId, productId) => {
+    await decreaseQuantity({ userId, productId });
   };
 
   // Scroll to the top
@@ -120,14 +131,16 @@ const CartPage = () => {
                         {/* Quantity */}
                         <div className="border">
                           <button
-                            onClick={() => dispatch(decreaseQuantity(item._id))}
+                            onClick={() =>
+                              handleDecreaseQuantity(user._id, item.productId)
+                            }
                             className="bg-gray-200 px-2"
                           >
                             -
                           </button>
                           <span className="px-2">{item.quantity}</span>
                           <button
-                            onClick={() => dispatch(addToCart(item))}
+                            onClick={() => handleClick(item)}
                             className="bg-gray-200 px-2"
                           >
                             +
@@ -156,7 +169,7 @@ const CartPage = () => {
             <Link to="/checkout">
               <button className="bg-primary w-full text-center text-white py-2 text-lg rounded mt-3 relative overflow-hidden group">
                 <span className="relative inline-block transition-all duration-300 ease-in-out">
-                  Checkout <span>({cartItems.length})</span>
+                  Checkout <span>({cartData.length})</span>
                 </span>
 
                 {/* Blur Effect - Moving from Top to Bottom */}
