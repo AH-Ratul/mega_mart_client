@@ -1,17 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
 import logo from "../../../public/logo123.svg";
 import { allIcons } from "../../data/all-icons";
-import DropDown from "../Shared/DropDown/DropDown";
-import useToggle from "../../hooks/useToggle";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import DropOnHover from "../Shared/DropDown/DropOnHover";
 import CategoryOnHover from "../Shared/DropDown/CategoryOnHover";
+import Modal from "../Shared/Modal/Modal";
+import Loader from "../Shared/Loader/Loader";
 
 const Header = () => {
   const { account, search, cart3 } = allIcons;
-  const [toggleStates, toggle] = useToggle({
-    drop: false,
-  });
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+
+  const handleCartClick = () => {
+    
+      window.location.href = "/shopping_cart";
+      console.log("ci");
+    
+  };
 
   return (
     <header className="hidden fixed w-screen z-10 top-0 lg:flex justify-center items-center bg-[#c82233e6]  border-b-cardinal border-b backdrop-blur-sm">
@@ -65,14 +71,15 @@ const Header = () => {
 
             {/* CART */}
             <div className="relative ">
-              <Link
-                to="/shopping_cart"
+              
+              <button
+                onClick={handleCartClick}
                 className="flex items-center text-xs text-white/90 hover:bg-black/10 hover:rounded-full p-2"
               >
                 <span className="text-[1.688rem] text-white rounded-full">
                   {cart3}
                 </span>
-              </Link>
+              </button>
             </div>
           </div>
         </div>
