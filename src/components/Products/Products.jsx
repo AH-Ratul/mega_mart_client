@@ -19,7 +19,7 @@ const Products = () => {
 
   // get user
   const { data: userData } = useGetMeQuery();
-  const user = userData.data;
+  const user = userData?.data;
 
   // cart added to database
   const [addedToCart] = useAddedToCartMutation();
