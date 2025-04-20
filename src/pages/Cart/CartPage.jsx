@@ -3,7 +3,11 @@ import { Link } from "react-router-dom";
 import Products from "../../components/Products/Products";
 import { useDispatch, useSelector } from "react-redux";
 import { allIcons } from "../../data/all-icons";
-import { addToCart, removeFromCart } from "../../redux/slices/cartSlice";
+import {
+  clearCart,
+  decreaseQnty,
+  removeFromCart,
+} from "../../redux/slices/cartSlice";
 import {
   useAddedToCartMutation,
   useDecreaseQuantityMutation,
@@ -12,35 +16,44 @@ import {
 } from "../../redux/api/cart_api";
 import { useGetMeQuery } from "../../redux/api/users_api";
 import { handleCartToAddedGlobal } from "../../utils/cartUtils";
+import Loader from "../../components/Shared/Loader/Loader";
+import Modal from "../../components/Shared/Modal/Modal";
+import CustomToast from "../../hooks/CustomToast";
 
 const CartPage = () => {
   const { deleted } = allIcons;
   const dispatch = useDispatch();
-  const cartItems = useSelector((state) => state.cart.cartItems);
+  const localCartItem = useSelector((state) => state.cart.cartItems);
 
   // get user
   const { data: userData } = useGetMeQuery();
-  const user = userData.data;
+  const user = userData?.data;
 
   // for increase quantity
   const [addedToCart] = useAddedToCartMutation();
 
   const handleClick = (product) => {
-    handleCartToAddedGlobal({ user, product, addedToCart });
+    handleCartToAddedGlobal({ user, product, addedToCart, dispatch });
   };
 
   // get cart data
-  const { data: cartData, isLoading } = useGetCartQuery(user._id);
+  const { data: dbCartData = [], isLoading } = useGetCartQuery(user?._id, {
+    skip: !user,
+  });
+
+  const cartData = (user ? dbCartData : localCartItem) || [];
 
   // remove cart data & decrease quantity
   const [removeItem] = useRemoveitemMutation();
   const [decreaseQuantity] = useDecreaseQuantityMutation();
 
   const handleRemove = async (userId, productId) => {
+    if (!user) return dispatch(removeFromCart(productId));
     await removeItem({ userId, productId });
   };
 
   const handleDecreaseQuantity = async (userId, productId) => {
+    if (!user) return dispatch(decreaseQnty(productId));
     await decreaseQuantity({ userId, productId });
   };
 
@@ -48,6 +61,24 @@ const CartPage = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  // Sync guest cart to db on login
+  useEffect(() => {
+    const syncCart = async () => {
+      if (user && localCartItem.length > 0) {
+        try {
+          for (const item of localCartItem) {
+            await addedToCart({ userId: user?._id, ...item }).unwrap();
+          }
+          dispatch(clearCart());
+        } catch (error) {
+          console.log("sync fail", error);
+        }
+      }
+    };
+
+    syncCart();
+  }, [user]);
 
   // Total price calculate
   const calculateTotal = () => {
@@ -57,8 +88,19 @@ const CartPage = () => {
     }, 0);
   };
 
-  if (isLoading) {
-    return <p>loading..</p>;
+  const handleCheckout = () => {
+    if (cartData.length === 0) {
+      CustomToast({
+        type: "error",
+        message: "Please select the item you want to check out",
+      });
+    } else {
+      window.location.href = "/checkout";
+    }
+  };
+
+  if (user && isLoading) {
+    return <Modal modal={<Loader size="30px" />} />;
   }
 
   return (
@@ -85,7 +127,7 @@ const CartPage = () => {
               <div className="w-full">
                 {cartData.map((item) => (
                   <div
-                    key={item._id}
+                    key={item._id || item.productId}
                     className="flex items-center px-1 py-1  mb-1"
                   >
                     <img
@@ -97,12 +139,14 @@ const CartPage = () => {
                       {/* product name & remove button */}
                       <div className="flex items-center justify-between w-full">
                         <p className="text-sm">
-                          {item.productName.length > 100
+                          {item.productName?.length > 100
                             ? `${item.productName.slice(0, 90)}...`
                             : item.productName}
                         </p>
                         <button
-                          onClick={() => handleRemove(user._id, item.productId)}
+                          onClick={() =>
+                            handleRemove(user?._id, item.productId)
+                          }
                           className="text-red-500 hover:bg-gray-200 p-2 text-lg rounded-full ml-1"
                         >
                           {deleted}
@@ -132,7 +176,7 @@ const CartPage = () => {
                         <div className="border">
                           <button
                             onClick={() =>
-                              handleDecreaseQuantity(user._id, item.productId)
+                              handleDecreaseQuantity(user?._id, item.productId)
                             }
                             className="bg-gray-200 px-2"
                           >
@@ -166,8 +210,11 @@ const CartPage = () => {
               </p>
             </div>
             {/* link to checkout */}
-            <Link to="/checkout">
-              <button className="bg-primary w-full text-center text-white py-2 text-lg rounded mt-3 relative overflow-hidden group">
+            <>
+              <button
+                onClick={handleCheckout}
+                className="bg-primary w-full text-center text-white py-2 text-lg rounded mt-3 relative overflow-hidden group"
+              >
                 <span className="relative inline-block transition-all duration-300 ease-in-out">
                   Checkout <span>({cartData.length})</span>
                 </span>
@@ -175,7 +222,7 @@ const CartPage = () => {
                 {/* Blur Effect - Moving from Top to Bottom */}
                 <span className="absolute inset-0 bg-white/20 blur-lg scale-y-0 origin-top group-hover:scale-y-100 transition-transform duration-300 ease-in-out"></span>
               </button>
-            </Link>
+            </>
           </div>
         </div>
 
