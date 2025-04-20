@@ -11,12 +11,9 @@ const CustomToast = ({type, message}) => {
                 type === 'success' ? 'border-l-green-500 bg-white text-green-700' : 'bg-white border-l-red-500 text-red-700'
               } shadow-lg rounded-md flex`}
             >
-              <div className="flex-1 w-0 p-2">
+              <div className="flex-1 w-0 py-2">
                 <div className="flex items-start">
                   <div className="ml-3 flex-1">
-                    <p className="text-sm font-medium">
-                      {type === 'success' ? 'Success' : 'Error'}
-                    </p>
                     <p className="mt-1 text-sm">
                       {message}
                     </p>
