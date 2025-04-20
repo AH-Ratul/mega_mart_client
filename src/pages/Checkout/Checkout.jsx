@@ -1,9 +1,10 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import { useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import { useGetCartQuery } from "../../redux/api/cart_api";
 import { useGetMeQuery } from "../../redux/api/users_api";
+import Modal from "../../components/Shared/Modal/Modal";
+import Loader from "../../components/Shared/Loader/Loader";
 
 const Checkout = () => {
   const {
@@ -16,13 +17,11 @@ const Checkout = () => {
   const location = useLocation();
   const data = location.state;
 
-  const cartItems = useSelector((state) => state.cart.cartItems);
-
   // get user
   const { data: userData } = useGetMeQuery();
   const user = userData?.data;
 
-  const { data: cartData, isLoading } = useGetCartQuery(user._id);
+  const { data: cartData, isLoading } = useGetCartQuery(user?._id);
 
   const items = data
     ? [
@@ -69,7 +68,7 @@ const Checkout = () => {
   };
 
   if (isLoading) {
-    return <p>loading...</p>;
+    return <Modal modal={<Loader size="30px"/>} />;
   }
 
   if (!cartData) {
