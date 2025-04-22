@@ -12,8 +12,6 @@ const Login = () => {
   const { google, phone } = allIcons;
   const location = useLocation();
 
-  const to = location?.state?.from?.pathname || "/";
-
   const {
     register,
     handleSubmit,
@@ -30,12 +28,13 @@ const Login = () => {
   const onSubmit = async (data) => {
     try {
       const result = await loginUser(data).unwrap();
-      console.log(result);
       CustomToast({ type: "success", message: result.message });
 
       dispatch(setUser(result.data.user));
 
       reset();
+
+      const to = location?.state?.from?.pathname || "/";
       navigate(to);
     } catch (error) {
       console.log(error);
