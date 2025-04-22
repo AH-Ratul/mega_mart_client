@@ -1,12 +1,25 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { useForm } from "react-hook-form";
 import { useLocation } from "react-router-dom";
-import { useGetCartQuery } from "../../redux/api/cart_api";
-import { useGetMeQuery } from "../../redux/api/users_api";
-import Modal from "../../components/Shared/Modal/Modal";
+import {
+  useAddedToCartMutation,
+  useGetCartQuery,
+} from "../../redux/api/cart_api";
 import Loader from "../../components/Shared/Loader/Loader";
+import { useDispatch, useSelector } from "react-redux";
+import { clearCart } from "../../redux/slices/cartSlice";
 
 const Checkout = () => {
+  const location = useLocation();
+  const dispatch = useDispatch();
+  const localCartItem = useSelector((state) => state.cart.cartItems || []);
+  const { user } = useSelector((state) => state.auth);
+
+  const [addedToCart] = useAddedToCartMutation();
+
+  // ref to block double sync
+  const hasSynced = useRef(false);
+
   const {
     register,
     handleSubmit,
@@ -14,13 +27,26 @@ const Checkout = () => {
     formState: { errors },
   } = useForm();
 
-  const location = useLocation();
+  // Sync guest cart to DB after login
+  useEffect(() => {
+    const syncCart = async () => {
+      if (user && localCartItem.length > 0 && !hasSynced.current) {
+        hasSynced.current = true; // prevent future syncs
+        try {
+          for (const item of localCartItem) {
+            await addedToCart({ userId: user._id, ...item }).unwrap();
+          }
+          dispatch(clearCart());
+        } catch (error) {
+          console.log("sync fail", error);
+        }
+      }
+    };
+
+    syncCart();
+  }, [user, localCartItem, addedToCart, dispatch]);
+
   const data = location.state;
-
-  // get user
-  const { data: userData } = useGetMeQuery();
-  const user = userData?.data;
-
   const { data: cartData, isLoading } = useGetCartQuery(user?._id);
 
   const items = data
@@ -66,10 +92,6 @@ const Checkout = () => {
       reset();
     })();
   };
-
-  if (isLoading) {
-    return <Modal modal={<Loader size="30px"/>} />;
-  }
 
   if (!cartData) {
     return <p>no data found</p>;
@@ -155,7 +177,8 @@ const Checkout = () => {
 
           {/* selected items */}
           <section className="bg-white lg:mt-5 mb-5 p-3 mx-2 xl:mx-0">
-            {cartData?.map((item) => (
+            {isLoading && <Loader size="30px" />}
+            {items?.map((item) => (
               <div key={item._id} className="flex border-b pt-3 pb-3">
                 <img
                   src={item.productImages[0]}
