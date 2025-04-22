@@ -1,10 +1,9 @@
 import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Products from "../../components/Products/Products";
 import { useDispatch, useSelector } from "react-redux";
 import { allIcons } from "../../data/all-icons";
 import {
-  clearCart,
   decreaseQnty,
   removeFromCart,
 } from "../../redux/slices/cartSlice";
@@ -14,7 +13,6 @@ import {
   useGetCartQuery,
   useRemoveitemMutation,
 } from "../../redux/api/cart_api";
-import { useGetMeQuery } from "../../redux/api/users_api";
 import { handleCartToAddedGlobal } from "../../utils/cartUtils";
 import Loader from "../../components/Shared/Loader/Loader";
 import Modal from "../../components/Shared/Modal/Modal";
@@ -23,11 +21,9 @@ import CustomToast from "../../hooks/CustomToast";
 const CartPage = () => {
   const { deleted } = allIcons;
   const dispatch = useDispatch();
-  const localCartItem = useSelector((state) => state.cart.cartItems);
-
-  // get user
-  const { data: userData } = useGetMeQuery();
-  const user = userData?.data;
+  const navigate = useNavigate();
+  const localCartItem = useSelector((state) => state.cart.cartItems || []);
+  const { user } = useSelector((state) => state.auth);
 
   // for increase quantity
   const [addedToCart] = useAddedToCartMutation();
@@ -37,9 +33,7 @@ const CartPage = () => {
   };
 
   // get cart data
-  const { data: dbCartData = [], isLoading } = useGetCartQuery(user?._id, {
-    skip: !user,
-  });
+  const { data: dbCartData = [], isLoading } = useGetCartQuery(user?._id);
 
   const cartData = (user ? dbCartData : localCartItem) || [];
 
@@ -62,24 +56,6 @@ const CartPage = () => {
     window.scrollTo(0, 0);
   }, []);
 
-  // Sync guest cart to db on login
-  useEffect(() => {
-    const syncCart = async () => {
-      if (user && localCartItem.length > 0) {
-        try {
-          for (const item of localCartItem) {
-            await addedToCart({ userId: user?._id, ...item }).unwrap();
-          }
-          dispatch(clearCart());
-        } catch (error) {
-          console.log("sync fail", error);
-        }
-      }
-    };
-
-    syncCart();
-  }, [user]);
-
   // Total price calculate
   const calculateTotal = () => {
     return cartData.reduce((total, item) => {
@@ -94,13 +70,13 @@ const CartPage = () => {
         type: "error",
         message: "Please select the item you want to check out",
       });
-    } else {
-      window.location.href = "/checkout";
+      return;
     }
+    navigate("/checkout");
   };
 
-  if (user && isLoading) {
-    return <Modal modal={<Loader size="30px" />} />;
+  if (isLoading) {
+    return <Modal modal={<Loader size="40px" />} />;
   }
 
   return (
