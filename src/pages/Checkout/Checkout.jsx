@@ -234,7 +234,7 @@ const Checkout = () => {
             </div>
             <button
               onClick={onSubmitOrder}
-              className="w-full bg-primary py-2 rounded-sm text-white mt-4"
+              className="w-full bg-primary hover:bg-opacity-95 py-2 rounded-sm text-white mt-4"
             >
               Proceed to Pay
             </button>
