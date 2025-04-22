@@ -12,7 +12,7 @@ const Footer = () => {
   const { facebook, insta, X, youtube } = allIcons;
 
   return (
-    <footer className="hidden bg-eerieblack lg:flex flex-col justify-center items-center text-white pt-7 pb-3 w-full">
+    <footer className="hidden bg-eerieblack lg:flex flex-col justify-center items-center text-white mt-14 pt-7 pb-3 w-full">
       <div className="flex gap-20 xl:gap-32">
         {/* INFO */}
         <div>
