@@ -4,10 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { allIcons } from "../../data/all-icons";
 import { Link } from "react-router-dom";
 import Loader from "../Shared/Loader/Loader";
-import { addToCart } from "../../redux/slices/cartSlice";
-import CustomToast from "../../hooks/CustomToast";
 import { useAddedToCartMutation } from "../../redux/api/cart_api";
-import { useGetMeQuery } from "../../redux/api/users_api";
 import { handleCartToAddedGlobal } from "../../utils/cartUtils";
 
 const Products = () => {
@@ -16,10 +13,7 @@ const Products = () => {
   const { data: productsData, isLoading, error } = useGetProductsQuery();
   const { loading } = useSelector((state) => state.products);
   const products = productsData?.data || [];
-
-  // get user
-  const { data: userData } = useGetMeQuery();
-  const user = userData?.data;
+  const { user } = useSelector((state) => state.auth);
 
   // cart added to database
   const [addedToCart] = useAddedToCartMutation();
