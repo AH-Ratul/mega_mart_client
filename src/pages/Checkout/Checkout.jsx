@@ -114,84 +114,25 @@ const Checkout = () => {
           <div className="w-full flex flex-col-reverse lg:flex-col">
             {/* Shipping address */}
             <section className="bg-white mx-2 xl:mx-0">
-              <p className="bg-gray-50 py-2 ps-3 text-sm font-semibold tracking-wide">
+              <p className="bg-gray-100 py-2 ps-3 text-sm font-semibold tracking-wide rounded">
                 Shipping Address
               </p>
-              <form
-                onSubmit={handleSubmit(onSubmitOrder)}
-                className="px- py-2 flex flex-col gap-3"
-              >
-                <input
-                  type="text"
-                  id="fullname"
-                  placeholder="Fullname: Mr. ABC"
-                  {...register("fullname", {
-                    required: "Name is required",
-                  })}
-                  className="border text-sm py-2 ps-2 focus:border-secondary outline-none"
-                />
-                {errors.fullname && (
-                  <p className="text-red-600 text-xs">
-                    {errors.fullname.message}
-                  </p>
-                )}
-                <input
-                  type="number"
-                  id="phone"
-                  placeholder="Phone Number: 012XXXXXXXX"
-                  {...register("phone", {
-                    required: "Phone is required",
-                    minLength: {
-                      value: 11,
-                      message: "Enter a valid phone number",
-                    },
-                  })}
-                  className="border text-sm py-2 ps-2 focus:border-secondary outline-none"
-                />
-                {errors.phone && (
-                  <p className="text-red-600 text-xs">{errors.phone.message}</p>
-                )}
-                <input
-                  type="text"
-                  id="email"
-                  placeholder="Email: user@email.com"
-                  {...register("email", {
-                    pattern: {
-                      value:
-                        /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
-                      message: "Enter a valid email address",
-                    },
-                  })}
-                  className="border text-sm py-2 ps-2 focus:border-secondary outline-none"
-                />
-                {errors.email && (
-                  <p className="text-red-600 text-xs">{errors.email.message}</p>
-                )}
-                <input
-                  type="text"
-                  placeholder="Address: House# 23, Street# 3, ABC road"
-                  {...register("address", {
-                    required: "Address must required",
-                  })}
-                  className="border text-sm py-2 ps-2 focus:border-secondary outline-none"
-                />
-                {errors.address && (
-                  <p className="text-red-600 text-xs">
-                    {errors.address.message}
-                  </p>
-                )}
-                <textarea
-                  name="orderNote"
-                  id="orderNote"
-                  placeholder="Order note (optional)"
-                  {...register("orderNote")}
-                  className="border p-2 text-sm focus:border-secondary outline-none"
-                />
-              </form>
+
+              {user.addresses.map((address) => (
+                <div className="pl-3 mt-3 py-2 border border-dashed border-l-primary rounded text-sm flex flex-col gap-1">
+                  <div className="flex items-center gap-5">
+                    <p>{address.fullname}</p>
+                    <p>+880 {address.phone}</p>
+                  </div>
+                  <p className="text-primary">{address.address}</p>
+                  <p>{address.area}</p>
+                  <p>{address.district}</p>
+                </div>
+              ))}
             </section>
 
             {/* selected items */}
-            <section className="bg-white lg:mt-5 mb-5 p- mx-2 xl:mx-0">
+            <section className="bg-white lg:mt-5 mb-5 p- mx-2 xl:mx-0 border-t pt-4">
               {isLoading && <Loader size="30px" />}
               {items?.map((item) => (
                 <div key={item._id} className="flex pt-3 pb-3 border-b">
