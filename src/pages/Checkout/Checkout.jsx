@@ -98,7 +98,7 @@ const Checkout = () => {
   }
 
   return (
-    <div className="pt-20 pb-24 lg:pb-10 mx-auto w-full flex flex-col  items-center h-full">
+    <div className="pt-20 pb-24 lg:pb-10 px-3 lg:px-0 mx-auto w-full flex flex-col  items-center h-full">
       <div className="w-full max-w-[1270px] ">
         {/* Breadcrumb */}
         <nav aria-label="breadcrumb">
@@ -111,7 +111,7 @@ const Checkout = () => {
 
         {/* main content */}
         <div className="flex flex-col lg:flex-row gap-4 lg:gap-12  justify-center mt-5">
-          <div className="w-full flex flex-col-reverse lg:flex-col">
+          <div className="w-full flex flex-col">
             {/* Shipping address */}
             <section className="bg-white mx-2 xl:mx-0">
               <p className="bg-gray-100 py-2 ps-3 text-sm font-semibold tracking-wide rounded">
