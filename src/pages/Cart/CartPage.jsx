@@ -70,7 +70,7 @@ const CartPage = () => {
       return;
     }
 
-    if (user.address.length === 0) {
+    if (user.addresses.length === 0) {
       navigate("/contact_information", { state: { redirectTo: "/checkout" } });
     } else {
       navigate("/checkout");
