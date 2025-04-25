@@ -16,6 +16,7 @@ const VerifyCode = lazy(() => import("../pages/VerifyCode/VerifyCode"));
 const ProductDetails = lazy(() => import("../pages/ProductDetails/ProductDetails"));
 const CartPage = lazy(() => import("../pages/Cart/CartPage"));
 const Checkout = lazy(() => import("../pages/Checkout/Checkout"));
+const ContactInfo = lazy(() => import("../pages/Contact_Info/ContactInfo"));
 
 //Suspense wrapper 
 const loadable =(Component) => (
@@ -68,6 +69,14 @@ export const router = createBrowserRouter([
       {
         path: "shopping_cart",
         element: loadable(CartPage),
+      },
+      {
+        path: "contact_information",
+        element: ( 
+          <PrivateRoute>
+            {loadable(ContactInfo)}
+          </PrivateRoute>
+        ),
       },
       {
         path: "/checkout",
