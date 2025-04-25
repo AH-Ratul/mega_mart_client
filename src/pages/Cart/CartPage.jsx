@@ -1,12 +1,9 @@
 import React, { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { redirect, useNavigate } from "react-router-dom";
 import Products from "../../components/Products/Products";
 import { useDispatch, useSelector } from "react-redux";
 import { allIcons } from "../../data/all-icons";
-import {
-  decreaseQnty,
-  removeFromCart,
-} from "../../redux/slices/cartSlice";
+import { decreaseQnty, removeFromCart } from "../../redux/slices/cartSlice";
 import {
   useAddedToCartMutation,
   useDecreaseQuantityMutation,
@@ -72,7 +69,12 @@ const CartPage = () => {
       });
       return;
     }
-    navigate("/checkout");
+
+    if (user.address.length === 0) {
+      navigate("/contact_information", { state: { redirectTo: "/checkout" } });
+    } else {
+      navigate("/checkout");
+    }
   };
 
   if (isLoading) {
