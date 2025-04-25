@@ -1,7 +1,15 @@
 import React from "react";
 import { useForm } from "react-hook-form";
+import { useAddContactMutation } from "../../redux/api/contact_api";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const ContactInfo = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const { user } = useSelector((state) => state.auth);
+  const [addContact, isLoading] = useAddContactMutation();
+
   const {
     register,
     handleSubmit,
@@ -9,8 +17,11 @@ const ContactInfo = () => {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => {
-    console.log(data);
+  const onSubmit = async (data) => {
+    await addContact({ userId: user._id, ...data });
+    const redirectTo = location.state.redirectTo || "/";
+    navigate(redirectTo);
+
     reset();
   };
   return (
