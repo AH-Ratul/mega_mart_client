@@ -29,7 +29,7 @@ const ContactInfo = () => {
       <div className="w-full max-w-[1270px] px-5 lg:px-0">
         {/* Breadcrumb */}
         <nav aria-label="breadcrumb">
-          <ol className="flex space-x-2 text-gray-400 text-sm">
+          <ol className="flex space-x-2 text-gray-400 text-xs">
             <li>Home</li>
             <li>{">"}</li>
             <li className="font-medium text-black">Contact Information</li>
