@@ -86,10 +86,10 @@ const CartPage = () => {
       <div className="w-full max-w-[1270px] ">
         {/* breadcrumb */}
         <nav aria-label="breadcrumb">
-          <ol className="flex space-x-2 text-gray-600 text-xs">
+          <ol className="flex space-x-2 text-gray-400 text-xs">
             <li>Home</li>
             <li>{">"}</li>
-            <li className="font-semibold text-black">Cart</li>
+            <li className="font-medium text-black">Cart</li>
           </ol>
         </nav>
         {/* main cart */}
