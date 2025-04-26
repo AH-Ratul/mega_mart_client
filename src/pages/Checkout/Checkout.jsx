@@ -8,6 +8,8 @@ import {
 import Loader from "../../components/Shared/Loader/Loader";
 import { useDispatch, useSelector } from "react-redux";
 import { clearCart } from "../../redux/slices/cartSlice";
+import card from "../../../public/card.png";
+import cash from "../../../public/cash.png";
 
 const Checkout = () => {
   const location = useLocation();
@@ -23,6 +25,7 @@ const Checkout = () => {
   const {
     register,
     handleSubmit,
+    watch,
     reset,
     formState: { errors },
   } = useForm();
@@ -76,21 +79,12 @@ const Checkout = () => {
   const total = itemsTotal + shippingCharge;
 
   // handle checkout data to submit
-  const onSubmitOrder = () => {
-    handleSubmit((formData) => {
-      const orderData = {
-        ...formData,
-        items,
-        orderSummary: {
-          itemsTotal,
-          shippingCharge,
-          total,
-        },
-      };
-
-      console.log("order", orderData);
-      reset();
-    })();
+  const onSubmitOrder = (data) => {
+    console.log("order", {
+      address: user.addresses,
+      items,
+      paymentMethod: data.paymentMethod,
+    });
   };
 
   if (!cartData) {
@@ -102,7 +96,7 @@ const Checkout = () => {
       <div className="w-full max-w-[1270px] ">
         {/* Breadcrumb */}
         <nav aria-label="breadcrumb">
-          <ol className="flex space-x-2 text-gray-400 text-sm">
+          <ol className="flex space-x-2 text-gray-400 text-xs">
             <li>Home</li>
             <li>{">"}</li>
             <li className="font-medium text-black">Checkout</li>
@@ -110,7 +104,7 @@ const Checkout = () => {
         </nav>
 
         {/* main content */}
-        <div className="flex flex-col lg:flex-row gap-4 lg:gap-12  justify-center mt-5">
+        <div className="flex flex-col md:flex-row gap-4 lg:gap-12  justify-center mt-5">
           <div className="w-full flex flex-col">
             {/* Shipping address */}
             <section className="bg-white mx-2 xl:mx-0">
@@ -119,7 +113,7 @@ const Checkout = () => {
               </p>
 
               {user.addresses.map((address) => (
-                <div className="pl-3 mt-3 py-2 border border-dashed border-l-primary rounded text-sm flex flex-col gap-1">
+                <div className="p-3 mt-3 border-2 border-dashed border-l-primary rounded text-sm flex flex-col gap-1">
                   <div className="flex items-center gap-5">
                     <p>{address.fullname}</p>
                     <p>+880 {address.phone}</p>
@@ -132,7 +126,7 @@ const Checkout = () => {
             </section>
 
             {/* selected items */}
-            <section className="bg-white lg:mt-5 mb-5 p- mx-2 xl:mx-0 border-t pt-4">
+            <section className="bg-white mt-6 mb-10 mx-2 xl:mx-0 border-t pt-4">
               {isLoading && <Loader size="30px" />}
               {items?.map((item) => (
                 <div key={item._id} className="flex pt-3 pb-3 border-b">
@@ -156,18 +150,72 @@ const Checkout = () => {
             </section>
 
             {/* payment methods */}
-            <section>
-              <h1 className="font-bold tracking-wide">Payment Methods</h1>
+            <section className="mt-6">
+              <h1 className="font-bold text-lg tracking-wide mb-4">
+                Payment Methods
+              </h1>
+
+              <div className="flex flex-col gap-4">
+                {/* Card Option */}
+                <label className="flex items-center gap-4 cursor-pointer">
+                  <input
+                    type="radio"
+                    value="card"
+                    {...register("paymentMethod", {
+                      required: "Please select a payment method",
+                    })}
+                    className="peer hidden"
+                  />
+
+                  <div className="w-5 h-5 rounded-full border-2 border-gray-500 flex items-center justify-center peer-checked:border-gray-900 peer-checked:border-[6px] transition">
+                    <div className="w-2.5 h-2.5 bg-gray-900 rounded-full opacity-0 peer-checked:opacity-100 transition-all duration-300" />
+                  </div>
+
+                  <span className="text-gray-700 font-medium flex items-center gap-5">
+                    {" "}
+                    <img src={card} alt="" className="h-8" />
+                    Card
+                  </span>
+                </label>
+
+                {/* Cash Option */}
+                <label className="flex items-center gap-4 cursor-pointer">
+                  <input
+                    type="radio"
+                    value="cash"
+                    {...register("paymentMethod", {
+                      required: "Please select a payment method",
+                    })}
+                    className="peer hidden"
+                  />
+
+                  <div className="w-5 h-5 rounded-full border-2 border-gray-500 flex items-center justify-center peer-checked:border-gray-900 peer-checked:border-[6px] transition">
+                    <div className="w-2.5 h-2.5 bg-gray-900 rounded-full opacity-0 peer-checked:opacity-100 transition-all duration-150" />
+                  </div>
+
+                  <span className="text-gray-700 font-medium flex items-center gap-5">
+                    {" "}
+                    <img src={cash} alt="" className="h-9" />
+                    Cash on Delivary
+                  </span>
+                </label>
+              </div>
+
+              {errors.paymentMethod && (
+                <p className="text-red-500 text-sm mt-2">
+                  {errors.paymentMethod.message}
+                </p>
+              )}
             </section>
           </div>
 
           {/* Order Summary */}
-          <div className="xl:w-[500px] mx-2 xl:mx-0 h-fit">
+          <div className="md:w-80 xl:w-[500px] mx-2 xl:mx-0 h-fit mt-10 md:mt-0">
             <h1 className="font-medium mb-4">Order Summary</h1>
-            <section className="flex items-center justify-end">
+            <section className="flex items-center justify-start">
               <input
                 type="text"
-                className="border text-sm py-2 ps-4 w-80 outline-none rounded focus:border-black"
+                className="border text-sm py-2 ps-4 w-full md:w-44 xl:w-80 outline-none rounded focus:border-black"
                 placeholder="Coupon Code"
               />
               <button className="py-2 px-5 ml-3 font-semibold border border-black/50 hover:outline hover:outline-1 text-sm rounded-full">
@@ -194,7 +242,7 @@ const Checkout = () => {
                 </p>
               </div>
               <button
-                onClick={onSubmitOrder}
+                onClick={handleSubmit(onSubmitOrder)}
                 className="w-full bg-primary hover:bg-opacity-95 py-2 rounded-sm text-white mt-4"
               >
                 Submit Order
