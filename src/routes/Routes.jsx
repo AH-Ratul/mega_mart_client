@@ -17,6 +17,7 @@ const ProductDetails = lazy(() => import("../pages/ProductDetails/ProductDetails
 const CartPage = lazy(() => import("../pages/Cart/CartPage"));
 const Checkout = lazy(() => import("../pages/Checkout/Checkout"));
 const ContactInfo = lazy(() => import("../pages/Contact_Info/ContactInfo"));
+const SuccessPage = lazy(() => import("../pages/SuccessPage/SuccessPage"))
 
 //Suspense wrapper 
 const loadable =(Component) => (
@@ -85,6 +86,14 @@ export const router = createBrowserRouter([
             {loadable(Checkout)}
           </PrivateRoute>
         ),
+      },
+      {
+        path: "/order/success/:transactionId",
+        element: (
+          <PrivateRoute>
+            {loadable(SuccessPage)}
+          </PrivateRoute>
+          )
       }
     ],
   },
