@@ -1,15 +1,12 @@
 import React, { useEffect, useRef } from "react";
-import { useForm } from "react-hook-form";
 import { useLocation } from "react-router-dom";
 import {
   useAddedToCartMutation,
   useGetCartQuery,
 } from "../../redux/api/cart_api";
-import Loader from "../../components/Shared/Loader/Loader";
 import { useDispatch, useSelector } from "react-redux";
 import { clearCart } from "../../redux/slices/cartSlice";
-import card from "../../../public/card.png";
-import cash from "../../../public/cash.png";
+import { useInitiateOrderMutation } from "../../redux/api/order_api";
 
 const Checkout = () => {
   const location = useLocation();
@@ -18,17 +15,10 @@ const Checkout = () => {
   const { user } = useSelector((state) => state.auth);
 
   const [addedToCart] = useAddedToCartMutation();
+  const [initiateOrder, { isLoading }] = useInitiateOrderMutation();
 
   // ref to block double sync
   const hasSynced = useRef(false);
-
-  const {
-    register,
-    handleSubmit,
-    watch,
-    reset,
-    formState: { errors },
-  } = useForm();
 
   // Sync guest cart to DB after login
   useEffect(() => {
@@ -50,7 +40,7 @@ const Checkout = () => {
   }, [user, localCartItem, addedToCart, dispatch]);
 
   const data = location.state;
-  const { data: cartData, isLoading } = useGetCartQuery(user?._id);
+  const { data: cartData } = useGetCartQuery(user?._id);
 
   const items = data
     ? [
@@ -79,12 +69,28 @@ const Checkout = () => {
   const total = itemsTotal + shippingCharge;
 
   // handle checkout data to submit
-  const onSubmitOrder = (data) => {
-    console.log("order", {
-      address: user.addresses,
-      items,
-      paymentMethod: data.paymentMethod,
-    });
+  const onSubmitOrder = async () => {
+    try {
+      const orderData = {
+        user: user._id,
+        products: items.map((item) => ({
+          productId: item.productId,
+          quantity: item.quantity,
+          price: item.price,
+        })),
+        totalPrice: total,
+        transactionId: `TXN-${Date.now()}`,
+        status: "PENDING",
+      };
+
+      const res = await initiateOrder(orderData).unwrap();
+
+      if (res.redirectUrl) {
+        window.location.href = res.redirectUrl;
+      }
+    } catch (error) {
+      console.error("Payment initiation failed", error);
+    }
   };
 
   if (!cartData) {
@@ -127,7 +133,6 @@ const Checkout = () => {
 
             {/* selected items */}
             <section className="bg-white mt-6 mb-10 mx-2 xl:mx-0 border-t pt-4">
-              {isLoading && <Loader size="30px" />}
               {items?.map((item) => (
                 <div key={item._id} className="flex pt-3 pb-3 border-b">
                   <img
@@ -147,65 +152,6 @@ const Checkout = () => {
                   </div>
                 </div>
               ))}
-            </section>
-
-            {/* payment methods */}
-            <section className="mt-6">
-              <h1 className="font-bold text-lg tracking-wide mb-4">
-                Payment Methods
-              </h1>
-
-              <div className="flex flex-col gap-4">
-                {/* Card Option */}
-                <label className="flex items-center gap-4 cursor-pointer">
-                  <input
-                    type="radio"
-                    value="card"
-                    {...register("paymentMethod", {
-                      required: "Please select a payment method",
-                    })}
-                    className="peer hidden"
-                  />
-
-                  <div className="w-5 h-5 rounded-full border-2 border-gray-500 flex items-center justify-center peer-checked:border-gray-900 peer-checked:border-[6px] transition">
-                    <div className="w-2.5 h-2.5 bg-gray-900 rounded-full opacity-0 peer-checked:opacity-100 transition-all duration-300" />
-                  </div>
-
-                  <span className="text-gray-700 font-medium flex items-center gap-5">
-                    {" "}
-                    <img src={card} alt="" className="h-8" />
-                    Card
-                  </span>
-                </label>
-
-                {/* Cash Option */}
-                <label className="flex items-center gap-4 cursor-pointer">
-                  <input
-                    type="radio"
-                    value="cash"
-                    {...register("paymentMethod", {
-                      required: "Please select a payment method",
-                    })}
-                    className="peer hidden"
-                  />
-
-                  <div className="w-5 h-5 rounded-full border-2 border-gray-500 flex items-center justify-center peer-checked:border-gray-900 peer-checked:border-[6px] transition">
-                    <div className="w-2.5 h-2.5 bg-gray-900 rounded-full opacity-0 peer-checked:opacity-100 transition-all duration-150" />
-                  </div>
-
-                  <span className="text-gray-700 font-medium flex items-center gap-5">
-                    {" "}
-                    <img src={cash} alt="" className="h-9" />
-                    Cash on Delivary
-                  </span>
-                </label>
-              </div>
-
-              {errors.paymentMethod && (
-                <p className="text-red-500 text-sm mt-2">
-                  {errors.paymentMethod.message}
-                </p>
-              )}
             </section>
           </div>
 
@@ -242,10 +188,10 @@ const Checkout = () => {
                 </p>
               </div>
               <button
-                onClick={handleSubmit(onSubmitOrder)}
+                onClick={onSubmitOrder}
                 className="w-full bg-primary hover:bg-opacity-95 py-2 rounded-sm text-white mt-4"
               >
-                Submit Order
+                {isLoading ? "Processing..." : "Place Order"}
               </button>
             </section>
           </div>
