@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import Loader from "../Shared/Loader/Loader";
 import { useAddedToCartMutation } from "../../redux/api/cart_api";
 import { handleCartToAddedGlobal } from "../../utils/cartUtils";
+import CustomToast from "../../hooks/CustomToast";
 
 const Products = () => {
   const { cart2 } = allIcons;
@@ -19,7 +20,14 @@ const Products = () => {
   const [addedToCart] = useAddedToCartMutation();
 
   const handleClick = (product) => {
-    handleCartToAddedGlobal({ product, user, addedToCart, dispatch });
+    if (product.quantity === 0) {
+      CustomToast({
+        type: "error",
+        message: "Product is Out of Stock, Can't Purchase",
+      });
+    } else {
+      handleCartToAddedGlobal({ product, user, addedToCart, dispatch });
+    }
   };
 
   if (isLoading && loading) {
@@ -84,7 +92,6 @@ const Products = () => {
                       &#2547; {product.price}
                     </span>
                   )}
-                  <span className="text-xs text-gray1">0 sold</span>
                 </div>
                 <button
                   onClick={() => handleClick(product)}
@@ -99,6 +106,8 @@ const Products = () => {
                 <p className="text-xs text-primary">
                   Only {product.quantity} left
                 </p>
+              ) : product.availability === "Out of Stock" ? (
+                <p className="text-xs text-red-500">Out of Stock</p>
               ) : (
                 ""
               )}
