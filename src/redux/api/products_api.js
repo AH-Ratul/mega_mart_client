@@ -16,9 +16,21 @@ export const productApi = createApi({
       }),
     }),
     getProductById: builder.query({
-      query: (id) => `/products/getProducts/${id}`,
+      query: (id) => `products/getProducts/${id}`,
+    }),
+    searchProducts: builder.query({
+      query: (keyword) => {
+        return {
+          url: "products/search",
+          params: { keyword },
+        };
+      },
     }),
   }),
 });
 
-export const { useGetProductsQuery, useGetProductByIdQuery } = productApi;
+export const {
+  useGetProductsQuery,
+  useGetProductByIdQuery,
+  useSearchProductsQuery,
+} = productApi;
