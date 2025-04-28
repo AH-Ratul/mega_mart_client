@@ -5,9 +5,10 @@ import MenuSideBar from "../Shared/Menubar/MenuSideBar";
 import useToggle from "../../hooks/useToggle";
 import CategorySideBar from "../Shared/Category/CategorySideBar";
 import { Link } from "react-router-dom";
+import SearchBox from "../SearchBox/SearchBox";
 
 const HeaderSm = () => {
-  const { home, cart, search, list, menu } = allIcons;
+  const { home, cart, list, menu } = allIcons;
   const [toggleStates, toggle] = useToggle({
     category: false,
     menu: false,
@@ -18,20 +19,16 @@ const HeaderSm = () => {
     <header className="lg:hidden">
       {/* top header */}
       <div className="flex justify-center items-center gap-3 px-3 py-2 bg-[#c82233e6] fixed z-10 top-0 w-screen">
+        {/* LOGO */}
         <div className="w-[55%]">
           <a href="/">
             <img src={logo} alt="logo" />
           </a>
         </div>
-        <div className="flex items-center w-screen relative">
-          <input
-            type="text"
-            className=" text-gray1 rounded-2xl p-2 ps-3 text-sm w-full outline-none"
-            placeholder="Search"
-          />
-          <button className="bg-black/95 hover:bg-black/70 py-[6.5px] px-2 text-white/90 text-xl rounded-full absolute right-0 mr-[1px]">
-            {search}
-          </button>
+
+        {/* SEARCH */}
+        <div className="relative w-screen">
+          <SearchBox />
         </div>
       </div>
 
@@ -44,6 +41,7 @@ const HeaderSm = () => {
           {home}
           <span className="text-xs">Home</span>
         </a>
+
         {/* category */}
         <div>
           <button
@@ -58,6 +56,7 @@ const HeaderSm = () => {
             close={() => toggle("category")}
           />
         </div>
+
         {/* cart */}
         <div>
           <Link
@@ -68,6 +67,7 @@ const HeaderSm = () => {
             <span className="text-xs">Cart</span>
           </Link>
         </div>
+
         {/* menu */}
         <div>
           <button
