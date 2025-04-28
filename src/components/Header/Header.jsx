@@ -4,9 +4,10 @@ import { allIcons } from "../../data/all-icons";
 import { Link } from "react-router-dom";
 import DropOnHover from "../Shared/DropDown/DropOnHover";
 import CategoryOnHover from "../Shared/DropDown/CategoryOnHover";
+import SearchBox from "../SearchBox/SearchBox";
 
 const Header = () => {
-  const { account, search, cart3 } = allIcons;
+  const { account, cart3 } = allIcons;
 
   return (
     <header className="hidden fixed w-screen z-10 top-0 lg:flex justify-center items-center bg-[#c82233e6]  border-b-cardinal border-b backdrop-blur-sm">
@@ -27,18 +28,8 @@ const Header = () => {
           </div>
 
           {/* SEARCH */}
-          <div className="flex w-[360px] rounded-md relative items-center">
-            <input
-              type="text"
-              className="text-gray1 rounded-2xl  py-[9px] ps-3 w-full outline-none text-sm"
-              placeholder="Search"
-            />
-            <button
-              onClick={() => console.log("click search")}
-              className="bg-black/95 hover:bg-black/70 px-2 py-[6.5px] me-[2px] text-white/90 text-xl rounded-full absolute right-0"
-            >
-              {search}
-            </button>
+          <div className="relative">
+            <SearchBox />
           </div>
 
           {/* ACCOUNT & CART */}
