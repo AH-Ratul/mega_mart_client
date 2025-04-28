@@ -6,7 +6,8 @@ import Loader from "../../components/Shared/Loader/Loader";
 import Products from "../../components/Products/Products";
 import { decrement, increment } from "../../redux/slices/quantitySlice";
 import CustomToast from "../../hooks/CustomToast";
-import { addToCart } from "../../redux/slices/cartSlice";
+import { handleCartToAddedGlobal } from "../../utils/cartUtils";
+import { useAddedToCartMutation } from "../../redux/api/cart_api";
 
 const ProductDetails = () => {
   const { id } = useParams();
@@ -15,15 +16,23 @@ const ProductDetails = () => {
   const { _id, productName, productImages, price, discountPrice, description } =
     productData?.data || [];
 
-  const quantity = useSelector((state) => state.quantity.value);
   const dispatch = useDispatch();
+  const quantity = useSelector((state) => state.quantity.value);
+  const { user } = useSelector((state) => state.auth);
 
   const navigate = useNavigate();
 
-  const handleAddToCart = (product) => {
-    dispatch(addToCart(product));
+  const [addedToCart] = useAddedToCartMutation();
 
-    CustomToast({ type: "success", message: "Added to cart" });
+  const handleAddToCart = (product) => {
+    if (product.quantity === 0) {
+      CustomToast({
+        type: "error",
+        message: "Product is Out of Stock, Can't Purchase",
+      });
+    } else {
+      handleCartToAddedGlobal({ product, user, addedToCart, dispatch });
+    }
   };
 
   const handleBuy = () => {
