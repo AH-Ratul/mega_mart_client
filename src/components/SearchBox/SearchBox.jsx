@@ -87,7 +87,13 @@ const SearchBox = () => {
               ".
             </p>
           ) : (
-            <ul>
+            <ul
+              className={`${
+                products
+                  ? "overflow-scroll overflow-x-hidden"
+                  : "overflow-hidden"
+              } h-96`}
+            >
               {products.map((product) => (
                 <li
                   key={product._id}
