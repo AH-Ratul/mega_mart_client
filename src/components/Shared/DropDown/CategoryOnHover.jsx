@@ -28,12 +28,6 @@ const CategoryOnHover = () => {
         <Link className="hover:text-primary hover:bg-gray-100 px-7 py-2 transition duration-300 ease-in-out">
           TV & Home Applience
         </Link>
-        <Link className="hover:text-primary hover:bg-gray-100 px-7 py-2 transition duration-300 ease-in-out">
-          Gift's Items
-        </Link>
-        <Link className="hover:text-primary hover:bg-gray-100 px-7 py-2 transition duration-300 ease-in-out">
-          Grocery
-        </Link>
       </div>
     </div>
   );
