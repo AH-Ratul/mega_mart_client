@@ -44,7 +44,17 @@ const ProductDetails = () => {
       discountPrice,
       quantity,
     };
-    navigate(`/checkout`, { state: item });
+
+    //navigate(`/checkout`, { state: item });
+
+    if (user.addresses.length === 0) {
+      navigate("/contact_information", {
+        state: { redirectTo: "/checkout", item: item },
+        
+      });
+    } else {
+      navigate("/checkout", { state: item });
+    }
   };
 
   // Scrolls to the top when navigating to a new product detail page.
