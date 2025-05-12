@@ -88,6 +88,13 @@ export const userApi = createApi({
         method: "GET",
       }),
     }),
+    getUser: builder.query({
+      query: (id) => ({
+        url: `/users/get/${id}`,
+        method: "GET",
+      }),
+      providesTags: ["auth"],
+    }),
   }),
 });
 
