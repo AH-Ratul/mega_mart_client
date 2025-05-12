@@ -14,6 +14,7 @@ export const contactApi = createApi({
         method: "POST",
         body: data,
       }),
+      invalidatesTags: ["auth"],
     }),
   }),
 });
