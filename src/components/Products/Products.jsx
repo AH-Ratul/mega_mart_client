@@ -11,13 +11,18 @@ import CustomToast from "../../hooks/CustomToast";
 const Products = () => {
   const { cart2 } = allIcons;
   const dispatch = useDispatch();
-  const { data: productsData, isLoading, error } = useGetProductsQuery();
   const { loading } = useSelector((state) => state.products);
-  const products = productsData?.data || [];
   const { user } = useSelector((state) => state.auth);
 
   // cart added to database
   const [addedToCart] = useAddedToCartMutation();
+  const {
+    data: productsData,
+    isLoading,
+    error,
+  } = useGetProductsQuery(undefined, { refetchOnMountOrArgChange: true });
+
+  const products = productsData?.data || [];
 
   const handleClick = (product) => {
     if (product.quantity === 0) {
