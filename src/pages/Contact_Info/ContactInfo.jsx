@@ -19,21 +19,23 @@ const ContactInfo = () => {
     formState: { errors },
   } = useForm();
 
-  console.log("loc", location);
-
   const onSubmit = async (data) => {
-    await addContact({ userId: user._id, ...data });
-    const redirectTo = location.state.redirectTo || "/";
-    const item = location.state.item;
-    navigate(redirectTo, { state: item });
+    try {
+      await addContact({ userId: user._id, ...data });
 
-    reset();
+      const redirectTo = location.state.redirectTo || "/";
+      const item = location.state.item;
+      navigate(redirectTo, { state: item });
+
+      reset();
+    } catch (error) {
+      console.error(error);
+    }
   };
 
-  if(isLoading) {
-    return <Modal modal={<Loader size="30px" />} />
+  if (isLoading) {
+    return <Modal modal={<Loader size="30px" />} />;
   }
-
 
   return (
     <div className="mt-20 pb-24 lg:pb-10 mx-auto w-full flex flex-col  items-center h-full">
@@ -168,7 +170,9 @@ const ContactInfo = () => {
             <div>
               <input
                 type="submit"
-                value={isLoading ? "Processing..." : "Continue to Payment"}
+                value={
+                  isLoading ? "Processing to Payment..." : "Continue to Payment"
+                }
                 disabled={isLoading}
                 className="w-[370px] sm:w-[400px] bg-primary rounded-full py-3 text-white cursor-pointer"
               />
