@@ -7,15 +7,23 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { clearCart } from "../../redux/slices/cartSlice";
 import { useInitiateOrderMutation } from "../../redux/api/order_api";
+import { useGetMeQuery } from "../../redux/api/users_api";
+import { setUser } from "../../redux/slices/authSlice";
 
 const Checkout = () => {
   const location = useLocation();
   const dispatch = useDispatch();
   const localCartItem = useSelector((state) => state.cart.cartItems || []);
-  const { user } = useSelector((state) => state.auth);
+
+  const { data: userInfo } = useGetMeQuery(null, {
+    refetchOnMountOrArgChange: true,
+  });
 
   const [addedToCart] = useAddedToCartMutation();
   const [initiateOrder, { isLoading }] = useInitiateOrderMutation();
+
+  const user = userInfo?.data;
+  dispatch(setUser(user));
 
   // ref to block double sync
   const hasSynced = useRef(false);
@@ -118,7 +126,7 @@ const Checkout = () => {
                 Shipping Address
               </p>
 
-              {user.addresses.map((address) => (
+              {user?.addresses?.map((address) => (
                 <div className="p-3 mt-3 border-2 border-dashed border-l-primary rounded text-sm flex flex-col gap-1">
                   <div className="flex items-center gap-5">
                     <p>{address.fullname}</p>
