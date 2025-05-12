@@ -3,12 +3,14 @@ import { useForm } from "react-hook-form";
 import { useAddContactMutation } from "../../redux/api/contact_api";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import Modal from "../../components/Shared/Modal/Modal";
+import Loader from "../../components/Shared/Loader/Loader";
 
 const ContactInfo = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const { user } = useSelector((state) => state.auth);
-  const [addContact, isLoading] = useAddContactMutation();
+  const [addContact, { isLoading }] = useAddContactMutation();
 
   const {
     register,
@@ -17,13 +19,22 @@ const ContactInfo = () => {
     formState: { errors },
   } = useForm();
 
+  console.log("loc", location);
+
   const onSubmit = async (data) => {
     await addContact({ userId: user._id, ...data });
     const redirectTo = location.state.redirectTo || "/";
-    navigate(redirectTo);
+    const item = location.state.item;
+    navigate(redirectTo, { state: item });
 
     reset();
   };
+
+  if(isLoading) {
+    return <Modal modal={<Loader size="30px" />} />
+  }
+
+
   return (
     <div className="mt-20 pb-24 lg:pb-10 mx-auto w-full flex flex-col  items-center h-full">
       <div className="w-full max-w-[1270px] px-5 lg:px-0">
@@ -157,7 +168,8 @@ const ContactInfo = () => {
             <div>
               <input
                 type="submit"
-                value="Continue to Payment"
+                value={isLoading ? "Processing..." : "Continue to Payment"}
+                disabled={isLoading}
                 className="w-[370px] sm:w-[400px] bg-primary rounded-full py-3 text-white cursor-pointer"
               />
               <p className="text-[#0A8800] text-sm ml-3 mt-5 font-semibold">
