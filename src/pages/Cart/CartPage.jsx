@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { redirect, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Products from "../../components/Products/Products";
 import { useDispatch, useSelector } from "react-redux";
 import { allIcons } from "../../data/all-icons";
@@ -20,23 +20,25 @@ const CartPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const localCartItem = useSelector((state) => state.cart.cartItems || []);
-  const { user } = useSelector((state) => state.auth);
+  const { user, loading } = useSelector((state) => state.auth);
 
   // for increase quantity
   const [addedToCart] = useAddedToCartMutation();
 
-  const handleClick = (product) => {
-    handleCartToAddedGlobal({ user, product, addedToCart, dispatch });
-  };
-
   // get cart data
-  const { data: dbCartData = [], isLoading } = useGetCartQuery(user?._id);
+  const { data: dbCartData = [], isLoading } = useGetCartQuery(user?._id, {
+    refetchOnMountOrArgChange: true,
+  });
 
   const cartData = (user ? dbCartData : localCartItem) || [];
 
   // remove cart data & decrease quantity
   const [removeItem] = useRemoveitemMutation();
   const [decreaseQuantity] = useDecreaseQuantityMutation();
+
+  const handleClick = (product) => {
+    handleCartToAddedGlobal({ user, product, addedToCart, dispatch });
+  };
 
   const handleRemove = async (userId, productId) => {
     if (!user) return dispatch(removeFromCart(productId));
@@ -61,7 +63,7 @@ const CartPage = () => {
     }, 0);
   };
 
-  const handleCheckout = () => {
+  const handleCheckout = async () => {
     if (cartData.length === 0) {
       CustomToast({
         type: "error",
@@ -77,7 +79,7 @@ const CartPage = () => {
     }
   };
 
-  if (isLoading) {
+  if (isLoading || loading) {
     return <Modal modal={<Loader size="40px" />} />;
   }
 
