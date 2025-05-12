@@ -7,7 +7,9 @@ import { useEffect } from "react";
 
 const AuthProvider = ({ children }) => {
   const dispatch = useDispatch();
-  const { data: userData, isLoading } = useGetMeQuery();
+  const { data: userData, isLoading } = useGetMeQuery(null, {
+    refetchOnMountOrArgChange: true,
+  });
   const { loading } = useSelector((state) => state.auth);
 
   useEffect(() => {
