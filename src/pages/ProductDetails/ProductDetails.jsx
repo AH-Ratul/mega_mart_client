@@ -11,18 +11,21 @@ import { useAddedToCartMutation } from "../../redux/api/cart_api";
 
 const ProductDetails = () => {
   const { id } = useParams();
-  const { data: productData, isLoading, error } = useGetProductByIdQuery(id);
-  const { loading } = useSelector((state) => state.products);
-  const { _id, productName, productImages, price, discountPrice, description } =
-    productData?.data || [];
-
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const quantity = useSelector((state) => state.quantity.value);
   const { user } = useSelector((state) => state.auth);
-
-  const navigate = useNavigate();
+  const { loading } = useSelector((state) => state.products);
 
   const [addedToCart] = useAddedToCartMutation();
+  const {
+    data: productData,
+    isLoading,
+    error,
+  } = useGetProductByIdQuery(id, { refetchOnMountOrArgChange: true });
+
+  const { _id, productName, productImages, price, discountPrice, description } =
+    productData?.data || [];
 
   const handleAddToCart = (product) => {
     if (product.quantity === 0) {
@@ -45,12 +48,9 @@ const ProductDetails = () => {
       quantity,
     };
 
-    //navigate(`/checkout`, { state: item });
-
-    if (user.addresses.length === 0) {
+    if (user?.addresses?.length === 0) {
       navigate("/contact_information", {
         state: { redirectTo: "/checkout", item: item },
-        
       });
     } else {
       navigate("/checkout", { state: item });
