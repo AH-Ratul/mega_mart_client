@@ -6,6 +6,7 @@ const cartSlice = createSlice({
   name: "cart",
   initialState: {
     cartItems: Array.isArray(storedCart) ? storedCart : [],
+    shippingInfo: {},
   },
   reducers: {
     addToCart: (state, action) => {
