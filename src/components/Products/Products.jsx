@@ -44,36 +44,44 @@ const Products = () => {
   }
 
   return (
-    <div>
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-2 mb-20 mt-2">
+    <div className="mt-4 mb-16">
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
         {products.map((product) => (
           <div
             key={product._id}
-            className="flex flex-col w-fit h-[360px] lg:p-2 sm:w-60 lg:shadow-sm lg:hover:shadow-md relative"
+            className="flex flex-col w-full bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300"
           >
-            {/* PRODUCT IMAGE */}
-            <div className="h-56 flex items-center justify-center overflow-hidden">
+            {/* Product Image */}
+            <div className="relative aspect-square overflow-hidden">
               <Link
                 to={`/details/${product._id}/${encodeURIComponent(
                   product.productName
                 )}`}
-                className="block"
               >
                 <img
                   src={product.productImages}
-                  alt="img"
+                  alt={product.productName}
                   className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
                 />
               </Link>
+              {product.quantity < 5 && product.quantity > 0 ? (
+                <span className="absolute top-2 left-2 bg-red-500 text-white text-xs font-medium px-2 py-1 rounded-full">
+                  Only {product.quantity} left
+                </span>
+              ) : product.availability === "Out of Stock" ? (
+                <span className="absolute top-2 left-2 bg-gray-600 text-white text-xs font-medium px-2 py-1 rounded-full">
+                  Out of Stock
+                </span>
+              ) : null}
             </div>
 
-            {/* DETAILS */}
-            <div className="w-full">
+            {/* Product Details */}
+            <div className="p-3 flex flex-col gap-1">
               <Link
                 to={`/details/${product._id}/${encodeURIComponent(
                   product.productName
                 )}`}
-                className="text-sm hover:text-primary transition duration-300"
+                className="text-sm font-medium text-gray-800 hover:text-primary transition-colors"
               >
                 {product.productName.length > 25
                   ? `${product.productName.slice(0, 23)}...`
@@ -81,41 +89,25 @@ const Products = () => {
               </Link>
 
               {/* Price & Cart Button */}
-              <div className="flex justify-between items-center mt-1 ">
-                <div className="flex items-center gap-1">
-                  {product.discountPrice ? (
-                    <>
-                      <p className="font-bold text-sm">
-                        &#2547; {product.discountPrice}
-                      </p>
-                      <span className="text-xs text-gray1 line-through hidden lg:block">
-                        &#2547; {product.price}
-                      </span>
-                    </>
-                  ) : (
-                    <span className="font-bold text-">
-                      &#2547; {product.price}
+              <div className="flex justify-between items-center">
+                <div className="flex items-center gap-2">
+                  <span className="text-sm font-semibold text-gray-800">
+                    ৳ {product.discountPrice || product.price}
+                  </span>
+                  {product.discountPrice && (
+                    <span className="text-xs text-gray-400 line-through">
+                      ৳ {product.price}
                     </span>
                   )}
                 </div>
                 <button
                   onClick={() => handleClick(product)}
-                  className="border border-d2 hover:border-primary hover:text-primary rounded-full py-1 px-2 text-lg transition duration-300"
+                  className="p-1.5 border border-gray-300 rounded-full text-gray-600 hover:border-primary hover:text-primary transition-colors"
+                  aria-label="Add to cart"
                 >
                   {cart2}
                 </button>
               </div>
-
-              {/* Quantity counts */}
-              {product.quantity < 5 && product.quantity > 0 ? (
-                <p className="text-xs text-primary">
-                  Only {product.quantity} left
-                </p>
-              ) : product.availability === "Out of Stock" ? (
-                <p className="text-xs text-red-500">Out of Stock</p>
-              ) : (
-                ""
-              )}
             </div>
           </div>
         ))}
