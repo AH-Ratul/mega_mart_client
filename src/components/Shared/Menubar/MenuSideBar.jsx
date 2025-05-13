@@ -28,45 +28,72 @@ const MenuSideBar = ({ isOpen, close }) => {
 
   return (
     <div>
+      {/* Sidebar */}
       <div
-        className={`fixed h-[100dvh] left-0 right-32 md:right-64 text-gray1 bg-white z-20 top-0 px-3 overflow-hidden inset-y-0 transform ${
-          isOpen ? "translate-x-0 shadow-2xl" : "-translate-x-full"
-        } transition-transform duration-500 ease-in-out`}
+        className={`fixed top-0 left-0 h-full w-64 bg-white z-20 transform ${
+          isOpen ? "translate-x-0 shadow-lg" : "-translate-x-full"
+        } transition-transform duration-300 ease-in-out lg:hidden`}
       >
-        <div className="flex justify-between items-center pl-4 mt-2">
-          <img src={logo} alt="logo" className="w-32 md:w-52 py-2" />
-          <span
+        {/* Header */}
+        <div className="flex items-center justify-between p-4 border-b border-gray-200">
+          <img src={logo} alt="MegaMart Logo" className="h-6 object-contain" />
+          <button
             onClick={close}
-            className="hover:text-primary text-black text-3xl"
+            className="text-gray-600 hover:text-primary text-2xl"
+            aria-label="Close menu"
           >
             {cross}
-          </span>
+          </button>
         </div>
-        <div className=" mt-4 pl-5 md:pl-6 flex flex-col gap-2 text-lg md:text-xl">
-          <Link to="/account" onClick={close} className="hover:text-primary">
+
+        {/* Navigation Links */}
+        <nav className="flex flex-col gap-3 p-4 text-base font-medium text-gray-800">
+          <Link
+            to="/account"
+            onClick={close}
+            className="py-2 hover:text-primary transition-colors"
+          >
             My Account
           </Link>
-          <Link className="hover:text-primary">My Oreders</Link>
-          <Link className="hover:text-primary">WishList</Link>
+          <Link
+            to="/orders"
+            onClick={close}
+            className="py-2 hover:text-primary transition-colors"
+          >
+            My Orders
+          </Link>
+          <Link
+            to="/wishlist"
+            onClick={close}
+            className="py-2 hover:text-primary transition-colors"
+          >
+            Wishlist
+          </Link>
           {user ? (
             <button
               onClick={handleLogout}
-              className="hover:text-primary text-start"
+              className="py-2 text-left hover:text-primary transition-colors"
             >
               Logout
             </button>
           ) : (
-            <Link to="/login" onClick={close} className="hover:text-primary">
+            <Link
+              to="/login"
+              onClick={close}
+              className="py-2 hover:text-primary transition-colors"
+            >
               Login
             </Link>
           )}
-        </div>
+        </nav>
       </div>
+
+      {/* Overlay */}
       <div
         onClick={close}
-        className={`fixed w-screen h-screen bg-gray-900 top-0 left-0 z-10 transform ${
+        className={`fixed inset-0 bg-gray-900 z-10 ${
           isOpen ? "opacity-30 visible" : "opacity-0 invisible"
-        } transistion-opacity duration-500 ease-in-out`}
+        } transition-opacity duration-300 ease-in-out lg:hidden`}
       ></div>
     </div>
   );
