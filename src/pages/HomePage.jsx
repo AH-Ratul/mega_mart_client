@@ -1,11 +1,14 @@
 import React from "react";
 import Products from "../components/Products/Products";
+import banner from "../../public/banner.png";
 
 const HomePage = () => {
   return (
     <main className="relative flex flex-col">
       <section className="lg:flex lg:items-center">
-        <div className="bg-[#DF1238] w-screen h-96 flex justify-center pt-14"></div>
+        <div className="bg-[#DF1238] w-screen h-fit flex justify-center pt-16">
+          <img src={banner} alt="banner" srcset="" className="w-full" />
+        </div>
       </section>
 
       <section className="mt-20 px-3 flex flex-col items-center w-full">
