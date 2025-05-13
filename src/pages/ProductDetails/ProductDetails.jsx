@@ -24,8 +24,15 @@ const ProductDetails = () => {
     error,
   } = useGetProductByIdQuery(id, { refetchOnMountOrArgChange: true });
 
-  const { _id, productName, productImages, price, discountPrice, description } =
-    productData?.data || [];
+  const {
+    _id,
+    productName,
+    productImages,
+    price,
+    discountPrice,
+    description,
+    category,
+  } = productData?.data || [];
 
   const handleAddToCart = (product) => {
     if (product.quantity === 0) {
@@ -72,101 +79,95 @@ const ProductDetails = () => {
 
   return (
     <>
-      <div className="mt-[53px] lg:mt-[75px] flex justify-center items-center mb-32">
-        <div className="flex flex-col lg:flex-row w-full max-w-7xl overflow-hidden">
+      <div className="mt-12 lg:mt-16 mb-20 max-w-7xl mx-auto px-4">
+        {/* Product Section */}
+        <div className="flex flex-col lg:flex-row gap-8 lg:gap-16">
           {/* Product Image */}
-          <div className="hidden lg:block w-20 h-20 border-2 border-black cursor-pointer mr-1">
-            <img
-              src={productImages}
-              alt={productName}
-              className="w-full h-full"
-            />
-          </div>
-          <div className="flex justify-center items-center w-full lg:w-1/2 h-auto lg:h-[550px] overflow-hidden">
-            <img
-              src={productImages}
-              alt={productName}
-              className="w-full h-full object-cover"
-            />
+          <div className="flex-1 flex justify-center">
+            <div className="w-full max-w-[450px] aspect-square overflow-hidden">
+              <img
+                src={productImages}
+                alt={productName}
+                className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+              />
+            </div>
           </div>
 
           {/* Product Details */}
-          <div className="flex flex-col justify-between mt-1 lg:mt-0 px-6 lg:w-1/2">
-            <div>
-              <h1 className="mb-1 text-xl">{productName}</h1>
-              <span className="bg-slate-200 px-1 py-[1px] text-sm font-medium tracking-wide rounded-md">
-                Brand: Walton
-              </span>
-              <div className="flex justify-start items-center gap-4 text-sm text-gray-500 mt-2 mb-4">
-                <span>0 sold</span>
-                <span className="flex items-center">
-                  ⭐⭐⭐⭐⭐ 4.3 Ratings
-                </span>
-              </div>
-              <p className="font-semibold text-xl mb-4 flex items-center gap-2">
-                {discountPrice ? (
-                  <>
-                    <span>&#2547; {discountPrice}</span>
-                    <span className="text-base text-gray1 line-through">
-                      &#2547; {price}
-                    </span>
-                  </>
-                ) : (
-                  <span className="">&#2547; {price}</span>
-                )}
-              </p>
-              <p className="text-sm text-pretty">{description}</p>
+          <div className="flex-1 flex flex-col gap-4 px-4 lg:px-0">
+            <h1 className="text-2xl font-bold text-gray-800">{productName}</h1>
+
+            <div className="flex items-center gap-3 text-sm text-gray-500">
+              <span className="flex items-center">⭐ 4.3 (Ratings)</span>
             </div>
 
+            <div className="flex items-center gap-3">
+              <span className="text-xl font-semibold text-gray-800">
+                ৳ {discountPrice || price}
+              </span>
+              {discountPrice && (
+                <span className="text-sm text-gray-400 line-through">
+                  ৳ {price}
+                </span>
+              )}
+            </div>
+
+            <p className="text-sm text-gray-600">Category: {category}</p>
+
             {/* Quantity Selector */}
-            <div className="flex items-center gap-4 w-fit mt-2 lg:mt-0">
-              <span className="text-gray-700">Quantity: </span>
-              <div className="flex items-center bg-gray-100">
+            <div className="flex items-center gap-2">
+              <span className="text-sm font-semibold text-gray-600">Qty:</span>
+              <div className="flex items-center border border-gray-300 rounded-lg overflow-hidden">
                 <button
                   onClick={() => dispatch(decrement())}
-                  className={`px-4 text-xl transition ${
-                    quantity === 1 ? "cursor-not-allowed" : "hover:bg-gray-200"
-                  } `}
                   disabled={quantity === 1}
+                  className="px-3 py-1.5 text-gray-600 text-lg font-medium bg-gray-50 hover:bg-gray-100 disabled:bg-gray-200 disabled:text-gray-400 disabled:cursor-not-allowed transition-colors"
+                  aria-label="Decrease quantity"
                 >
-                  -
+                  −
                 </button>
-                <span className="w-10 text-center py-[1px] text-lg bg-white">
+                <span
+                  className="w-10 text-center py-1.5 text-base font-semibold text-gray-800 bg-white"
+                  aria-live="polite"
+                >
                   {quantity}
                 </span>
                 <button
                   onClick={() => dispatch(increment())}
-                  className="px-4 text-xl hover:bg-gray-200"
+                  className="px-3 py-1.5 text-gray-600 text-lg font-medium bg-gray-50 hover:bg-gray-100 transition-colors"
+                  aria-label="Increase quantity"
                 >
                   +
                 </button>
               </div>
             </div>
 
-            {/* Add to Cart & Buy Button */}
-            <div className="flex items-center gap-5 pb-1">
+            {/* Buttons */}
+            <div className="flex gap-4 mt-4">
               <button
                 onClick={() => handleAddToCart(productData.data)}
-                className="mt-6 w-1/2 border border-black/70 py-3 rounded-lg transition-transform duration-300 hover:scale-105"
+                className="flex-1 py-2.5 border border-gray-700 rounded-lg text-gray-800 font-medium hover:bg-gray-50 transition-colors"
+                aria-label="Add to cart"
               >
                 Add to Cart
               </button>
               <button
                 onClick={handleBuy}
-                className="mt-6 w-1/2 bg-primary text-white py-3 rounded-lg transition-transform duration-300 hover:scale-105"
+                className="flex-1 py-2.5 bg-primary text-white rounded-lg font-medium hover:bg-primary-dark transition-colors"
+                aria-label="Buy now"
               >
                 Buy Now
               </button>
             </div>
           </div>
         </div>
-      </div>
 
-      {/* Familiar Items */}
-      <div className="flex flex-col items-center mx-2">
-        <div className="w-full flex flex-col max-w-[1270px]">
-          <h1 className="text-xl mb-4 ml-3">Explore your interests</h1>
-          <div className="flex justify-center">
+        {/* Familiar Items */}
+        <div className="mt-12 px-4">
+          <h2 className="text-xl font-semibold text-gray-800 mb-4">
+            Explore Similar Items
+          </h2>
+          <div className="w-full">
             <Products />
           </div>
         </div>
