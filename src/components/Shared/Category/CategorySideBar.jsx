@@ -5,54 +5,60 @@ import { Link } from "react-router-dom";
 const CategorySideBar = ({ isOpen, close }) => {
   const { cross } = allIcons;
 
+  const categories = [
+    "Mobile & Accessories",
+    "Electrical & Appliance",
+    "Home Decor & Lifestyle",
+    "Women's Fashion",
+    "Men's Fashion",
+    "Computers & Accessories",
+    "TV & Home Appliance",
+  ];
+
   return (
     <div>
+      {/* Sidebar */}
       <div
-        className={`fixed h-[100dvh]  left-0 right-32 md:right-64 text-gray1 bg-white z-20 top-0 overflow-hidden inset-y-0 transform ${
-          isOpen ? "translate-x-0 shadow-2xl" : "-translate-x-full"
-        } transition-transform duration-500 ease-in-out`}
+        className={`fixed top-0 left-0 h-full w-64 bg-white z-20 transform ${
+          isOpen ? "translate-x-0 shadow-lg" : "-translate-x-full"
+        } transition-transform duration-300 ease-in-out lg:hidden`}
       >
-        <div className="flex justify-between items-center">
-          <h1 className="text-2xl mt-4 ml-4 text-black flex items-center font-bold">
-            Categories
-          </h1>
-          <span
+        {/* Header */}
+        <div className="flex items-center justify-between p-4 border-b border-gray-200">
+          <h2 className="text-lg font-semibold text-gray-800">Categories</h2>
+          <button
             onClick={close}
-            className="hover:text-primary text-black text-3xl mr-3"
+            className="text-gray-600 hover:text-primary text-2xl"
+            aria-label="Close categories"
           >
             {cross}
-          </span>
+          </button>
         </div>
-        {/* category lists */}
-        <div className=" mt-9 flex flex-col text-sm md:text-base border border-r-0 border-b1 ">
-          <Link className="hover:text-primary border-b border-b1 pl-5 py-1">
-            Mobile & Accessories
-          </Link>
-          <Link className="hover:text-primary border-b border-b1 pl-5 py-1">
-            Electrical & Applience
-          </Link>
-          <Link className="hover:text-primary border-b border-b1 pl-5 py-1">
-            Home Decor & Life Style
-          </Link>
-          <Link className="hover:text-primary border-b border-b1 pl-5 py-1">
-            Women's Fashion
-          </Link>
-          <Link className="hover:text-primary border-b border-b1 pl-5 py-1">
-            Men's Fashion
-          </Link>
-          <Link className="hover:text-primary border-b border-b1 pl-5 py-1">
-            Computers & Accessories
-          </Link>
-          <Link className="hover:text-primary  pl-5 py-1">
-            TV & Home Applience
-          </Link>
-        </div>
+
+        {/* Category List */}
+        <nav className="flex flex-col p-4">
+          {categories.map((category, index) => (
+            <Link
+              key={index}
+              to={`/category/${category
+                .toLowerCase()
+                .replace(/ & /g, "-")
+                .replace(/\s+/g, "-")}`}
+              onClick={close}
+              className="py-2 px-3 text-sm font-medium text-gray-800 hover:text-primary hover:bg-gray-50 rounded-md transition-colors"
+            >
+              {category}
+            </Link>
+          ))}
+        </nav>
       </div>
+
+      {/* Overlay */}
       <div
         onClick={close}
-        className={`fixed w-screen h-screen bg-gray-900 top-0 left-0 z-10 transform ${
+        className={`fixed inset-0 bg-gray-900 z-10 ${
           isOpen ? "opacity-30 visible" : "opacity-0 invisible"
-        } transistion-opacity duration-500 ease-in-out`}
+        } transition-opacity duration-300 ease-in-out lg:hidden`}
       ></div>
     </div>
   );
