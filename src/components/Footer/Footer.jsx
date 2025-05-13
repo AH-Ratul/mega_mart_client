@@ -12,108 +12,188 @@ const Footer = () => {
   const { facebook, insta, X, youtube } = allIcons;
 
   return (
-    <footer className="hidden bg-eerieblack lg:flex flex-col justify-center items-center text-white mt-14 2xl:mt-72 pt-7 pb-3 w-full">
-      <div className="flex gap-20 xl:gap-32">
-        {/* INFO */}
-        <div>
-          <h1 className="mb-4 font-semibold">Company Info</h1>
-          <ul className="flex flex-col gap-1 text-sm text-white/70">
-            <li className="hover:text-white w-fit">
-              <Link>About MegaMart</Link>
-            </li>
-            <li className="hover:text-white w-fit">
-              <Link>Contact us</Link>
-            </li>
-            <li className="hover:text-white w-fit">
-              <Link>News center</Link>
-            </li>
-            <li className="hover:text-white w-fit">
-              <Link>Careers</Link>
-            </li>
-          </ul>
-        </div>
-
-        {/* Services */}
-        <div>
-          <h1 className="mb-4 font-semibold">Customer Service</h1>
-          <ul className="flex flex-col text-sm text-white/70 gap-1">
-            <li className="hover:text-white w-fit">
-              <Link>Return & Refund</Link>
-            </li>
-            <li className="hover:text-white w-fit">
-              <Link>Shipping Info</Link>
-            </li>
-            <li className="hover:text-white w-fit">
-              <Link>Policies & Rules</Link>
-            </li>
-            <li className="hover:text-white w-fit">
-              <Link>Report suspicious activity</Link>
-            </li>
-          </ul>
-        </div>
-
-        {/* HELP section */}
-        <div>
-          <h1 className="mb-4 font-semibold">Help</h1>
-          <ul className="flex flex-col text-sm text-white/70 gap-1">
-            <li className="hover:text-white w-fit">
-              <Link>Support center & FAQ</Link>
-            </li>
-            <li className="hover:text-white w-fit">
-              <Link>Safety Center</Link>
-            </li>
-            <li className="hover:text-white w-fit">
-              <Link>Product support</Link>
-            </li>
-            <li className="hover:text-white w-fit">
-              <Link>Sitemap</Link>
-            </li>
-          </ul>
-        </div>
-
-        {/* Social Media Links */}
-        <div>
-          <h1 className="mb-3 font-semibold">Connect with us</h1>
-          <div className="flex items-center gap-2 text-2xl">
-            <Link className="hover:bg-white/10 rounded-full p-2">{insta}</Link>
-            <Link className="hover:bg-white/10 rounded-full p-2">
-              {facebook}
-            </Link>
-            <Link className="hover:bg-white/10 rounded-full p-2">{X}</Link>
-            <Link className="hover:bg-white/10 rounded-full p-2">
-              {youtube}
-            </Link>
+    <footer className="bg-eerieblack text-white w-full pt-8 pb-20 lg:pb-4">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Footer Content */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          {/* Company Info */}
+          <div>
+            <h3 className="text-lg font-semibold text-white mb-3">Company</h3>
+            <ul className="space-y-2 text-sm text-gray-400">
+              <li>
+                <Link
+                  to="/about"
+                  className="hover:text-white transition-colors"
+                >
+                  About MegaMart
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/contact"
+                  className="hover:text-white transition-colors"
+                >
+                  Contact Us
+                </Link>
+              </li>
+              <li>
+                <Link to="/news" className="hover:text-white transition-colors">
+                  News Center
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/careers"
+                  className="hover:text-white transition-colors"
+                >
+                  Careers
+                </Link>
+              </li>
+            </ul>
           </div>
 
-          {/* Payment Methods */}
+          {/* Customer Service */}
           <div>
-            <p className="font-semibold text-base mt-4">We accept</p>
-            <div className=" mt-2 flex items-center gap-2">
-              <img src={visa} alt="visa" className="w-10" />
+            <h3 className="text-lg font-semibold text-white mb-3">
+              Customer Service
+            </h3>
+            <ul className="space-y-2 text-sm text-gray-400">
+              <li>
+                <Link
+                  to="/returns"
+                  className="hover:text-white transition-colors"
+                >
+                  Return & Refund
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/shipping"
+                  className="hover:text-white transition-colors"
+                >
+                  Shipping Info
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/policies"
+                  className="hover:text-white transition-colors"
+                >
+                  Policies & Rules
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/report"
+                  className="hover:text-white transition-colors"
+                >
+                  Report Suspicious Activity
+                </Link>
+              </li>
+            </ul>
+          </div>
 
-              <img src={ms} alt="ms" className="w-10" />
+          {/* Help */}
+          <div>
+            <h3 className="text-lg font-semibold text-white mb-3">Help</h3>
+            <ul className="space-y-2 text-sm text-gray-400">
+              <li>
+                <Link
+                  to="/support"
+                  className="hover:text-white transition-colors"
+                >
+                  Support Center & FAQ
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/safety"
+                  className="hover:text-white transition-colors"
+                >
+                  Safety Center
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/product-support"
+                  className="hover:text-white transition-colors"
+                >
+                  Product Support
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/sitemap"
+                  className="hover:text-white transition-colors"
+                >
+                  Sitemap
+                </Link>
+              </li>
+            </ul>
+          </div>
 
-              <img src={pay} alt="pay" className="w-10" />
+          {/* Connect & Payments */}
+          <div>
+            <h3 className="text-lg font-semibold text-white mb-3">
+              Connect with Us
+            </h3>
+            <div className="flex gap-2 mb-6">
+              <Link
+                to="/instagram"
+                className="p-2 rounded-full hover:bg-white/10 transition-colors"
+              >
+                {insta}
+              </Link>
+              <Link
+                to="/facebook"
+                className="p-2 rounded-full hover:bg-white/10 transition-colors"
+              >
+                {facebook}
+              </Link>
+              <Link
+                to="/x"
+                className="p-2 rounded-full hover:bg-white/10 transition-colors"
+              >
+                {X}
+              </Link>
+              <Link
+                to="/youtube"
+                className="p-2 rounded-full hover:bg-white/10 transition-colors"
+              >
+                {youtube}
+              </Link>
+            </div>
 
-              <img src={bkash} alt="bkash" className="w-10 bg-white rounded" />
-
-              <img src={rocket} alt="rocket" className="w-10 rounded" />
-
+            <h3 className="text-lg font-semibold text-white mb-3">We Accept</h3>
+            <div className="flex flex-wrap gap-2">
+              <img src={visa} alt="Visa" className="h-8 object-contain" />
+              <img src={ms} alt="Mastercard" className="h-8 object-contain" />
+              <img src={pay} alt="Pay" className="h-8 object-contain" />
+              <img
+                src={bkash}
+                alt="bKash"
+                className="h-8 object-contain bg-white rounded"
+              />
+              <img
+                src={rocket}
+                alt="Rocket"
+                className="h-8 object-contain rounded"
+              />
               <img
                 src={nagad}
-                alt="nagad"
-                className="w-10 bg-white py-1.5 px-1 rounded"
+                alt="Nagad"
+                className="h-8 object-contain bg-white rounded p-1"
               />
             </div>
           </div>
         </div>
-      </div>
 
-      {/* Copyright */}
-      <div className="border-t border-t-white/20 w-full flex items-center justify-center mt-12">
-        <p className="text-sm my-5 text-white/70">
-          Copyright &copy; MegaMart 2025 | All Right Reserved
-        </p>
+        {/* Copyright */}
+        <div className="border-t border-gray-700 mt-8 pt-4 text-center">
+          <p className="text-sm text-gray-400">
+            Copyright © MegaMart 2025 | All Rights Reserved
+          </p>
+        </div>
       </div>
     </footer>
   );
