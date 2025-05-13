@@ -16,40 +16,45 @@ const HeaderSm = () => {
   }); // custom hook to handle toggle
 
   return (
-    <header className="lg:hidden">
-      {/* top header */}
-      <div className="flex justify-center items-center gap-3 px-3 py-2 bg-[#c82233e6] fixed z-10 top-0 w-screen">
-        {/* LOGO */}
-        <div className="w-[55%]">
-          <a href="/">
-            <img src={logo} alt="logo" />
-          </a>
+    <header className="lg:hidden fixed top-0 w-screen z-20">
+      {/* Top Header */}
+      <div className="flex justify-center items-center gap-3 px-4 py-2 bg-[#c82233e6] shadow-md">
+        {/* Logo */}
+        <div className="flex-shrink-0 w-32">
+          <Link to="/">
+            <img
+              src={logo}
+              alt="MegaMart Logo"
+              className="h-8 object-contain"
+            />
+          </Link>
         </div>
 
-        {/* SEARCH */}
-        <div className="relative w-screen">
+        {/* Search */}
+        <div className="flex-1 w-screen">
           <SearchBox />
         </div>
       </div>
 
-      {/* bottom header */}
-      <section className="bg-gray-200 py-2 fixed bottom-0 w-[100dvw] z-20 flex justify-between items-center px-8 md:px-12">
-        <a
-          href="/"
-          className="text-primary text-2xl flex flex-col items-center"
+      {/* Bottom Navigation */}
+      <nav className="bg-white border-t border-gray-200 fixed bottom-0 w-full z-30 flex justify-around items-center py-2 shadow-lg">
+        <Link
+          to="/"
+          className="flex flex-col items-center text-gray-600 hover:text-primary transition-colors"
+          aria-label="Home"
         >
-          {home}
-          <span className="text-xs">Home</span>
-        </a>
+          <span className="text-2xl">{home}</span>
+          <span className="text-xs font-medium">Home</span>
+        </Link>
 
-        {/* category */}
         <div>
           <button
             onClick={() => toggle("category")}
-            className="text-gray1 text-2xl hover:text-secondary flex flex-col items-center"
+            className="flex flex-col items-center text-gray-600 hover:text-primary transition-colors"
+            aria-label="Categories"
           >
-            {list}
-            <span className="text-xs">Categories</span>
+            <span className="text-2xl">{list}</span>
+            <span className="text-xs font-medium">Categories</span>
           </button>
           <CategorySideBar
             isOpen={toggleStates.category}
@@ -57,32 +62,30 @@ const HeaderSm = () => {
           />
         </div>
 
-        {/* cart */}
-        <div>
-          <Link
-            to="/shopping_cart"
-            className="text-gray1 text-2xl hover:text-secondary flex flex-col items-center"
-          >
-            {cart}
-            <span className="text-xs">Cart</span>
-          </Link>
-        </div>
+        <Link
+          to="/shopping_cart"
+          className="flex flex-col items-center text-gray-600 hover:text-primary transition-colors"
+          aria-label="Cart"
+        >
+          <span className="text-2xl">{cart}</span>
+          <span className="text-xs font-medium">Cart</span>
+        </Link>
 
-        {/* menu */}
         <div>
           <button
             onClick={() => toggle("menu")}
-            className="text-gray1 text-2xl hover:text-secondary flex flex-col items-center"
+            className="flex flex-col items-center text-gray-600 hover:text-primary transition-colors"
+            aria-label="Menu"
           >
-            {menu}
-            <span className="text-xs">Menu</span>
+            <span className="text-2xl">{menu}</span>
+            <span className="text-xs font-medium">Menu</span>
           </button>
           <MenuSideBar
             isOpen={toggleStates.menu}
             close={() => toggle("menu")}
           />
         </div>
-      </section>
+      </nav>
     </header>
   );
 };
