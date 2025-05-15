@@ -84,7 +84,7 @@ const CartPage = () => {
   }
 
   return (
-    <div className="mt-16 px-4 flex flex-col items-center w-full">
+    <div className="mt-[70px] px-4 flex flex-col items-center w-full">
       <div className="w-full max-w-7xl">
         {/* Breadcrumb */}
         <nav aria-label="breadcrumb" className="mb-6">
