@@ -26,6 +26,14 @@ export const productApi = createApi({
         };
       },
     }),
+    getCategoryProducts: builder.query({
+      query: (categoryName) => {
+        return {
+          url: `products/category/${categoryName}`,
+          method: "GET",
+        };
+      },
+    }),
   }),
 });
 
@@ -33,4 +41,5 @@ export const {
   useGetProductsQuery,
   useGetProductByIdQuery,
   useSearchProductsQuery,
+  useGetCategoryProductsQuery,
 } = productApi;
