@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import {
   useAddedToCartMutation,
   useGetCartQuery,
@@ -106,19 +106,23 @@ const Checkout = () => {
   }
 
   return (
-    <div className="pt-20 pb-24 lg:pb-10 px-3 lg:px-0 mx-auto w-full flex flex-col  items-center h-full">
-      <div className="w-full max-w-[1270px] ">
+    <div className="mt-[70px] pb-24 lg:pb-10 px-3  w-full flex flex-col items-center h-full">
+      <div className="w-full max-w-7xl">
         {/* Breadcrumb */}
         <nav aria-label="breadcrumb">
-          <ol className="flex space-x-2 text-gray-400 text-xs">
-            <li>Home</li>
-            <li>{">"}</li>
+          <ol className="flex space-x-2 items-center text-gray-400 text-xs sm:text-sm">
+            <li>
+              <Link to="/" className="hover:text-primary transition-colors">
+                Home
+              </Link>
+            </li>
+            <li>&gt;</li>
             <li className="font-medium text-black">Checkout</li>
           </ol>
         </nav>
 
         {/* main content */}
-        <div className="flex flex-col md:flex-row gap-4 lg:gap-12  justify-center mt-5">
+        <div className="flex flex-col md:flex-row gap-4 lg:gap-10  justify-center mt-5">
           <div className="w-full flex flex-col">
             {/* Shipping address */}
             <section className="bg-white mx-2 xl:mx-0">
@@ -130,10 +134,14 @@ const Checkout = () => {
                 <div className="p-3 mt-3 border-2 border-dashed border-l-primary rounded text-sm flex flex-col gap-1">
                   <div className="flex items-center gap-5">
                     <p>{address.fullname}</p>
+
                     <p>+880 {address.phone}</p>
                   </div>
+
                   <p className="text-primary">{address.address}</p>
+
                   <p>{address.area}</p>
+
                   <p>{address.district}</p>
                 </div>
               ))}
@@ -148,8 +156,10 @@ const Checkout = () => {
                     alt="img"
                     className="w-24 h-24 bg-gray-500"
                   />
+
                   <div className="ml-5">
                     <p className="text-wrap">{item.productName}</p>
+
                     <div className="flex gap-8 mt-12 text-sm">
                       <p>
                         Price: <span>&#2547;</span> {item.price}
@@ -166,16 +176,19 @@ const Checkout = () => {
           {/* Order Summary */}
           <div className="md:w-80 xl:w-[500px] mx-2 xl:mx-0 h-fit mt-10 md:mt-0">
             <h1 className="font-medium mb-4">Order Summary</h1>
+
             <section className="flex items-center justify-start">
               <input
                 type="text"
                 className="border text-sm py-2 ps-4 w-full md:w-44 xl:w-80 outline-none rounded focus:border-black"
                 placeholder="Coupon Code"
               />
+
               <button className="py-2 px-5 ml-3 font-semibold border border-black/50 hover:outline hover:outline-1 text-sm rounded-full">
                 Apply
               </button>
             </section>
+
             <section className="mt-7 border-t">
               <div className="flex justify-between items-center mt-3 text-sm">
                 <p>Items Total</p>
@@ -183,18 +196,21 @@ const Checkout = () => {
                   <span>&#2547;</span> {itemsTotal}
                 </p>
               </div>
+
               <div className="flex justify-between items-center mt-3 text-sm">
                 <p>Shipping Charge</p>
                 <p>
                   <span>&#2547;</span> {shippingCharge}
                 </p>
               </div>
+
               <div className="flex justify-between items-center border-t mt-5 pt-3">
                 <p>Total</p>
                 <p className="text-lg">
                   <span>&#2547;</span> {total}
                 </p>
               </div>
+
               <button
                 onClick={onSubmitOrder}
                 className="w-full bg-primary hover:bg-opacity-95 py-2 rounded-sm text-white mt-4"
