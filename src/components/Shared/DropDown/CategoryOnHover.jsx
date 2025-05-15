@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const CategoryOnHover = () => {
+const CategoryOnHover = ({ close }) => {
   const categories = [
     "Mobile & Accessories",
     "Electrical & Appliance",
@@ -13,7 +13,7 @@ const CategoryOnHover = () => {
   ];
 
   return (
-    <div className="invisible absolute group-hover:visible w-80 h-fit bg-white shadow-sm text-d1 z-20 mt-2 border rounded-md transition-transform duration-300 ease-out transform -translate-y-2 group-hover:-translate-y-0">
+    <div className="invisible absolute group-hover:visible w-80 h-fit bg-white shadow-sm text-d1 z-50 mt-2 border rounded-md transition-transform duration-300 ease-out transform -translate-y-2 group-hover:-translate-y-0">
       <div className="absolute top-[3px] left-11 transform -translate-y-2 -translate-x-1/2 w-3 h-3 rotate-45 bg-white"></div>
 
       {/* Category List */}
