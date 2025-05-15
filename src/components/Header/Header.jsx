@@ -12,7 +12,7 @@ const Header = () => {
 
   return (
     <header className="hidden lg:flex fixed top-0 w-full z-50 bg-[#c82233e6] border-b border-b-cardinal backdrop-blur-sm">
-      <div className="w-full max-w-7xl mx-auto flex items-center justify-between gap-10 px-4 xl:px-2">
+      <div className="w-full max-w-[1315px] mx-auto flex items-center justify-between px-2">
         {/* LOGO */}
         <a href="/">
           <img src={logo} alt="logo" className="w-44" />
