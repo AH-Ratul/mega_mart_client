@@ -9,7 +9,11 @@ const initialState = {
 const productSlice = createSlice({
   name: "products",
   initialState,
-  reducers: {},
+  reducers: {
+    setProducts: (state, action) => {
+      state.product = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addMatcher(
@@ -19,14 +23,12 @@ const productSlice = createSlice({
           state.loading = false;
         }
       )
-      .addMatcher(
-        productApi.endpoints.getProducts.matchRejected,
-        (state) => {
-          state.product = "";
-          state.loading = true;
-        }
-      );
+      .addMatcher(productApi.endpoints.getProducts.matchRejected, (state) => {
+        state.product = "";
+        state.loading = true;
+      });
   },
 });
 
+export const { setProducts } = productSlice.actions;
 export default productSlice.reducer;
