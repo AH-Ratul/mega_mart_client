@@ -78,7 +78,7 @@ const SearchBox = () => {
 
         {/* Dropdown */}
         {showDropdown && (
-          <div className="absolute mt-2 w-full max-w-md bg-white rounded-lg shadow-lg z-50">
+          <div className="absolute mt-2 w-full max-w-md bg-white rounded-lg shadow-lg z-30">
             {isLoading ? (
               <div className="flex justify-center py-4">
                 <Loader size="20px" />
