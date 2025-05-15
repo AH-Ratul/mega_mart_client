@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useGetProductByIdQuery } from "../../redux/api/products_api";
 import { useDispatch, useSelector } from "react-redux";
 import Loader from "../../components/Shared/Loader/Loader";
@@ -32,6 +32,7 @@ const ProductDetails = () => {
     discountPrice,
     description,
     category,
+    subCategory,
   } = productData?.data || [];
 
   const handleAddToCart = (product) => {
@@ -79,9 +80,46 @@ const ProductDetails = () => {
 
   return (
     <>
-      <div className="mt-12 lg:mt-16 mb-20 max-w-7xl mx-auto px-4">
+      <div className="mt-16 lg:mt-[70px] mb-20 max-w-7xl mx-auto px-1">
+        {/* Breadcrumb */}
+        <nav
+          aria-label="breadcrumb"
+          className="mb-6 overflow-x-auto  px-3 lg:px-0"
+        >
+          <ol className="flex items-center whitespace-nowrap gap-1 sm:gap-2 text-xs sm:text-sm text-gray-500 px-1 overflow-hidden">
+            <li className="shrink-0">
+              <Link to="/" className="hover:text-primary transition-colors">
+                Home
+              </Link>
+            </li>
+
+            <li className="shrink-0 text-gray-400">&gt;</li>
+
+            <li className="shrink-0 font-medium truncate max-w-[160px]">
+              <Link
+                to={`/category/${category}`}
+                className="hover:text-primary transition-colors"
+              >
+                {category}
+              </Link>
+            </li>
+
+            <li className="shrink-0 text-gray-400">&gt;</li>
+
+            <li className="shrink-0 font-medium truncate max-w-[150px]">
+              {subCategory}
+            </li>
+
+            <li className="shrink-0 text-gray-400">&gt;</li>
+
+            <li className="shrink-0 font-medium text-gray-800 truncate max-w-[250px]">
+              {productName}
+            </li>
+          </ol>
+        </nav>
+
         {/* Product Section */}
-        <div className="flex flex-col lg:flex-row gap-8 lg:gap-16">
+        <div className="flex flex-col lg:flex-row gap-8 lg:gap-16 mt-1">
           {/* Product Image */}
           <div className="flex-1 flex justify-center">
             <div className="w-full max-w-[450px] aspect-square overflow-hidden">
