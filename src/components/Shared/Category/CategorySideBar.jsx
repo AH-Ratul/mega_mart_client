@@ -11,7 +11,7 @@ const CategorySideBar = ({ isOpen, close }) => {
     "Home Decor & Lifestyle",
     "Women's Fashion",
     "Men's Fashion",
-    "Computers & Accessories",
+    "Computer & Accessories",
     "TV & Home Appliance",
   ];
 
@@ -40,10 +40,7 @@ const CategorySideBar = ({ isOpen, close }) => {
           {categories.map((category, index) => (
             <Link
               key={index}
-              to={`/category/${category
-                .toLowerCase()
-                .replace(/ & /g, "-")
-                .replace(/\s+/g, "-")}`}
+              to={`/category/${category}`}
               onClick={close}
               className="py-2 px-3 text-sm font-medium text-gray-800 hover:text-primary hover:bg-gray-50 rounded-md transition-colors"
             >
