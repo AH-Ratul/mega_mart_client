@@ -12,7 +12,7 @@ const HomePage = () => {
       </section>
 
       <section className="mt-20 px-3 flex flex-col items-center w-full">
-        <div className="w-full flex flex-col max-w-[1270px]">
+        <div className="w-full flex flex-col max-w-7xl">
           <h1 className="text-xl mb-14 ml-3">Buy Your All Favorite Products</h1>
           <div className="flex justify-center">
             <Products />
