@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import logo from "../../../public/logo123.svg";
 import { allIcons } from "../../data/all-icons";
 import { Link } from "react-router-dom";
@@ -8,6 +8,7 @@ import SearchBox from "../SearchBox/SearchBox";
 
 const Header = () => {
   const { account, cart3 } = allIcons;
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
     <header className="hidden fixed w-screen z-10 top-0 lg:flex justify-center items-center bg-[#c82233e6]  border-b-cardinal border-b backdrop-blur-sm">
@@ -20,11 +21,15 @@ const Header = () => {
           </a>
 
           {/* CATEGORY */}
-          <div className="relative group py-2">
+          <div
+            className="relative group py-2"
+            onMouseEnter={() => setIsOpen(true)}
+            onMouseLeave={() => setIsOpen(false)}
+          >
             <p className="text-white p-2 hover:bg-black/10 hover:rounded-full cursor-pointer">
               Category
             </p>
-            <CategoryOnHover />
+            {isOpen && <CategoryOnHover close={() => setIsOpen(false)} />}
           </div>
 
           {/* SEARCH */}
