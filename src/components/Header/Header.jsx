@@ -11,60 +11,55 @@ const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <header className="hidden fixed w-screen z-10 top-0 lg:flex justify-center items-center bg-[#c82233e6]  border-b-cardinal border-b backdrop-blur-sm">
-      <div>
-        {/* lower div */}
-        <div className=" w-full flex justify-between items-center lg:gap-16 xl:gap-[170px] 2xl:gap-[180px]">
-          {/* LOGO */}
-          <a href="/">
-            <img src={logo} alt="logo" className="w-44" />
-          </a>
+    <header className="hidden lg:flex fixed top-0 w-full z-50 bg-[#c82233e6] border-b border-b-cardinal backdrop-blur-sm">
+      <div className="w-full max-w-7xl mx-auto flex items-center justify-between gap-10 px-4 xl:px-2">
+        {/* LOGO */}
+        <a href="/">
+          <img src={logo} alt="logo" className="w-44" />
+        </a>
 
-          {/* CATEGORY */}
-          <div
-            className="relative group py-2"
-            onMouseEnter={() => setIsOpen(true)}
-            onMouseLeave={() => setIsOpen(false)}
-          >
-            <p className="text-white p-2 hover:bg-black/10 hover:rounded-full cursor-pointer">
-              Category
-            </p>
-            {isOpen && <CategoryOnHover close={() => setIsOpen(false)} />}
+        {/* CATEGORY */}
+        <div
+          className="relative group py-2"
+          onMouseEnter={() => setIsOpen(true)}
+          onMouseLeave={() => setIsOpen(false)}
+        >
+          <p className="text-white p-2 hover:bg-black/10 hover:rounded-full cursor-pointer">
+            Category
+          </p>
+          {isOpen && <CategoryOnHover close={() => setIsOpen(false)} />}
+        </div>
+
+        {/* SEARCH */}
+        <div className="relative">
+          <SearchBox />
+        </div>
+
+        {/* ACCOUNT & CART */}
+        <div className="flex items-center gap-4">
+          {/* Account */}
+          <div className="relative group py-2">
+            <Link
+              to=""
+              className="flex items-center gap-1 text-white text-2xl h-10 hover:bg-black/10 hover:rounded-full p-3"
+            >
+              {account}
+              <p className="text-xs leading-tight">
+                Orders &<br />
+                Account
+              </p>
+            </Link>
+            <DropOnHover />
           </div>
 
-          {/* SEARCH */}
+          {/* Cart */}
           <div className="relative">
-            <SearchBox />
-          </div>
-
-          {/* ACCOUNT & CART */}
-          <div className="flex items-center gap-2 ">
-            {/* login */}
-            <div className="relative group py-2">
-              <Link
-                to=""
-                className="flex items-center gap-1 text-white text-2xl h-10 hover:bg-black/10 hover:rounded-full p-3"
-              >
-                {account}
-                <p className="text-xs">
-                  Orders & <br />
-                  Account
-                </p>
-              </Link>
-              <DropOnHover />
-            </div>
-
-            {/* CART */}
-            <div className="relative ">
-              <Link
-                to="/shopping_cart"
-                className="flex items-center text-xs text-white/90 hover:bg-black/10 hover:rounded-full p-2"
-              >
-                <span className="text-[1.688rem] text-white rounded-full">
-                  {cart3}
-                </span>
-              </Link>
-            </div>
+            <Link
+              to="/shopping_cart"
+              className="flex items-center text-xs text-white/90 hover:bg-black/10 hover:rounded-full p-2"
+            >
+              <span className="text-[1.688rem] text-white">{cart3}</span>
+            </Link>
           </div>
         </div>
       </div>
