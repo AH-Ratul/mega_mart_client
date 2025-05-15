@@ -8,7 +8,7 @@ import { useAddedToCartMutation } from "../../redux/api/cart_api";
 import { handleCartToAddedGlobal } from "../../utils/cartUtils";
 import CustomToast from "../../hooks/CustomToast";
 
-const Products = () => {
+const Products = ({ customProducts }) => {
   const { cart2 } = allIcons;
   const dispatch = useDispatch();
   const { loading } = useSelector((state) => state.products);
@@ -20,9 +20,12 @@ const Products = () => {
     data: productsData,
     isLoading,
     error,
-  } = useGetProductsQuery(undefined, { refetchOnMountOrArgChange: true });
+  } = useGetProductsQuery(undefined, {
+    refetchOnMountOrArgChange: true,
+    skip: !!customProducts,
+  });
 
-  const products = productsData?.data || [];
+  const products = productsData?.data || customProducts || [];
 
   const handleClick = (product) => {
     if (product.quantity === 0) {
@@ -39,8 +42,20 @@ const Products = () => {
     return <Loader size="30px" />;
   }
 
+  if ((!products || products.length === 0) && !isLoading) {
+    return (
+      <p className="mt-10 text-center text-gray-500 my-40">
+        No products found.
+      </p>
+    );
+  }
+
   if (error) {
-    return <p>Error occured to fetch data</p>;
+    return (
+      <p className="mt-10 text-center text-gray-500 my-40">
+        Error occured to fetch data
+      </p>
+    );
   }
 
   return (
