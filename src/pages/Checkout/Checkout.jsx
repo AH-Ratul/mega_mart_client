@@ -174,7 +174,7 @@ const Checkout = () => {
           </div>
 
           {/* Order Summary */}
-          <div className="md:w-80 xl:w-[500px] mx-2 xl:mx-0 h-fit mt-10 md:mt-0">
+          <div className="md:w-96 xl:w-[500px] mx-2 xl:mx-0 h-fit mt-10 md:mt-0">
             <h1 className="font-medium mb-4">Order Summary</h1>
 
             <section className="flex items-center justify-start">
