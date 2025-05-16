@@ -27,7 +27,7 @@ const ResetPassword = () => {
       };
 
       const result = await resetPassword(newData).unwrap();
-      console.log(result)
+      console.log(result);
 
       CustomToast({ type: "success", message: result.message });
       reset();
@@ -37,9 +37,10 @@ const ResetPassword = () => {
   };
 
   return (
-    <div className="flex justify-center items-center mt-28 md:mt-14">
+    <div className="flex justify-center items-center mt-28 mb-28">
       <div className="text-center">
         <h1 className="text-3xl text-primary">Reset Your Password</h1>
+
         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col mt-9">
           <input
             type="password"
@@ -59,6 +60,7 @@ const ResetPassword = () => {
               {errors.password.message}
             </p>
           )}
+
           <input
             type="password"
             id="passwordConfirm"
@@ -74,6 +76,7 @@ const ResetPassword = () => {
               {errors.confirmpassword.message}
             </p>
           )}
+
           <button className="mt-4 bg-primary hover:bg-opacity-95 rounded-md py-2 text-white">
             {isLoading ? (
               <Loader color="white" size="2xl" />
@@ -81,6 +84,7 @@ const ResetPassword = () => {
               "Reset Your Password"
             )}
           </button>
+
           {isSuccess && (
             <Link to="/login" className="mt-5 text-xs text-d2 hover:underline">
               Go to Login
