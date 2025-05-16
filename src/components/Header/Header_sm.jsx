@@ -18,9 +18,9 @@ const HeaderSm = () => {
   return (
     <header className="lg:hidden fixed top-0 w-screen z-20">
       {/* Top Header */}
-      <div className="flex justify-center items-center gap-3 px-4 py-2 bg-[#c82233e6] shadow-md">
+      <div className="flex justify-between items-center w-full gap-3 px-4 py-2 bg-[#c82233e6] shadow-md">
         {/* Logo */}
-        <div className="flex-shrink-0 w-32">
+        <div className="flex-shrink-0 w-32 md:w-44">
           <Link to="/">
             <img
               src={logo}
@@ -31,7 +31,7 @@ const HeaderSm = () => {
         </div>
 
         {/* Search */}
-        <div className="flex-1 w-screen">
+        <div className="relative w-96">
           <SearchBox />
         </div>
       </div>
