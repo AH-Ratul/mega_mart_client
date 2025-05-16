@@ -9,7 +9,7 @@ import CustomToast from "../../hooks/CustomToast";
 import Loader from "../../components/Shared/Loader/Loader";
 
 const Login = () => {
-  const { google, phone } = allIcons;
+  const { google } = allIcons;
   const location = useLocation();
 
   const {
@@ -43,11 +43,12 @@ const Login = () => {
   };
 
   return (
-    <div className="flex justify-center items-center pt-28 pb-28">
+    <div className="flex justify-center items-center mt-28 mb-28">
       <div className="w-full px-4 md:px-20  lg:w-[400px] lg:px-8 py-4 rounded-lg lg:border lg:border-b1">
         <h1 className="font-medium text-2xl text-center text-primary mt-9 lg:mt-3">
           Login
         </h1>
+
         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col ">
           <input
             type="email"
@@ -67,6 +68,7 @@ const Login = () => {
           {errors.email && (
             <p className="text-red-600 text-xs mt-1">{errors.email.message}</p>
           )}
+
           <input
             type="password"
             id="password"
@@ -85,6 +87,7 @@ const Login = () => {
               {errors.password.message}
             </p>
           )}
+
           <div className="flex justify-end">
             <Link
               to="/forgetpassword"
@@ -93,6 +96,7 @@ const Login = () => {
               Forgot Password?
             </Link>
           </div>
+
           <button className="mt-3 bg-primary hover:bg-opacity-90 py-[7px] rounded-md text-white text-base font-medium tracking-wide text-center">
             {isLoading || loading ? (
               <Loader color="white" size="24px" />
@@ -101,6 +105,7 @@ const Login = () => {
             )}
           </button>
         </form>
+
         <div>
           <p className="text-xs mt-6 font-medium tracking-wide">
             By Continuing, you agree to our{" "}
@@ -114,17 +119,15 @@ const Login = () => {
             .
           </p>
         </div>
+
         {/* social login */}
         <div className="flex justify-center items-center gap-5 mt-5">
           <button className="flex justify-center items-center  rounded-md gap-2 py-1 text-base w-full border border-secondary ">
             <span>{google}</span>
-            <span className="text-primary text-sm">Google</span>
+            <span className="text-primary">Google</span>
           </button>
-          <Link className="flex justify-center items-center rounded-md gap-2 py-1 text-base w-full border border-secondary ">
-            <span>{phone}</span>
-            <span className="text-primary text-sm">Phone</span>
-          </Link>
         </div>
+
         {/* register link */}
         <p className="text-xs text-center mt-8 mb-4">
           New Here?{" "}
