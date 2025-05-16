@@ -7,16 +7,21 @@ import Footer from "../components/Footer/Footer";
 
 const Main = () => {
   return (
-    <main className="relative font-OpenSans">
+    <div className="relative flex flex-col min-h-screen font-OpenSans">
       {/* Header section */}
       <Header />
       <HeaderSm />
 
-      {/** */}
-      <Outlet />
+      {/* main contents */}
+      <main className="flex-1">
+        <Outlet />
+      </main>
+
+      {/* footer */}
       <Footer />
+
       <Toaster position="top-right" />
-    </main>
+    </div>
   );
 };
 
