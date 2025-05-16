@@ -108,9 +108,11 @@ const CartPage = () => {
                 <p className="text-xl font-semibold text-gray-800">
                   Your Cart is Empty
                 </p>
+
                 <p className="text-sm text-gray-500 mt-2">
                   Add your favorite items to it
                 </p>
+
                 <Link
                   to="/"
                   className="mt-4 inline-block bg-primary text-white py-2 px-6 rounded-lg hover:bg-primary-dark transition-colors"
@@ -130,6 +132,7 @@ const CartPage = () => {
                       alt={item.productName}
                       className="w-16 h-16 object-cover rounded"
                     />
+
                     <div className="flex-1 flex flex-col gap-2">
                       {/* Product Name & Remove Button */}
                       <div className="flex items-center justify-between">
@@ -155,12 +158,14 @@ const CartPage = () => {
                           <span className="text-sm font-semibold text-gray-800">
                             ৳ {item.discountPrice || item.price}
                           </span>
+
                           {item.discountPrice && (
                             <span className="text-xs text-gray-400 line-through">
                               ৳ {item.price}
                             </span>
                           )}
                         </div>
+
                         <div className="flex items-center border border-gray-300 rounded-lg overflow-hidden">
                           <button
                             onClick={() =>
@@ -172,12 +177,14 @@ const CartPage = () => {
                           >
                             −
                           </button>
+
                           <span
                             className="w-8 text-center py-1 text-sm font-semibold text-gray-800 bg-white"
                             aria-live="polite"
                           >
                             {item.quantity}
                           </span>
+
                           <button
                             onClick={() => handleClick(item)}
                             className="px-2 py-1 text-gray-600 text-base font-medium bg-gray-50 hover:bg-gray-100 transition-colors"
@@ -200,10 +207,12 @@ const CartPage = () => {
               <h2 className="text-lg font-semibold text-gray-800 mb-4">
                 Order Summary
               </h2>
+
               <div className="flex justify-between items-center text-lg font-semibold text-gray-800 mb-4">
                 <span>Total</span>
                 <span>৳ {calculateTotal().toFixed(2)}</span>
               </div>
+
               <button
                 onClick={handleCheckout}
                 className="w-full bg-primary text-white py-2.5 rounded-lg font-medium hover:bg-primary-dark transition-colors relative overflow-hidden group"
@@ -212,6 +221,7 @@ const CartPage = () => {
                 <span className="relative z-10">
                   Checkout ({cartData.length})
                 </span>
+
                 <span className="absolute inset-0 bg-white/20 scale-y-0 origin-top group-hover:scale-y-100 transition-transform duration-300"></span>
               </button>
             </div>
