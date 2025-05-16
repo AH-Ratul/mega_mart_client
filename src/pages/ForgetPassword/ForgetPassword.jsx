@@ -30,7 +30,7 @@ const ForgetPassword = () => {
   };
 
   return (
-    <div className="flex justify-center items-center mt-28 md:mt-14">
+    <div className="flex justify-center items-center mt-28 mb-28">
       <div className="text-center">
         <h1 className="text-3xl text-primary">Forget Your Password?</h1>
         <p className="text-xs mt-3 text-gray1">
